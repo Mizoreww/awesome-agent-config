@@ -91,7 +91,13 @@ python3 scripts/adapt_researchstudio.py --stage "$stage" --agent codex --root "$
 
 Claude 改用 `--agent claude`。适配修正全局安装的脚本路径和项目输出路径；Codex 还替换 Claude 专用工具指令。脚本只改 stage，所有锚点匹配成功后才发布；锚点不符应检查新上游，不能用宽泛替换绕过。Windows 的 shell 脚本需可用 Bash；路径应为该 Bash 能访问的形式，必要时通过 Git Bash 的 `cygpath` 核实。
 
-用文件工具逐一发布 stage 内目录。检查 paper_search 的绝对脚本路径、scoop_check 的 fetch 入口，并确认源文件之外仅有预期适配。Reel 的 `paper2poster` 内含 html2pptx 等嵌套资源，必须完整保留。
+用文件工具逐一发布 stage 内目录。检查 paper_search 的绝对脚本路径、scoop_check 的 fetch 入口，并确认源文件之外仅有预期适配。Reel 的 `paper2poster` 内含 html2pptx 等嵌套资源，必须完整保留。Reel 同样先将五个目录复制到新的 stage，然后运行下面的适配，再逐一发布：
+
+```sh
+python3 scripts/adapt_researchstudio.py --stage "$stage" --agent codex --bundle reel --root "$target_dir"
+```
+
+Reel 适配覆盖各 SKILL.md、引用的 Markdown runbook 和运行诊断中的旧 Claude/仓库相对脚本路径，替换成已验证的 Codex 绝对路径；保留资源与业务逻辑。上游路径或锚点变化时停止发布并检查。
 
 本条验收是完整源码与适配，不运行上游 install.sh/npx setup，不创建 Python 环境、不装包或浏览器。缺少 API key、Chromium、LaTeX 等业务前提留到首次调用，由 skill 自带说明引导；交接简短注明“源码已安装，运行准备在首次使用完成”。
 

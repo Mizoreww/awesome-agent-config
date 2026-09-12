@@ -144,3 +144,8 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: Running the preserved paper-reading browser tests through their Linux-style Chrome discovery path.
 **Mistake**: Exposed only a symlink to the macOS Chrome binary; Chrome then looked for its Frameworks directory beside the symlink and failed to launch.
 **Rule**: When adapting these tests to an installed macOS Chrome, use a temporary shell launcher that execs the real app executable path, with Playwright's isolated profile. Do not copy or relocate the browser binary or change the published skill payload to fix test environment discovery.
+
+## 2026-09-12 - Distinguish menu coverage from enabled settings
+**Context**: Counting preserved Claude plugin options while consolidating main and codex.
+**Mistake**: Attributed all 21 offered plugins to settings.json and inferred their enabled/optional breakdown from a summary instead of the actual template.
+**Rule**: Count settings keys, enabled values and installer menu entries separately. main has 20 settings selectors (15 true, 5 false), with Matt offered additionally by the menu; source coverage is their union, not the enabled-only subset.

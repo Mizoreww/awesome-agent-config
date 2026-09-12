@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Adapt a staged ResearchStudio Idea snapshot for the selected agent skill directory."""
+"""Adapt a staged ResearchStudio snapshot for the selected agent skill directory."""
 import argparse
+import json
 from pathlib import Path
 import re
+import shlex
 import sys
+
+from managed_files import digest
 
 
 def adapt(stage: Path, agent_root: Path, agent: str):
@@ -52,6 +56,10 @@ def adapt(stage: Path, agent_root: Path, agent: str):
             pair for pair in replacements["scoop"]
             if pair[0] in ("${CLAUDE_PROJECT_DIR}", 'scripts/fetch_paper.sh "<PDF_URL>" "<pdf_name>"')
         ]
+        replacements["fetch"][0] = (
+            ': "${CLAUDE_PROJECT_DIR:?CLAUDE_PROJECT_DIR must be set}"',
+            'PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$PWD}"',
+        )
     # Check all anchors before writing any file; an upstream change needs inspection.
     for name, pairs in replacements.items():
         for old, new in pairs:
@@ -64,15 +72,84 @@ def adapt(stage: Path, agent_root: Path, agent: str):
         files[name].write_text(content, encoding="utf-8")
 
 
+def adapt_reel(stage: Path, agent_root: Path):
+    names = ("paper2assets", "paper2poster", "paper2video", "paper2blog", "paper2reel")
+    root = agent_root.expanduser().resolve() / "skills"
+    if any(c in root.as_posix() for c in "\n\r"):
+        raise ValueError("Target directory cannot contain line breaks")
+    digest(stage)
+    for name in names:
+        if not (stage / name / "SKILL.md").is_file():
+            raise ValueError(f"Missing complete Reel member: {name}")
+    pattern = re.compile(
+        r"(?<![\w./])(?:~/\.claude/|\.claude/|<config>/)?skills/"
+        r"(?P<name>paper2assets|paper2poster|paper2video|paper2blog|paper2reel)"
+        r"(?P<suffix>(?:/[\w.*-]+)*/?)"
+    )
+
+    def absolute_path(match):
+        relative = match["name"] + match["suffix"]
+        # Template globs in prose name a directory, not a required individual file.
+        reference = relative.rsplit("/", 1)[0] if "*" in relative else relative
+        if not (stage / reference).exists():
+            raise ValueError(f"Upstream Reel reference is missing: {relative}")
+        return shlex.quote((root / relative).as_posix())
+
+    updates = {}
+    for path in sorted(stage.rglob("*.md")):
+        original = path.read_text(encoding="utf-8")
+        content, count = pattern.subn(absolute_path, original)
+        if path.parent == stage / "paper2video" and path.name == "SKILL.md":
+            anchor = "Run Paper2Video workflow commands from `ResearchStudio-Reel/` unless noted."
+            if anchor not in content:
+                raise ValueError("Upstream Reel working-directory instruction changed")
+            content = content.replace(anchor, "Use the absolute skill paths below. Keep outputs in the user's project directory.")
+        if path.name == "SKILL.md" and path.parent.name in names:
+            if count == 0:
+                raise ValueError(f"Upstream Reel path anchors changed: {path}")
+            boundary = content.find("\n---", 4)
+            if not content.startswith("---\n") or boundary < 0:
+                raise ValueError(f"Missing skill frontmatter: {path}")
+            boundary += len("\n---")
+            note = (
+                "\n\n## Codex runtime paths\n\n"
+                "Use the available Codex tools for Claude tool names below. "
+                "Resolve remaining relative script paths against the directory containing this SKILL.md, "
+                "and use absolute project output paths. Reuse existing selected skill providers; "
+                "additional skill dependencies belong in the actual Codex home. "
+                "Runtime dependency setup remains a first-use step.\n"
+            )
+            content = content[:boundary] + note + content[boundary:]
+        if content != original:
+            updates[path] = content
+    # This executable only embeds a repair command; keep that diagnostic consistent too.
+    diagnostics = stage / "paper2poster/scripts/utils/deliverables.py"
+    source = diagnostics.read_text(encoding="utf-8")
+    anchor = ('"Run Step 10:  python ~/.claude/skills/paper2poster/scripts/"\n'
+              '        "render_poster.py <outdir>/poster.html"')
+    if source.count(anchor) != 2:
+        raise ValueError("Upstream Reel diagnostic anchors changed")
+    command = "Run Step 10: python " + shlex.quote((root / "paper2poster/scripts/render_poster.py").as_posix()) + " <outdir>/poster.html"
+    updates[diagnostics] = source.replace(anchor, json.dumps(command))
+    for path, content in updates.items():
+        path.write_text(content, encoding="utf-8")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stage", type=Path, required=True, help="Temporary directory containing only the three Idea skills")
+    parser.add_argument("--stage", type=Path, required=True, help="Temporary directory containing the selected bundle's skills")
     parser.add_argument("--agent", choices=("claude", "codex"), required=True)
+    parser.add_argument("--bundle", choices=("idea", "reel"), default="idea")
     parser.add_argument("--root", type=Path, required=True, help="Final agent home; only embedded in staged instructions")
     args = parser.parse_args()
     try:
-        adapt(args.stage, args.root, args.agent)
-        print("Staged Idea instructions adapted; no runtime dependencies installed.")
+        if args.bundle == "reel":
+            if args.agent != "codex":
+                raise ValueError("Reel is currently offered only for Codex")
+            adapt_reel(args.stage, args.root)
+        else:
+            adapt(args.stage, args.root, args.agent)
+        print("Staged instructions adapted; no runtime dependencies installed.")
     except (ValueError, OSError) as error:
         print(error, file=sys.stderr)
         sys.exit(1)

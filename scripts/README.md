@@ -41,7 +41,7 @@ Missing keys are added; unchanged previously managed values can update. Existing
 After deploying the corrected AGENTS instructions, remove the old lessons override only when its value is exactly `lessons.md`:
 
 ```sh
-uv run --with tomlkit==0.13.3 python scripts/managed_files.py --root "$target_dir" merge platforms/codex/templates/config.toml config.toml --item settings --remove model_instructions_file
+uv run --with tomlkit==0.13.3 python scripts/managed_files.py --root "$target_dir" merge platforms/codex/templates/import-sync.toml config.toml --item lessons --replace /desktop/external-agent-import-sync-enabled --remove model_instructions_file
 ```
 
 Do not supply `--remove` if that value is absent or points elsewhere. Permissions, hooks, status lines and agents have separate template patches and catalogue IDs; merge only what was selected.
@@ -54,6 +54,6 @@ The agent maintains the selection/native-plugin record described in INSTALL.md s
 
 ## Specific source preparation and verification
 
-- `adapt_researchstudio.py --stage <temporary-Idea-skills> --agent <claude|codex> --root <final-root>`: changes only staged Idea source, validates expected upstream anchors, prepares global paths and Codex tool instructions where needed. Use a fresh stage each time; publish only after success. This does not install business dependencies.
+- `adapt_researchstudio.py --stage <temporary-Idea-skills> --agent <claude|codex> --root <final-root>`: changes only staged source and validates expected upstream anchors. The default Idea bundle prepares global paths/tool instructions; add `--bundle reel` for the five Codex Reel skills and their referenced runbooks. Use a fresh stage each time; publish only after success. This does not install business dependencies.
 - `stage_lieflat.py <checkout> <fresh-stage>`: keeps root files and templates/examples/scripts/agents, including the license; excludes preview media. Review the upstream noncommercial license before selection.
 - `check_mcp.py --timeout 60 -- <command> <args...>`: tests a stdio initialize handshake without adding a server. It stops the test process afterwards. HTTP integrations use their native client's connection/authentication check.

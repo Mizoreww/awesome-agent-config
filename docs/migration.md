@@ -21,7 +21,7 @@ main 的 7 个与 codex 的 8 个本地 skill 目录，映射为 10 个实际目
 
 本地目录不是安装能力的全集。[catalog.md](../catalog.md) 和 [sources.md](../platforms/sources.md) 还覆盖：
 
-- main settings 的全部 21 个可选原生插件 selector（其中 15 项原先启用，6 项选装），以及 DeepXiv、ResearchStudio Idea 和 lieflat-charts 源码入口。
+- main settings 中的 20 个原生插件 selector（15 个启用、5 个关闭）加上安装菜单的 Matt 插件，共 21 个可选插件，以及 DeepXiv、ResearchStudio Idea 和 lieflat-charts 源码入口。
 - Codex 的 Matt v1.1.0 十九项工作流、独立 code-review、定制 handoff；Superpowers 十四项；Karpathy；PUA 三项。
 - Anthropic 文档四项、Codex examples 精选三项、独立 frontend-design；frontend-slides、PPT Master。
 - AI Research 六组精选（24 项）、DeepXiv 三项、ResearchStudio Idea 三项与 Reel 五项，以及既有 MCP 配置能力。

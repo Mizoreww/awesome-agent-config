@@ -16,7 +16,7 @@
       "source": "settings.json",
       "blob": "27bb9e20376ce6894088e5990758b9c8f4fd7c87",
       "target": "platforms/claude/templates/settings.json",
-      "adaptation": "Split into base settings.json, permissions.json, statusline.json and lessons-hooks.json; all 21 offered plugin selectors move to platforms/claude/README.md and are selected explicitly."
+      "adaptation": "Split into base settings.json, permissions.json, statusline.json and lessons-hooks.json; all 20 settings selectors plus the installer menu's Matt plugin move to platforms/claude/README.md and are selected explicitly."
     },
     {
       "agent": "claude",

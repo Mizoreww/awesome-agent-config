@@ -34,12 +34,13 @@ def digest(path: Path) -> str | None:
         if is_link(entry) or not (entry.is_file() or entry.is_dir()):
             raise ValueError(f"Only regular files/directories are supported: {entry}")
         name = "." if entry == path else entry.relative_to(path).as_posix()
-        result.update(name.encode() + b"\0")
+        encoded_name = name.encode()
+        result.update(len(encoded_name).to_bytes(8, "big") + encoded_name)
         if entry.is_file():
-            result.update(b"file\0" + entry.read_bytes())
-            result.update(b"executable" if entry.stat().st_mode & 0o111 else b"regular")
+            result.update(b"F" + hashlib.sha256(entry.read_bytes()).digest())
+            result.update(b"X" if entry.stat().st_mode & 0o111 else b"-")
         else:
-            result.update(b"directory")
+            result.update(b"D")
     return result.hexdigest()
 
 
