@@ -27,6 +27,8 @@ Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自�
 
 优先使用原生插件/MCP 命令；所选范围或 client 需要时，agent 再按仓库说明采用源码安装。你无需自己判断 npx、插件和 skill 复制渠道。Codex 安装会关闭外部 agent 自动导入，使安装内容遵循你的选择。Windows 与 WSL 分别检测配置，共用 home 的 App/CLI 会复用已有安装。
 
+Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex 包与兼容插件。[插件说明](platforms/codex/plugins.md)集中记录具体渠道和限制；官方目录的可用范围取决于账号与 client，已有同等能力会优先复用。
+
 [安装流程](INSTALL.md) · [Claude 操作说明](platforms/claude/README.md) · [Codex 操作说明](platforms/codex/README.md) · [完整目录与整包成员](catalog.md)
 
 ## 分类目录
@@ -86,7 +88,7 @@ Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自�
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | 创建和编辑 PDF、DOCX、PPTX、XLSX；优先复用 Codex 已有同等内置能力 | 原生插件 | 内置能力 / 源码 |
+| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | 创建和编辑 PDF、DOCX、PPTX、XLSX；优先复用 Codex 已有同等内置能力 | 原生插件 | 内置能力 / 兼容插件 / 源码 |
 | **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude：12 项示例；Codex：canvas-design、algorithmic-art、mcp-builder 三项 | 原生插件 | 精选源码 |
 | **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 前端视觉与界面设计，examples 整包已提供时复用 | 原生插件 | 插件 / 源码 |
 | **humanizer** | [blader](https://github.com/blader/humanizer) | 去除英文写作中的机械化 AI 表达 | 插件 / 源码 | 上游安装 |
@@ -97,7 +99,7 @@ Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自�
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **frontend-slides** | [zarazhangrui](https://github.com/zarazhangrui/frontend-slides) | 零依赖 HTML 演示文稿，支持 PPT 转换与多种风格 | 原生插件 | 精选源码 |
+| **frontend-slides** | [zarazhangrui](https://github.com/zarazhangrui/frontend-slides) | 零依赖 HTML 演示文稿，支持 PPT 转换与多种风格 | 原生插件 | 兼容插件 / 源码 |
 | **ppt-master** | [hugohe3](https://github.com/hugohe3/ppt-master) | 从 PDF / DOCX / URL / Markdown 生成可编辑 PPTX、形状与动画；首次使用准备运行环境 | 原生插件 | 精选源码 |
 
 ### Memory & Lifestyle · 记忆与生活
@@ -119,12 +121,7 @@ Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自�
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
 | **paper-reading** | [本仓库](skills/paper-reading/) | 论文阅读、图表提取、证据检查与 HTML 报告 | 内置 skill | 内置 skill |
-| **tokenization** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | HuggingFace Tokenizers、SentencePiece | 原生插件 | 精选源码 |
-| **fine-tuning** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | Axolotl、LLaMA-Factory、PEFT、Unsloth | 原生插件 | 精选源码 |
-| **post-training** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | GRPO、OpenRLHF、SimPO、TRL、verl | 原生插件 | 精选源码 |
-| **inference-serving** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | vLLM、SGLang、TensorRT-LLM、llama.cpp | 原生插件 | 精选源码 |
-| **distributed-training** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | DeepSpeed、FSDP2、Megatron-Core、Ray Train | 原生插件 | 精选源码 |
-| **optimization** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | AWQ、GPTQ、GGUF、Flash Attention、bitsandbytes | 原生插件 | 精选源码 |
+| **AI Research skills** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | 一个整包：分词、微调、后训练、推理服务、分布式训练与优化；[两端共用 31 项成员](catalog.md#ai-research-members) | 6 个原生插件 | 6 个兼容插件 / 源码 |
 | **deepxiv-cli** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | arXiv / PMC 论文混合检索与阅读 CLI | 精选源码 | 精选源码 |
 | **deepxiv-trending-digest** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | 近期热门论文的 Markdown 摘要 | 精选源码 | 精选源码 |
 | **deepxiv-baseline-table** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | 基于研究论文生成基线对比表 | 精选源码 | 精选源码 |
@@ -136,7 +133,7 @@ Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自�
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
 | **Lark / Feishu** | [飞书](https://github.com/larksuite/lark-openapi-mcp) | 飞书集成，在本机环境或原生设置中配置凭据 | MCP | MCP |
-| **GitHub** | [GitHub](https://github.com/github/github-mcp-server) | 仓库与 issue 工具，需要授权 | — | MCP |
+| **GitHub** | [OpenAI 插件 / GitHub MCP](platforms/codex/plugins.md) | 仓库与 issue 工具，需要授权；官方插件可用时优先采用 | — | 官方插件 / MCP |
 | **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | OpenAI 官方开发文档 | — | MCP |
 
 

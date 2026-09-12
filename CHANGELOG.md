@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0-dev.3] - 2026-09-12
+
+### Features
+- Combine AI Research into one selection with six upstream plugins and the same 31 skills on Claude and Codex. Keep all members visible; the catalogue now has 46 active IDs.
+- Prefer verified Codex plugins for AI Research, Anthropic's document suite and frontend-slides. Discover OpenAI official/curated plugins from the account's actual directory, including equivalent document tools, Superpowers and GitHub where available.
+- Add a focused Codex plugin reference that distinguishes publishers, records native selectors and explains source/MCP fallback decisions. Verify actual skill loading as well as installed state.
+
+### Design Rationale
+- Keep the conversational installer and existing README categories while reducing top-level choices. Native plugins own their lifecycle; agents maintain upstream recipes and selection records.
+- Preserve real compatibility, selected scope and pinned revisions. A successful plugin command alone does not prove that its skills load.
+
+### Notes & Caveats
+- Existing six-group IDs and Codex's old 24-member selection retain their scope until an explicit migration. The new bundle adds seven skills; component ownership and partial failures remain traceable.
+- Codex CLI 0.153.4 ignores Humanizer and PPT Master's root skill entries; PPT Master's nested Git source also bypasses the outer revision pin. Both keep upstream source installation. Matt, examples, PUA and Playwright retain their documented constraints.
+- Validation used isolated macOS Codex homes, real plugin loading and resource comparison. OAuth integrations, other operating systems and business runtime dependencies are not covered by those checks. The IDE extension currently lacks plugin support.
+
 ## [4.0.0-dev.2] - 2026-09-12
 
 ### Features

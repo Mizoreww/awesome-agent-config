@@ -27,6 +27,8 @@ For later changes, say “add paper-reading”, “update my previous selections
 
 Native plugin/MCP commands are preferred; the agent chooses source installation when the documented scope or client requires it. You do not need to choose between npx, plugins and skill copies yourself. Codex setup disables external-agent auto-import so installations follow your selections. Windows and WSL are detected and configured separately; App/CLI installations sharing a home are reused.
 
+For Codex, the agent checks the available OpenAI official/curated directory, then upstream Codex packages and verified compatible plugins. The [plugin guide](platforms/codex/plugins.md) records exact routes and limitations; official availability depends on the account and client. Existing equivalent capabilities are reused.
+
 [Installation workflow](INSTALL.md) · [Claude operations](platforms/claude/README.md) · [Codex operations](platforms/codex/README.md) · [Full catalogue and bundle members](catalog.md)
 
 ## Catalogue
@@ -86,7 +88,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | PDF, DOCX, PPTX and XLSX creation and editing; reuse equivalent built-in Codex tools | Native plugin | Built-in / source |
+| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | PDF, DOCX, PPTX and XLSX creation and editing; reuse equivalent built-in Codex tools | Native plugin | Built-in / compatible plugin / source |
 | **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude: 12 examples; Codex: canvas-design, algorithmic-art and mcp-builder | Native plugin | Selected source |
 | **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Distinctive frontend interfaces; reused when already supplied by the examples bundle | Native plugin | Plugin / source |
 | **humanizer** | [blader](https://github.com/blader/humanizer) | Remove mechanical AI writing patterns in English | Plugin / source | Upstream install |
@@ -97,7 +99,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **frontend-slides** | [zarazhangrui](https://github.com/zarazhangrui/frontend-slides) | Zero-dependency HTML slide generation with PPT conversion and varied styles | Native plugin | Selected source |
+| **frontend-slides** | [zarazhangrui](https://github.com/zarazhangrui/frontend-slides) | Zero-dependency HTML slide generation with PPT conversion and varied styles | Native plugin | Compatible plugin / source |
 | **ppt-master** | [hugohe3](https://github.com/hugohe3/ppt-master) | Editable PPTX from PDF / DOCX / URL / Markdown, with shapes and animations; runtime setup on first use | Native plugin | Selected source |
 
 ### Memory & Lifestyle
@@ -119,12 +121,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
 | **paper-reading** | [Repository](skills/paper-reading/) | Research paper reading, figure extraction, evidence checks and HTML reports | Bundled skill | Bundled skill |
-| **tokenization** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | HuggingFace Tokenizers and SentencePiece | Native plugin | Selected source |
-| **fine-tuning** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | Axolotl, LLaMA-Factory, PEFT and Unsloth | Native plugin | Selected source |
-| **post-training** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | GRPO, OpenRLHF, SimPO, TRL and verl | Native plugin | Selected source |
-| **inference-serving** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | vLLM, SGLang, TensorRT-LLM and llama.cpp | Native plugin | Selected source |
-| **distributed-training** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | DeepSpeed, FSDP2, Megatron-Core and Ray Train | Native plugin | Selected source |
-| **optimization** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | AWQ, GPTQ, GGUF, Flash Attention and bitsandbytes | Native plugin | Selected source |
+| **AI Research skills** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | One bundle: tokenization, fine-tuning, post-training, inference, distributed training and optimization; [the same 31 members on both agents](catalog.md#ai-research-members) | 6 native plugins | 6 compatible plugins / source |
 | **deepxiv-cli** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | arXiv / PMC hybrid paper search and reading CLI | Selected source | Selected source |
 | **deepxiv-trending-digest** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | Markdown digests of recently trending papers | Selected source | Selected source |
 | **deepxiv-baseline-table** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | Baseline comparison tables grounded in research papers | Selected source | Selected source |
@@ -136,7 +133,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
 | **Lark / Feishu** | [Lark](https://github.com/larksuite/lark-openapi-mcp) | Lark integration; supply credentials through the local environment / native setup | MCP | MCP |
-| **GitHub** | [GitHub](https://github.com/github/github-mcp-server) | Repository and issue tools; requires authorization | — | MCP |
+| **GitHub** | [OpenAI plugin / GitHub MCP](platforms/codex/plugins.md) | Repository and issue tools; requires authorization; prefer the official plugin when available | — | Official plugin / MCP |
 | **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | Official OpenAI developer documentation | — | MCP |
 
 

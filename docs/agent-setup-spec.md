@@ -40,6 +40,8 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 handoff 不再独立设置，删除独立目录项和本地定制副本，只作为 Matt 包成员提供。Codex 的 Matt 精选范围加入上游 handoff，合计 20 项；其他版本与成员约束保持有效。旧 handoff ID 记录迁移关系，不自动扩大或覆盖已有用户安装。
 
+AI Research 合并为一个 `ai-research` 选项，两端统一使用上游 tokenization、fine-tuning、post-training、inference-serving、distributed-training、optimization 六组完整 31 项。成员按分类列全，优先通过六个原生插件组成一个安装选择；逐组件记录来源、版本、归属和结果。Codex 原 24 项的七项增补已由作者确认进入新目录，但已有用户的旧六组 ID 或部分选择不因此自动扩充；迁移先展示成员差异。
+
 Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平台/上游安装配方；作者推荐仍由作者决定。历史来源映射用于追溯首次合并，不能限制今后正常的 skills 增删改。稳定 ID 不复用于无关能力；删除或改名在迁移说明中记录，保留已安装用户的选择与归属直到明确迁移或卸载。
 
 ## INSTALL.md 的六步流程
@@ -53,7 +55,7 @@ Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平
 
 普通选择通常用一两轮问答即可；用户想了解某项时展开解释。问答数量由缺失信息决定，不固定成一长串调查问卷。
 
-编号对应实际可独立安装的单位：整包插件占一个编号，并列出其成员；独立 skill 单独编号。用户只想要包内少数成员时，说明原生整包与精选源码的差异，再按其选择执行。显示编号仅用于当前目录，安装记录保存稳定的条目标识和来源，避免下次目录变化后编号错位。
+编号对应目录定义的安装单位：整包插件占一个编号，并列出其成员；AI Research 这样的组合包也占一个编号，映射多个原生插件或完整源码成员；独立 skill 单独编号。用户只想要包内少数成员时，说明原生整包与精选源码的差异，再按其选择执行。显示编号仅用于当前目录，安装记录保存稳定的条目标识和来源，避免下次目录变化后编号错位。
 
 两个 agent 都被明确选中时，分别显示各自的完整目录和作者推荐，选择中注明目标。再次展示目录时，用户报出的编号默认表示新增或更新；此前已装但未提到的项继续保留。明确请求移除时才执行卸载。
 
@@ -66,6 +68,10 @@ Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平
 - 自有 skills 源码共享，安装到各 agent 的目录。Codex 自管内容继续放在其 Codex home，默认 `~/.codex/skills`；不以 `~/.agents/skills` 为权威副本。
 - `npx` 只在选定能力的上游安装方式或运行方式需要时使用；用户不必先学习不同渠道，再决定自己该运行哪条命令。
 - 上游支持或命令变化时，agent 查询官方说明并核对本地 CLI。固定版本、精选成员和本仓库的必要适配保持有效，不能顺手升级到 latest。
+
+Codex 尽量采用官方目录与可用插件：明确区分 OpenAI 发布、OpenAI curated 中的第三方作者、上游 Codex 专用包、Claude 格式兼容插件。从实际目录读取 selector，兼容性结论包括实际加载和完整资源，不能只凭 installed/enabled。可复用 OpenAI 文档能力或 GitHub 插件时优先复用；其余文档四件套、frontend-slides、AI Research 使用已验证的上游兼容包。
+
+无法满足范围、版本或入口约束的条目保留明确后备路径：Matt 固定精选、Codex examples/PUA、Humanizer、PPT Master 及没有插件入口的研究/写作 skills 使用上游源码，Playwright 保持固定 MCP，OpenAI 文档 MCP 不被更大的 Developers 插件替换。维护理由与具体配方集中在 platforms/codex/plugins.md，账号不可见的官方插件不宣称已验证可用。
 
 ## 保留的可靠性措施
 
@@ -83,7 +89,8 @@ Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生�
 
 - 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
 - 当前仓库独立保存自有和保留的定制 skill payload；第三方原版与外部 skill 组均有上游安装说明，能力不遗漏，不从历史 Claude/Codex 分支安装或更新。
-- handoff 仅在 Matt 包中，活动目录共 51 个 ID；旧独立 ID 在迁移说明中有明确处理。
+- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 46 个 ID；旧独立 ID 和 24 项范围在迁移说明中有明确处理。
+- Codex 原生优先渠道通过当前 CLI、实际 skill 加载和完整资源核实；官方目录受账号/client 限制，失败、待授权和待首次使用准备分别记录。组合包部分失败时保留成功组件，只续装未完成项。
 - 双语 README 保留原有 11 类和完整说明/表格；catalog 的稳定 ID、支持范围、来源和推荐与之相符。
 - 根指令能将仓库增删改路由到 MAINTAIN，将用户安装变更路由到 INSTALL；历史 provenance 不充当当前不可修改的清单。
 - Claude/Codex 分别使用独立指令和 lessons 模板，现有真实记录保持不变。

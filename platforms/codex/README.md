@@ -29,25 +29,9 @@ Codex 的跨项目纠错写入本 home 的 lessons.md，项目纠错写入项目
 <a id="plugins"></a>
 ## 原生插件优先
 
-本机能力检查顺序：`codex plugin --help`、`codex plugin list --json`、`codex plugin list --available --json`。先核实当前 client 已提供的插件和实际能力；配置文件列出 enabled 不代表资源完整。
+为所选条目确定渠道时读取[插件选择与安装](plugins.md)：它集中维护 OpenAI 官方/curated、上游 Codex 包及兼容插件的来源、selector、验证办法和源码后备原因。先查询当前 client / 账号实际可见的目录，复用已有能力；App / CLI 与 IDE 的插件支持分别核实。
 
-```sh
-codex plugin marketplace add <repository-or-url> --json
-codex plugin list --available --json
-codex plugin add <exact-selector-from-the-list> --json
-codex plugin list --json
-```
-
-| Catalog ID | 首选来源与范围 |
-| --- | --- |
-| superpowers | OpenAI 官方 openai/plugins，当前 selector 为 superpowers@openai-curated；只添加该包，避免重复安装 obra 源码副本 |
-| karpathy | forrestchang/andrej-karpathy-skills；核实兼容包 selector、skill 路径及加载情况 |
-| context7 | anthropics/claude-plugins-official 的兼容包，核实 HTTP MCP；不能完整适配时使用下面的原生 HTTP MCP |
-| frontend-design | anthropics/claude-plugins-official 的纯 skill 兼容包；保持单一提供方 |
-
-原生命令不支持 plugins 的 client，或包不能保持用户选定范围时，使用 [源码说明](../sources.md) 中已有的相应路径，并说明渠道。网络/安装失败不静默切换成源码。
-
-Matt 固定 v1.1.0 commit 与精选范围，具体来源由本仓库 sources.md 定义。此上游快照没有 marketplace，使用源码方式，包含上游 handoff。只有实际验证了固定 source、入口与完整成员的兼容插件，才进行明确迁移；不因为最新上游已有 marketplace 就升级版本。
+AI Research 是[一个 31 项整包](../sources.md#ai-research)，通过六个上游分类插件提供。选择、版本、归属和失败状态逐组件记录，旧选择按[迁移说明](../../docs/migration.md#ai-research)处理。
 
 更新只升级相关 marketplace，再用原生 add/update 能力更新所选包，最后查询实际版本；不无参数升级所有 marketplace。卸载使用 `codex plugin remove <selector>`，先核实创建归属和依赖关系。原生插件 cache 与内部数据库不由文件工具修改。
 
@@ -58,7 +42,7 @@ Matt 固定 v1.1.0 commit 与精选范围，具体来源由本仓库 sources.md 
 
 本目录仍保存 Codex 历史 adversarial-review 源码以防遗失；它不是当前可选安装项。Codex 审查使用 Matt code-review，不运行 Claude 对审工具。
 
-文档处理先核实本 client 的 OpenAI documents/pdf/spreadsheets/presentations 是否实际可用，满足需求时复用。否则使用原有 Anthropic 四件套的完整源码；如果对应兼容原生包已验证且满足同一范围，可优先采用原生渠道。examples 只取三个成员，不能改成整包十二项。
+文档处理按[插件选择](plugins.md)优先复用 OpenAI 四种文档能力；缺少覆盖时安装 Anthropic 四件套兼容插件，client 不支持时采用完整源码。examples 只取三个成员，不能改成整包十二项。
 
 所有固定来源、成员与必要适配见 [sources.md](../sources.md)。
 
@@ -90,7 +74,7 @@ codex mcp add playwright -- npx -y --loglevel=error --package=node@24 --package=
 
 Windows 若可执行入口是 npx.cmd，按本机 shell 核实调用方式；必要时通过原生 cmd 入口启动相同参数。没有可用 Node/npm 时说明并准备所选服务的前提，不影响不依赖它的 skills 安装。一次 initialize 成功只证明 MCP 启动；业务浏览器就绪按所需工作流另外验证。
 
-GitHub：核实 [官方 MCP server](https://github.com/github/github-mcp-server) 支持后，使用 https://api.githubcopilot.com/mcp 和 `--bearer-token-env-var GITHUB_PERSONAL_ACCESS_TOKEN`，或复用既有受支持配置。用户在环境中设置 token；不要把值传入聊天或记录。旧版 @modelcontextprotocol/server-github 仅作为已有安装的来源识别，不自动删掉。
+GitHub：先按[插件选择](plugins.md)检查可用的 OpenAI 官方 GitHub 插件或已有集成。需要 MCP 渠道时核实 [GitHub 官方 MCP server](https://github.com/github/github-mcp-server)，通过 `codex mcp add github --url https://api.githubcopilot.com/mcp --bearer-token-env-var GITHUB_PERSONAL_ACCESS_TOKEN` 注册，或复用既有受支持配置。用户在环境中设置 token；不要把值传入聊天或记录。旧版 @modelcontextprotocol/server-github 仅作为已有安装的来源识别，不自动删掉。
 
 Lark：核实 [lark-openapi-mcp](https://github.com/larksuite/lark-openapi-mcp)，用户补齐 app ID/secret 后按 `codex mcp add --help` 注册并验证。缺凭据记为待配置，不写占位服务器或打印真实 secret。templates/mcp 保存旧版可用的无凭据服务配置，供核对来源；不整份复制来启用全部 MCP。
 
@@ -100,7 +84,7 @@ Lark：核实 [lark-openapi-mcp](https://github.com/larksuite/lark-openapi-mcp)�
 上游 13.24.23（ed57a511f5dbf84e75c9a785df818c43b66b5849）的 marketplace `thedotmack` 指向 `./plugin`，其中已包含 `plugin/.codex-plugin/plugin.json`，引用 `hooks/codex-hooks.json`、`.mcp.json` 和完整 skills。优先核实并安装该 Codex 包：
 
 ```sh
-codex plugin marketplace add thedotmack/claude-mem --json
+codex plugin marketplace add thedotmack/claude-mem --ref ed57a511f5dbf84e75c9a785df818c43b66b5849 --json
 codex plugin list --available --json
 codex plugin add claude-mem@thedotmack --json
 codex plugin list --json

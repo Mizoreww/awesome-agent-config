@@ -1,5 +1,21 @@
 # 变更记录
 
+## [4.0.0-dev.3] - 2026-09-12
+
+### Features
+- AI Research 合为一个选择，通过六个上游插件在 Claude / Codex 提供同样的 31 项；成员继续列全，活动目录现为 46 个 ID。
+- Codex 的 AI Research、Anthropic 文档四件套、frontend-slides 优先采用已验证插件。OpenAI 官方/curated 插件从账号实际目录发现，优先复用同等文档能力、Superpowers 及可用的 GitHub 插件。
+- 新增集中的 Codex 插件说明，区分发布方，记录原生 selector 与源码/MCP 后备原因；验收同时检查安装状态和实际 skill 加载。
+
+### Design Rationale
+- 保留对话安装与 README 原有分类，减少顶层选择；插件生命周期交给原生机制，agent 维护上游配方与选择记录。
+- 保持真实兼容性、所选范围和固定 revision；插件命令成功不等于 skill 已加载。
+
+### Notes & Caveats
+- 旧六组 ID 与 Codex 24 项选择在明确迁移前保持原范围；新整包增加七项，组件归属和部分失败可继续追溯。
+- Codex CLI 0.153.4 忽略 Humanizer、PPT Master 的根目录 skill 入口；PPT Master 的嵌套 Git 来源还绕过外层 revision 约束。两项继续从上游源码安装；Matt、examples、PUA、Playwright 保持既有约束。
+- 已在 macOS 隔离 Codex home 验证原生安装、实际加载和资源一致性；这些检查不覆盖 OAuth 集成、其他 OS 和业务运行依赖。IDE extension 当前不支持插件。
+
 ## [4.0.0-dev.2] - 2026-09-12
 
 ### Features

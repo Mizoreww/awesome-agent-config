@@ -39,7 +39,7 @@ root lessons.md 保留本仓库纠错历史，安装使用各自 platforms/claud
 - main settings 中的 20 个原生插件 selector（15 个启用、5 个关闭）加上安装菜单的 Matt 插件，共 21 个可选插件，以及 DeepXiv、ResearchStudio Idea 和 lieflat-charts 源码入口。
 - Codex 的 Matt v1.1.0 工作流目前包含上游 handoff 共二十项，另有独立 code-review；Superpowers 十四项；Karpathy；PUA 三项。
 - Anthropic 文档四项、Codex examples 精选三项、独立 frontend-design；frontend-slides、PPT Master。
-- AI Research 六组精选（24 项）、DeepXiv 三项、ResearchStudio Idea 三项与 Reel 五项，以及既有 MCP 配置能力。
+- AI Research 原六组精选（24 项）已全部纳入新的两端统一 31 项整包；另外保留 DeepXiv 三项、ResearchStudio Idea 三项与 Reel 五项，以及既有 MCP 配置能力。
 
 旧脚本的 `LEGACY_CLEANUP_SKILLS`、`MATTPOCOCK_LEGACY_SKILLS` 和已禁用/移除的插件名单属于历史清理规则，不是当时活跃安装项。它们不重新加入可选清单；迁移也不会自动删除用户仍保留的历史内容。
 
@@ -69,7 +69,7 @@ Codex 关闭 `desktop.external-agent-import-sync-enabled`。旧 `model_instructi
 
 ## 条目退役与改名
 
-活动目录现为 51 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+活动目录现为 46 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
 
 <a id="handoff"></a>
 ### handoff → matt-workflow 成员
@@ -79,6 +79,19 @@ handoff 已取消独立设置，两平台均由 Matt 包提供。新装 Matt 包
 检测到旧独立 handoff 时，说明迁移将改为 Matt 上游版本，并展示包的完整范围；不能仅因旧 ID 存在就自动安装整个 Matt 包。用户选择迁移后，在隔离目录验证上游 handoff，核对旧 skills/handoff 的归属与修改；未修改的自管副本可受控替换并把归属改为 matt-workflow，外部或已修改副本先保留并准备具体合并。Claude 插件渠道切换时也先验证新包，再按明确移除选择处理旧副本。
 
 验证成功后，将旧 ID 标记已迁移并保留对应记录，活动选择指向 matt-workflow。未选择迁移时记录“旧独立安装保留”，不报告更新成功。新入口只有 Matt 包，不再提供独立 handoff 配方。
+
+<a id="ai-research"></a>
+### 六个 AI Research ID → ai-research 整包
+
+旧 `tokenization`、`fine-tuning`、`post-training`、`inference-serving`、`distributed-training`、`optimization` 合并为一个新选择 `ai-research`；原组名继续用于解释整包组件。新用户只选择一个编号，两端均安装上游这六组完整的 31 项，安装记录按整包及其组件保存。
+
+已有单组或部分组选择保持原范围：根据记录核实、更新对应的原生 selector 或源码成员，不因目录合并而补装其他组。用户明确选择新整包后，展示实际差异、复用已有组件，再补装缺项。只有原六组已选择且实际范围等于完整 31 项时，才可以仅关联新的整包选择，保留原组件的文件归属和安装历史，无需重装。
+
+Codex 旧六组共 24 项，仍属于待迁移的部分范围。新整包增加 miles-rl-training、slime-rl-training、torchforge-rl-training、huggingface-accelerate、pytorch-lightning、hqq-quantization、ml-training-recipes 七项；作者更新目录不等于已有用户同意补装。没有逐成员记录时先核对真实目录/manifest，不能只看旧六个 ID 齐全就标记 31 项完成。用户保持旧范围时沿用对应固定源码成员；原生组件会增加成员时先说明并等待选择。
+
+源码切换原生插件时，先在隔离目录验证新包；核对旧副本的归属、本地修改及调用名变化，再按明确迁移选择处理重复副本。外部或已修改目录先保留，切换完成前不把两个提供方都记作活动成功。
+
+原记录中的本地修改、外部安装和部分失败状态一并保留；只有全部所选成员验证完成才标记整包完成。明确请求卸载时逐组件检查创建归属，不因为合并 ID 获得外部内容的删除权。
 
 ## 支持边界
 

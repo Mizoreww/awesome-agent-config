@@ -164,3 +164,9 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: Deciding which derived skills remain local in the unified repository.
 **Mistake**: Kept handoff as an independent Codex option and local customized payload when the user wants it only within Matt skills.
 **Rule**: Offer handoff solely as a member of matt-workflow. Use the selected Matt source, remove the independent catalogue entry and local handoff copy, and document the old handoff ID as a migration to the bundle. Existing installations are migrated only when requested. This supersedes earlier requirements to preserve the customized handoff variant.
+
+## 2026-09-12 - Offer AI Research as one bundle
+**Context**: Simplifying the unified Academic Research catalogue.
+**Mistake**: Offered the six AI Research groups as separate top-level installation choices.
+**Rule**: Present one ai-research bundle containing tokenization, fine-tuning, post-training, inference-serving, distributed-training and optimization. Keep each group's members visible and retain the platform's upstream installation methods. Legacy partial selections do not authorize adding the rest of the bundle.
+**Clarification**: The author explicitly selected the complete upstream 31-member AI Research bundle for both agents, replacing Codex's 24-member curation for new bundle installs. Existing partial installations still require an explicit migration choice before adding members.

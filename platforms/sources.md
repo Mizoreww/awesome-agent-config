@@ -70,7 +70,7 @@ python3 scripts/managed_files.py --root "$target_dir" install "$checkout/<skill-
 
 需要固定 revision、自定义 home，或 CLI 无法满足目标路径时，使用上游同样支持的手动方案：按本页获取步骤下载表中 revision，在临时 stage 准备上述完整范围（保留执行位及许可），再通过文件工具部署。这仍从第三方原仓库安装，没有本仓库 vendored 副本。逐一验证所有资源的来源及目标路径。
 
-Humanizer 当前上游为 3.0.0，旧内置版本为 2.2.0；原生包只含 humanizer 这一项。新安装按当前配方处理；已有副本迁移先说明版本与调用名变化（Claude 插件调用名为 `/humanizer:humanizer`），保留本地修改并由用户选择迁移。neat-freak 的运行源码继续保持上述已核对的固定 revision。
+Humanizer 当前上游为 3.0.0，旧内置版本为 2.2.0；原生包只含 humanizer 这一项。Claude 使用插件；Codex 0.153.4 会忽略其根目录 skill 入口，按上面的源码配方安装，详见[兼容性说明](codex/plugins.md)。已有副本迁移先说明版本与调用名变化（Claude 插件调用名为 `/humanizer:humanizer`），保留本地修改并由用户选择迁移。neat-freak 的运行源码继续保持上述已核对的固定 revision。
 
 <a id="anthropic"></a>
 ## Anthropic
@@ -81,7 +81,7 @@ Humanizer 当前上游为 3.0.0，旧内置版本为 2.2.0；原生包只含 hum
 | examples（Codex） | skills/canvas-design、skills/algorithmic-art、skills/mcp-builder |
 | frontend-design | skills/frontend-design |
 
-目标名保持目录名。文档能力已由当前 client 的内置插件完整提供时复用。documents 对应的原生包若经过验证支持当前 Codex client，优先安装同范围的 document-skills；examples 的三个成员不能被整个十二项包替代。Claude examples 使用原生整包。
+目标名保持目录名。文档能力已由当前 client 的内置插件完整提供时复用。Codex 0.153.4 已验证同范围的 document-skills 原生兼容包实际加载四项并保留完整资源，优先按[插件说明](codex/plugins.md)安装；client 不支持时使用上述源码。examples 的三个成员不能被整个十二项包替代。Claude examples 使用原生整包。
 
 <a id="karpathy"></a>
 ## Karpathy
@@ -91,7 +91,7 @@ Humanizer 当前上游为 3.0.0，旧内置版本为 2.2.0；原生包只含 hum
 <a id="superpowers"></a>
 ## Superpowers
 
-Codex 首选 `superpowers@openai-curated`。不支持插件的 client 可从上表 OpenAI plugins 的 `plugins/superpowers/skills/` 复制 [目录](../catalog.md#members) 中十四个完整成员，逐一记录。核对 `using-superpowers` 的加载要求；在拟部署的全局指令中加入其实际路径入口，保留用户其余指令。其他插件目录不复制。
+Codex 首选当前账号可见的 OpenAI curated Superpowers，确切 selector 由[插件说明](codex/plugins.md)中的查询确定。目录不可用或 client 不支持插件时，可从上表 OpenAI plugins 的 `plugins/superpowers/skills/` 复制 [目录](../catalog.md#members) 中十四个完整成员，逐一记录。核对 `using-superpowers` 的加载要求；在拟部署的全局指令中加入其实际路径入口，保留用户其余指令。其他插件目录不复制。
 
 <a id="researchstudio"></a>
 ## ResearchStudio Idea / Reel
@@ -129,7 +129,7 @@ Reel 适配覆盖各 SKILL.md、引用的 Markdown runbook 和运行诊断中的
 | ppt-master | skills/ppt-master → skills/ppt-master |
 | frontend-slides | plugins/frontend-slides/skills/frontend-slides → skills/frontend-slides |
 
-Claude 优先使用对应原生插件。Codex 原生兼容包经验证能提供同一范围、同一 revision 时也优先采用；否则按上述路径部署完整源码。PPT Master 的 Python/浏览器环境留到首次调用，验收不执行安装业务依赖的命令。
+Claude 优先使用对应原生插件。Codex 的 frontend-slides 已验证原生兼容包实际加载完整 skill，按[插件说明](codex/plugins.md)优先采用；不支持插件的 client 使用上述源码。PPT Master 当前插件的根目录入口被 Codex 忽略，且嵌套 Git 来源没有固定 revision，保持上述固定源码路径。它的 Python/浏览器环境留到首次调用，验收不执行安装业务依赖的命令。
 
 <a id="pua"></a>
 ## PUA（Codex）
@@ -137,20 +137,24 @@ Claude 优先使用对应原生插件。Codex 原生兼容包经验证能提供�
 复制 `codex/pua`、`codex/pua-en`、`codex/pua-ja` 到同名 skills 目录。保留各自 `references/` 等资源；这些是上游 Codex 专用版本。新出现的其他 PUA skills 不随本选项自动安装。
 
 <a id="ai-research"></a>
-## AI Research（Codex 精选）
+## AI Research 整包（两端统一 31 项）
 
-Claude 用六个分类原生插件；Codex 安装下表精选成员。表中省略目标名时使用最后一级目录名；不要把上游目录前缀误当成 skill 名。
+选择 `ai-research` 一次安装以下六组、共 31 个完整 skills，所有成员归属同一个 catalog ID。两平台优先使用这些上游分类插件；Codex 0.153.4 已验证六个兼容包实际加载全部 31 项。这里只打包这六组，其他上游研究分类不随本选项安装。
 
-| Catalog ID | 源码路径 → 目标名 |
+| 原生 selector（Claude / Codex） | 源码路径 → 目标名 |
 | --- | --- |
-| tokenization | 02-tokenization/huggingface-tokenizers；02-tokenization/sentencepiece |
-| fine-tuning | 03-fine-tuning/axolotl；03-fine-tuning/llama-factory；03-fine-tuning/peft → peft-fine-tuning；03-fine-tuning/unsloth |
-| post-training | 06-post-training/grpo-rl-training；06-post-training/openrlhf → openrlhf-training；06-post-training/simpo → simpo-training；06-post-training/trl-fine-tuning → fine-tuning-with-trl；06-post-training/verl → verl-rl-training |
-| distributed-training | 08-distributed-training/deepspeed；08-distributed-training/pytorch-fsdp2；08-distributed-training/megatron-core → training-llms-megatron；08-distributed-training/ray-train |
-| inference-serving | 12-inference-serving/vllm → serving-llms-vllm；12-inference-serving/sglang；12-inference-serving/tensorrt-llm；12-inference-serving/llama-cpp |
-| optimization | 10-optimization/awq → awq-quantization；10-optimization/gptq；10-optimization/gguf → gguf-quantization；10-optimization/flash-attention → optimizing-attention-flash；10-optimization/bitsandbytes → quantizing-models-bitsandbytes |
+| tokenization@ai-research-skills | 02-tokenization/huggingface-tokenizers；02-tokenization/sentencepiece |
+| fine-tuning@ai-research-skills | 03-fine-tuning/axolotl；03-fine-tuning/llama-factory；03-fine-tuning/peft → peft-fine-tuning；03-fine-tuning/unsloth |
+| post-training@ai-research-skills | 06-post-training/grpo-rl-training；06-post-training/miles → miles-rl-training；06-post-training/openrlhf → openrlhf-training；06-post-training/simpo → simpo-training；06-post-training/slime → slime-rl-training；06-post-training/torchforge → torchforge-rl-training；06-post-training/trl-fine-tuning → fine-tuning-with-trl；06-post-training/verl → verl-rl-training |
+| inference-serving@ai-research-skills | 12-inference-serving/llama-cpp；12-inference-serving/sglang；12-inference-serving/tensorrt-llm；12-inference-serving/vllm → serving-llms-vllm |
+| distributed-training@ai-research-skills | 08-distributed-training/accelerate → huggingface-accelerate；08-distributed-training/deepspeed；08-distributed-training/megatron-core → training-llms-megatron；08-distributed-training/pytorch-fsdp2；08-distributed-training/pytorch-lightning；08-distributed-training/ray-train |
+| optimization@ai-research-skills | 10-optimization/awq → awq-quantization；10-optimization/bitsandbytes → quantizing-models-bitsandbytes；10-optimization/flash-attention → optimizing-attention-flash；10-optimization/gguf → gguf-quantization；10-optimization/gptq；10-optimization/hqq → hqq-quantization；10-optimization/ml-training-recipes |
 
-这些目标名沿用旧安装目录；核对 SKILL.md frontmatter 的实际调用名并记录。上游原生插件的分类成员可能更多，不能因此扩大用户选的精选范围。
+Marketplace 为 `Orchestra-Research/AI-research-SKILLs`，revision 见本页来源表；按 [Claude](claude/README.md#ai-research) / [Codex](codex/plugins.md) 的原生命令只安装表中六个 selector。核对 manifest 的显式 skill 路径、资源及实际加载成员，不能把 cache 中其余目录计作已启用。原生调用名可能带分类插件前缀。
+
+Client 不支持插件或固定版本条件不满足时，解释后按右列路径安装同一 31 项；省略目标名时使用最后一级目录名。源码部署使用文件工具的 `--item ai-research`，保留许可，逐一记录来源与结果。只有全部所选组件验证完成才标记整包成功，部分失败时保留已成功成员并续装。
+
+旧六组 ID、Codex 24 项或其他部分选择按[迁移规则](../docs/migration.md#ai-research)保留原范围；新目录中的 31 项不自动扩充已有用户的安装。
 
 <a id="deepxiv"></a>
 ## DeepXiv

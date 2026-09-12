@@ -56,16 +56,18 @@ claude plugin list --json
 | ppt-master | ppt-master@ppt-master | hugohe3/ppt-master |
 | claude-mem | claude-mem@thedotmack | thedotmack/claude-mem |
 | claude-health | health@claude-health | tw93/claude-health |
-| tokenization | tokenization@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
-| fine-tuning | fine-tuning@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
-| post-training | post-training@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
-| inference-serving | inference-serving@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
-| distributed-training | distributed-training@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
-| optimization | optimization@ai-research-skills | Orchestra-Research/AI-research-SKILLs |
+| ai-research | [六个分类插件组成一个安装项](#ai-research) | Orchestra-Research/AI-research-SKILLs |
 
 读取所用 manifest 核实完整成员和插件要求。example-skills 已含 frontend-design，选择整包后复用；同一服务的 MCP 不再另外注册。Claude-Mem 的 worker、hooks、数据库与普通 skill 不同，保留已有数据；使用原生安装/初始化流程。
 
 更新用本机帮助核实 `claude plugin update <selector>`，显式卸载用 `claude plugin uninstall <selector> --scope user`；只操作用户选择且归属明确的项。原来由用户安装的插件复用时不接管所有权。
+
+<a id="ai-research"></a>
+## AI Research 整包
+
+用户选择 `ai-research` 后，添加一次 `Orchestra-Research/AI-research-SKILLs` marketplace，核对其 checkout revision 与[共享来源表](../sources.md#ai-research)，再按上面的原生命令依次安装该表六个 selector。对话目录只显示一个编号；两端统一为这六组完整的 31 项，成员见 [catalog](../../catalog.md#ai-research-members)。若当前上游已改变范围或版本，先解释差异；原生渠道无法满足固定约束时使用共享表中的完整源码配方。
+
+选择记录使用 `ai-research`，每个插件分别保存 selector、版本、创建归属与结果。复用已有安装；部分插件失败时保留已成功组件，整包标记部分完成，只重试未完成项。更新/移除也核对每个组件的归属与修改。旧单组选择按[迁移规则](../../docs/migration.md#ai-research)保留原范围。
 
 <a id="local-skills"></a>
 ## 本地 skills

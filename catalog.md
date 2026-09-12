@@ -61,7 +61,7 @@ Agent 按用户语言展示：保留分类，跨分类连续编号，读当前�
 
 | ID | 安装项与用途 | Claude | Codex | Claude 推荐 | Codex 推荐 |
 | --- | --- | --- | --- | --- | --- |
-| documents | 文档四件套：pdf、docx、pptx、xlsx | [原生插件](platforms/claude/README.md#plugins) | 已有内置能力优先；[固定源码](platforms/sources.md#anthropic) | — | — |
+| documents | 文档四件套：pdf、docx、pptx、xlsx | [原生插件](platforms/claude/README.md#plugins) | 已有内置能力优先；[原生兼容插件](platforms/codex/plugins.md)；[源码后备](platforms/sources.md#anthropic) | — | — |
 | examples | Claude 示例全包 / Codex 精选三个；成员见下方 | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#anthropic) | — | — |
 | frontend-design | 前端视觉设计；已装 examples 整包时不重复 | [原生插件](platforms/claude/README.md#plugins) | [原生插件](platforms/codex/README.md#plugins)；[固定源码](platforms/sources.md#anthropic) | — | — |
 | humanizer | 英文写作去除机械表达 | [原生插件](platforms/claude/README.md#plugins)；[上游源码](platforms/sources.md#writing) | [上游安装](platforms/sources.md#writing) | — | — |
@@ -72,7 +72,7 @@ Agent 按用户语言展示：保留分类，跨分类连续编号，读当前�
 
 | ID | 安装项与用途 | Claude | Codex | Claude 推荐 | Codex 推荐 |
 | --- | --- | --- | --- | --- | --- |
-| frontend-slides | HTML slides 与 PPT 转换 | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#slides) | — | — |
+| frontend-slides | HTML slides 与 PPT 转换 | [原生插件](platforms/claude/README.md#plugins) | [原生兼容插件](platforms/codex/plugins.md)；[源码后备](platforms/sources.md#slides) | — | — |
 | ppt-master | 可编辑 PPTX；Codex 仅安装必要 skill 源码 | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#slides) | — | — |
 
 ## Memory & Lifestyle · 记忆与生活
@@ -94,12 +94,7 @@ Agent 按用户语言展示：保留分类，跨分类连续编号，读当前�
 | ID | 安装项与用途 | Claude | Codex | Claude 推荐 | Codex 推荐 |
 | --- | --- | --- | --- | --- | --- |
 | paper-reading | 论文阅读、证据检查与 HTML 报告 | [本地 skill](platforms/claude/README.md#local-skills) | [本地 skill](platforms/codex/README.md#local-skills) | — | — |
-| tokenization | 分词：huggingface-tokenizers、sentencepiece | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
-| fine-tuning | 微调：axolotl、llama-factory、peft-fine-tuning、unsloth | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
-| post-training | 后训练：grpo-rl-training、openrlhf-training、simpo-training、fine-tuning-with-trl、verl-rl-training | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
-| inference-serving | 推理：serving-llms-vllm、sglang、tensorrt-llm、llama-cpp | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
-| distributed-training | 分布式：deepspeed、pytorch-fsdp2、training-llms-megatron、ray-train | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
-| optimization | 优化：awq-quantization、gptq、gguf-quantization、optimizing-attention-flash、quantizing-models-bitsandbytes | [原生插件](platforms/claude/README.md#plugins) | [固定源码](platforms/sources.md#ai-research) | — | — |
+| ai-research | AI Research 整包：分词、微调、后训练、推理服务、分布式训练与优化；两端统一 31 项，成员见下方 | [原生插件组合](platforms/claude/README.md#ai-research) | [原生兼容插件组合](platforms/codex/plugins.md)；[源码后备](platforms/sources.md#ai-research) | — | — |
 | deepxiv-cli | DeepXiv 论文检索与阅读 | [固定源码](platforms/sources.md#deepxiv) | [固定源码](platforms/sources.md#deepxiv) | — | — |
 | deepxiv-trending-digest | DeepXiv 热门论文摘要 | [固定源码](platforms/sources.md#deepxiv) | [固定源码](platforms/sources.md#deepxiv) | — | — |
 | deepxiv-baseline-table | DeepXiv 基线对比表 | [固定源码](platforms/sources.md#deepxiv) | [固定源码](platforms/sources.md#deepxiv) | — | — |
@@ -111,7 +106,7 @@ Agent 按用户语言展示：保留分类，跨分类连续编号，读当前�
 | ID | 安装项与用途 | Claude | Codex | Claude 推荐 | Codex 推荐 |
 | --- | --- | --- | --- | --- | --- |
 | lark | 飞书/Lark MCP；需用户凭据 | [MCP](platforms/claude/README.md#mcp) | [MCP](platforms/codex/README.md#mcp) | — | — |
-| github | GitHub MCP；需用户授权 | — | [MCP](platforms/codex/README.md#mcp) | — | — |
+| github | GitHub 仓库与 issue 工具；需用户授权 | — | 可用时优先 [OpenAI 官方插件](platforms/codex/plugins.md)；[GitHub MCP](platforms/codex/README.md#mcp) | — | — |
 | openai-docs | OpenAI 官方文档 MCP | — | [MCP](platforms/codex/README.md#mcp) | — | — |
 
 <a id="members"></a>
@@ -125,8 +120,21 @@ Agent 按用户语言展示：保留分类，跨分类连续编号，读当前�
 - **Superpowers**：brainstorming、dispatching-parallel-agents、executing-plans、finishing-a-development-branch、receiving-code-review、requesting-code-review、subagent-driven-development、systematic-debugging、test-driven-development、using-git-worktrees、using-superpowers、verification-before-completion、writing-plans、writing-skills。
 - **Claude Matt 原生包（1.2.3 快照）**：ask-matt、diagnosing-bugs、grill-with-docs、triage、improve-codebase-architecture、setup-matt-pocock-skills、tdd、to-spec、to-tickets、wayfinder、implement、prototype、research、domain-modeling、codebase-design、code-review、resolving-merge-conflicts、wizard、grill-me、grilling、handoff、teach、to-questionnaire、wait-what、writing-for-agents。
 - **Codex Matt v1.1.0 精选**：ask-matt、diagnosing-bugs、grill-with-docs、triage、implement、improve-codebase-architecture、setup-matt-pocock-skills、tdd、to-spec、to-tickets、wayfinder、prototype、domain-modeling、codebase-design、grill-me、grilling、research、teach、writing-great-skills、handoff，共 20 项。code-review 是独立可选项；handoff 仅作为本包成员安装。
-- **六组 AI Research 原生分类插件**：Codex 精选成员已列在对应行。Claude 分类插件可能包含更多成员，按其 manifest 展示，不从 Codex 的精选范围推断整包内容。
 - **Claude-Mem（13.24.23 快照）**：babysit、ccs-align、cloud-sync、design-is、do、how-it-works、knowledge-agent、learn-codebase、make-plan、mem-search、mode-creator、oh-my-issues、pathfinder、smart-explore、standup、timeline-report、version-bump、weekly-digests、what-the、wowerpoint。属于 skills + hooks + MCP + worker 的完整包；按当前平台 manifest 展示全部成员与初始化要求，保留数据库。只复制它的 SKILL.md 不能代替安装插件。
 - **code-simplifier** 和 **codex-in-claude**：分别包含 agent/commands 等插件能力，按照上游 manifest 说明实际安装范围。
+
+<a id="ai-research-members"></a>
+### AI Research 整包
+
+`ai-research` 占一个编号，两端统一包含下面六组、共 31 项。Claude 使用六个上游分类插件，Codex 优先使用同一来源的兼容插件；获取渠道见对应平台说明。分类名只解释成员，不再成为独立安装选项。旧 24 项及部分选择的处理见[迁移说明](docs/migration.md#ai-research)。
+
+| 分组与用途 | Claude / Codex 共用成员（共 31 项） |
+| --- | --- |
+| 分词（tokenization） | huggingface-tokenizers、sentencepiece |
+| 微调（fine-tuning） | axolotl、llama-factory、peft-fine-tuning、unsloth |
+| 后训练（post-training） | grpo-rl-training、miles-rl-training、openrlhf-training、simpo-training、slime-rl-training、torchforge-rl-training、fine-tuning-with-trl、verl-rl-training |
+| 推理（inference-serving） | serving-llms-vllm、sglang、tensorrt-llm、llama-cpp |
+| 分布式（distributed-training） | huggingface-accelerate、deepspeed、pytorch-fsdp2、training-llms-megatron、pytorch-lightning、ray-train |
+| 优化（optimization） | awq-quantization、gptq、gguf-quantization、optimizing-attention-flash、quantizing-models-bitsandbytes、hqq-quantization、ml-training-recipes |
 
 历史来源及条目迁移见 [迁移说明](docs/migration.md)，这些记录不限制当前能力的正常维护。Codex 历史 adversarial-review 的源码仍保留，但当前策略使用 Matt code-review，因此不列为 Codex 可安装项。
