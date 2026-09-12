@@ -2,6 +2,8 @@
 
 用户要求在本仓库新增、更新、修改、删除 skills / 插件 / 配置，或调整作者推荐时，按本文件执行。给用户机器安装或更新已选内容走 [INSTALL.md](INSTALL.md)。仓库改动与用户已安装内容分别处理；修改目录不会直接修改任何 agent home。
 
+配置查询与增删改的统一入口是 [edit-config](skills/edit-config/SKILL.md)。它将仓库修改路由到本文件，将安装修改路由到 INSTALL；只读查询不进入写入流程。
+
 ## 1. 确定修改范围
 
 读取相关 [catalog.md](catalog.md) 条目、完整 skill 及其引用资源、对应平台说明；涉及外部来源时读取 [sources.md](platforms/sources.md) 的相应部分。沿用用户已明确的目标和授权。

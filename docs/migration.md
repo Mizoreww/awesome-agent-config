@@ -25,7 +25,7 @@ root lessons.md 保留本仓库纠错历史，安装使用各自 platforms/claud
 
 | 内容 | 当前维护方式 |
 | --- | --- |
-| paper-reading、两端更新 skill | 自有源码保存在本仓库 |
+| paper-reading、edit-config | 自有源码保存在本仓库；两端共用 edit-config |
 | storage-analyzer、adversarial-review | 保留定制源码及上游署名；Codex 历史 adversarial-review 仍不作为安装项 |
 | humanizer、humanizer-zh、neat-freak | 移除原样副本，稳定 ID 与能力保留；从 [第三方上游](../platforms/sources.md#writing) 安装 |
 | handoff | 移除独立副本与选择，统一使用 Matt 包中的上游成员 |
@@ -37,7 +37,7 @@ root lessons.md 保留本仓库纠错历史，安装使用各自 platforms/claud
 本地目录不是安装能力的全集。[catalog.md](../catalog.md) 和 [sources.md](../platforms/sources.md) 还覆盖：
 
 - main settings 中的 20 个原生插件 selector（15 个启用、5 个关闭）加上安装菜单的 Matt 插件，共 21 个可选插件，以及 DeepXiv、ResearchStudio Idea 和 lieflat-charts 源码入口。
-- Codex 的 Matt v1.1.0 工作流目前包含上游 handoff 共二十项，另有独立 code-review；Superpowers 十四项；Karpathy；PUA 三项。
+- Codex 的 Matt v1.1.0 工作流目前包含上游 handoff 共二十项，另有独立 code-review；Superpowers 十四项；Karpathy。原 PUA 三项的退役见下方。
 - Anthropic 文档四项、Codex examples 精选三项、独立 frontend-design；frontend-slides、PPT Master。
 - AI Research 原六组精选（24 项）已全部纳入新的两端统一 31 项整包；另外保留 DeepXiv 三项、ResearchStudio Idea 三项与 Reel 五项，以及既有 MCP 配置能力。
 
@@ -69,7 +69,30 @@ Codex 关闭 `desktop.external-agent-import-sync-enabled`。旧 `model_instructi
 
 ## 条目退役与改名
 
-活动目录现为 46 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+活动目录现为 43 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+
+<a id="removed-integrations"></a>
+### Lark、Claude-Mem 与 PUA 退役
+
+2026-09-13 按作者要求移除 `lark`（Lark / Feishu MCP）、`claude-mem`、`pua`（pua / pua-en / pua-ja）的活动条目、安装配方及相关模板。新安装不再提供这些内容。旧记录中的 ID 标记为退役，查询仍可报告实际状态；普通更新不重新安装或升级这些项目。
+
+仓库移除不自动卸载用户已有内容。用户明确要求卸载时，逐项核实来源、创建归属和本地修改，使用原生插件/MCP 卸载或受控文件移除；保留未授权删除的数据库、凭据、个人记忆和定制内容。
+
+<a id="common-rules"></a>
+### rules-common → rules-writing-style
+
+原 Common rules 的 agents、coding-style、git-workflow、hooks、patterns、performance、security、testing 八个文件全部退役。新 `rules-writing-style` 只安装 `rules/writing-style.md`，包含完整英文写作要求及示例；Python / TypeScript / Go 规则仍独立可选，已解除对 Common 文件的引用。
+
+旧 `rules-common` 选择不自动视作已安装新规则。用户选择替换后，先部署并验证新文件，再按明确移除请求处理上述旧文件。文件工具若记录的是整个 `rules/common` 目录，先检查所有权、hash 与实际成员；已有定制或额外文件时保留并准备逐文件处理，不能直接删除整个用户目录。不要从其他渠道重新安装旧 Common rules。
+
+<a id="edit-config"></a>
+### update-config / update_config → edit-config
+
+旧 catalog ID `update-config`、Claude `skills/update-config` 与 Codex `skills/update`（调用名 update_config）统一为共享 `skills/edit-config` 和 catalog ID `edit-config`。两端的全局模板均把配置查询、增删改、修复与更新路由到它；查询只读。模板提供缺少 skill 时读取同一分支工作流的入口，不暗中补装。
+
+新 skill 明确跟踪 `https://github.com/Mizoreww/awesome-claude-code-config.git` 的 `agent-config-for-agents` 分支。匹配的记录直接续用；缺失来源时使用此明确来源，但不认领既有安装。记录为其他 fork、分支、固定 commit 或本地来源时，按已明确的迁移选择处理；尚未决定则保留原来源。
+
+用户请求迁移旧更新入口后，先验证共享 skill，保留原选择、来源历史、文件归属和定制，再更新选择 ID 及全局指令中的旧调用名。旧目录仅在归属明确、未修改且移除已获授权时清理；其他副本标记待处理，不作为新入口继续推荐。新的仓库来源不重置其他已安装项的版本或状态。
 
 <a id="handoff"></a>
 ### handoff → matt-workflow 成员
@@ -97,4 +120,4 @@ Codex 旧六组共 24 项，仍属于待迁移的部分范围。新整包增加 
 
 macOS、Linux、Windows 与 WSL 共用相同的 agent 流程，分别检测本地 CLI、shell、配置目录和运行前提。Windows 与 WSL 不混用 home；Codex App、CLI、IDE 的内置能力也应分别核对。
 
-本开发环境是 macOS。Windows/WSL 的实际原生命令与 hooks 执行仍需对应环境验收；凭据类 MCP 和 Claude-Mem 的完整记忆生命周期需要用户授权及原生初始化。纯源码安装成功不代表可选业务依赖已经就绪。相关既有 skill 测试保留；只服务已退役终端安装器的断言随旧代码移除，新的开发验收脚本留在仓库之外。
+本开发环境是 macOS。Windows/WSL 的实际原生命令与 hooks 执行仍需对应环境验收；凭据类 MCP 需要用户授权及原生初始化。纯源码安装成功不代表可选业务依赖已经就绪。相关既有 skill 测试保留；只服务已退役终端安装器的断言随旧代码移除，新的开发验收脚本留在仓库之外。

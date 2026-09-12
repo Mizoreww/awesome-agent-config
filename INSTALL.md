@@ -2,6 +2,8 @@
 
 用户只需已有 Claude 或 Codex，并把本仓库交给你。默认配置当前对话的 agent；只有用户明确要求才同时配置两者。按用户语言交流，技术事实从本仓库和实际环境核实。
 
+后续配置查询、增删改、修复与更新统一由 [edit-config](skills/edit-config/SKILL.md) 发起。该 skill 明确跟踪本仓库的 agent-config-for-agents 分支，并先区分只读查询与修改。首次安装可以直接执行本流程；查询不执行下面的安装和记录步骤。
+
 ## 1. 读取与检测
 
 使用用户交给你的仓库页面、ref 或 checkout，按下方[仓库来源](#repository-source)确定版本和更新策略。把该 revision 下载到临时目录，或使用用户指定的 checkout；同时读取本文件、[catalog.md](catalog.md) 和目标的 [Claude](platforms/claude/README.md) / [Codex](platforms/codex/README.md) 说明。所有操作都基于这份仓库内容，已有 checkout 不切分支、不丢弃用户修改。
@@ -59,6 +61,8 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 
 先按已记录的仓库来源获取本次 revision 的 INSTALL 与 catalog，再读取已选 ID，更新对应来源；源码固定 revision 不自动解锁。作者新增推荐不扩大用户选择。用户要求改选时重新列完整目录，保留已安装标记。
 
+通过 edit-config 发起时，先执行该 skill 的分支与来源冲突检查，再使用解析后的同一 revision。它的目标为 `Mizoreww/awesome-claude-code-config` 的 `agent-config-for-agents` 分支；记录中的其他 fork、分支、固定 commit 或本地来源须按明确选择迁移，不被此默认目标静默覆盖。
+
 旧记录中的 ID 在当前目录消失或改名时，查阅当前仓库[迁移说明](docs/migration.md)；保留已安装对象和原记录，标记退役或待迁移并说明选择。只有用户要求迁移/移除才执行，不把未知 ID 忽略成“更新成功”。
 
 卸载前核对来源、创建归属和本地改动；整包还被其他已选项引用时先解释影响。原生插件用原生命令，文件工具仅移除自己创建且 hash 未变化的副本；混合配置通过具体的局部逆向修改处理。外部内容只取消关联。
@@ -90,3 +94,5 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 获取后的版本必须包含 INSTALL.md、catalog.md 和目标平台说明，才能继续本流程。若没有，说明来源不兼容并请求正确来源，不能运行旧安装器或切到历史分支。
 
 已有记录缺少这些字段时，从记录中的仓库来源或用户此次明确给出的 URL / checkout 补齐；没有可靠来源才补问。目录内容使用完整相同 revision；来源策略改变只更新来源记录，不重置选择和文件归属。Claude 与 Codex 各自在自己的 home 保存记录与 lessons。
+
+本仓库的 edit-config 自带明确的仓库 URL 与目标分支，可用于补齐缺失的来源字段；它不提供既有文件或插件的所有权证明。部署此 skill 时说明其分支关联。通用安装仍尊重用户明确提供的来源策略，冲突处理由 edit-config 在改动前完成。

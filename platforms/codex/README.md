@@ -38,7 +38,7 @@ AI Research 是[一个 31 项整包](../sources.md#ai-research)，通过六个�
 <a id="local-skills"></a>
 ## Skills
 
-共享 ../../skills 下的 paper-reading 是自有 skill，storage-analyzer 是保留上游署名的本仓库定制版，完整部署到 skills 同名目录。本目录 skills/update 部署到 skills/update，保留 update_config 调用名。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)。handoff 仅随 Matt 包从其上游获取，不再使用独立的本地副本。
+共享 ../../skills 下的 paper-reading、edit-config 是自有 skills，storage-analyzer 是保留上游署名的本仓库定制版，完整部署到 skills 同名目录。edit-config 处理配置查询与增删改，跟踪本仓库 agent-config-for-agents 分支；具体来源冲突与更新流程由该 skill 定义。安装全局指令不会暗中补装它；模板也提供同一工作流的读取入口。旧更新 skill 见[迁移说明](../../docs/migration.md#edit-config)。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)。handoff 仅随 Matt 包从其上游获取，不再使用独立的本地副本。
 
 本目录仍保存 Codex 历史 adversarial-review 源码以防遗失；它不是当前可选安装项。Codex 审查使用 Matt code-review，不运行 Claude 对审工具。
 
@@ -76,18 +76,4 @@ Windows 若可执行入口是 npx.cmd，按本机 shell 核实调用方式；必
 
 GitHub：先按[插件选择](plugins.md)检查可用的 OpenAI 官方 GitHub 插件或已有集成。需要 MCP 渠道时核实 [GitHub 官方 MCP server](https://github.com/github/github-mcp-server)，通过 `codex mcp add github --url https://api.githubcopilot.com/mcp --bearer-token-env-var GITHUB_PERSONAL_ACCESS_TOKEN` 注册，或复用既有受支持配置。用户在环境中设置 token；不要把值传入聊天或记录。旧版 @modelcontextprotocol/server-github 仅作为已有安装的来源识别，不自动删掉。
 
-Lark：核实 [lark-openapi-mcp](https://github.com/larksuite/lark-openapi-mcp)，用户补齐 app ID/secret 后按 `codex mcp add --help` 注册并验证。缺凭据记为待配置，不写占位服务器或打印真实 secret。templates/mcp 保存旧版可用的无凭据服务配置，供核对来源；不整份复制来启用全部 MCP。
-
-<a id="claude-mem"></a>
-## Claude-Mem 的 Codex 版本
-
-上游 13.24.23（ed57a511f5dbf84e75c9a785df818c43b66b5849）的 marketplace `thedotmack` 指向 `./plugin`，其中已包含 `plugin/.codex-plugin/plugin.json`，引用 `hooks/codex-hooks.json`、`.mcp.json` 和完整 skills。优先核实并安装该 Codex 包：
-
-```sh
-codex plugin marketplace add thedotmack/claude-mem --ref ed57a511f5dbf84e75c9a785df818c43b66b5849 --json
-codex plugin list --available --json
-codex plugin add claude-mem@thedotmack --json
-codex plugin list --json
-```
-
-用户选择后仍需读取 [上游](https://github.com/thedotmack/claude-mem) 当前 Codex 安装说明，定位 Codex 专用包，并核对 .codex-plugin/plugin.json、hooks、MCP 和 worker。通过原生插件发现/安装流程配置，按需完成原生 trust/初始化；保留数据库。没有可核实的 Codex 包时记录待支持，不安装 Claude hooks 来冒充兼容，也不复用其他机器的本地 cache 路径。
+templates/mcp 保存既有无凭据服务的参考配置，供核对来源；不整份复制来启用全部 MCP。

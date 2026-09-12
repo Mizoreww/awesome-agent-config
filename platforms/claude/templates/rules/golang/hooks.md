@@ -1,10 +1,8 @@
 # Go Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with Go specific content.
-
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+This rule describes optional hooks. Configure them only when requested in the actual Claude home's `settings.json` (respect `CLAUDE_CONFIG_DIR`):
 
 - **gofmt/goimports**: Auto-format `.go` files after edit
 - **go vet**: Run static analysis after editing `.go` files

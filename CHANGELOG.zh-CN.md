@@ -1,5 +1,22 @@
 # 变更记录
 
+## [4.0.0-dev.4] - 2026-09-13
+
+### Features
+- 从活动目录、安装配方和模板移除 Lark/Feishu MCP、Claude-Mem 与 PUA 三语言 skills。
+- Claude 原八个 Common rules 替换为一份完整英文写作 rule，保留全部给定示例；语言规则独立选择，移除失效 Common 引用及对未提供 skills/hooks 的假设。
+- 两端更新 skill 统一为共享 edit-config，处理配置查询、增删改、修复与更新；全局模板提供调用入口，跟踪 agent-config-for-agents，查询只读。
+- Context7 参考模板与 HTTP 配方对齐，统一配置入口说明；按当前发布分支的安装菜单默认项整理 Claude 20 项、Codex 22 项推荐草案，待作者最终确认。
+
+### Design Rationale
+- 一份配置管理 skill 避免两端更新规则不一致；明确的来源检查保留用户已选择的 fork、固定版本和本地来源策略。
+- 写作要求独立成 rule，语言规则按需选择；推荐映射记录在当前目录，安装无需依赖旧分支。
+
+### Notes & Caveats
+- 活动目录现为 43 个 ID；退役条目、Common rules 和旧更新 skill 路径均有迁移说明，不自动删除已有安装、定制或记忆。
+- 推荐依据为一致的 Bash/PowerShell 菜单默认值；权限从旧基础配置拆分、新写作 rule 替代 Common 的映射已注明，推荐不构成安装或提升权限的授权。
+- 源码变更在隔离 home 验证；Windows/WSL 执行和凭据类集成仍需对应环境。
+
 ## [4.0.0-dev.3] - 2026-09-12
 
 ### Features

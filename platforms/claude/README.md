@@ -9,17 +9,17 @@
 
 | Catalog ID | 来源 → 目标 / 操作 |
 | --- | --- |
-| instructions | templates/CLAUDE.md → CLAUDE.md；现有不同文件需要具体合并，不直接覆盖 |
+| instructions | templates/CLAUDE.md → CLAUDE.md，包含 edit-config 调用入口；现有不同文件需要具体合并，不直接覆盖 |
 | settings | 仅合并 templates/settings.json → settings.json |
 | permissions | 用户选择权限配置后，合并 templates/permissions.json；有差异的权限键需要明确 `--replace`，不要顺带改模型或插件 |
 | lessons | seed-lessons --agent claude 从 templates/lessons.md 创建空白记录；将 templates/CLAUDE.md 的 Memory System 段合并到全局 CLAUDE（若未随 instructions 部署），再合并 templates/lessons-hooks.json。保留用户指令与 hooks；Windows 先核实这些 command hooks 使用的 Bash 可用 |
 | statusline | templates/hooks/statusline.sh → hooks/statusline.sh；合并 templates/statusline.json；检查 Bash/jq。字体位于 templates/fonts（含 LICENSE），按 OS 用户字体目录安装，缺字体可使用文本显示 |
-| rules-common | templates/rules/common → rules/common |
+| rules-writing-style | templates/rules/writing-style.md → rules/writing-style.md；完整八条写作规则与英文示例 |
 | rules-python | templates/rules/python → rules/python |
 | rules-typescript | templates/rules/typescript → rules/typescript |
 | rules-golang | templates/rules/golang → rules/golang |
 
-规则按所选目录复制，不把说明用的 rules/README.md 放入会自动加载的规则目录。hooks/statusline 默认通过 CLAUDE_CONFIG_DIR 定位；若安装到未设置该环境变量的自定义目录，先在临时 patch 中生成正确引用并验证，再合并。
+写作规则按单文件部署，语言规则按所选目录复制；不把说明用的 rules/README.md 放入会自动加载的规则目录。语言规则独立于写作规则，按项目需要选择。旧 Common rules 的处理见[迁移说明](../../docs/migration.md#common-rules)。hooks/statusline 默认通过 CLAUDE_CONFIG_DIR 定位；若安装到未设置该环境变量的自定义目录，先在临时 patch 中生成正确引用并验证，再合并。
 
 全局模板中提到的工作流必须与所选能力一致：解释依赖、让用户选择对应工作流，或对拟部署模板做明确适配；不能暗中安装未选插件。
 
@@ -54,11 +54,10 @@ claude plugin list --json
 | humanizer | humanizer@humanizer（上游要求 Claude Code >= 2.1.142） | blader/humanizer |
 | frontend-slides | frontend-slides@frontend-slides | zarazhangrui/frontend-slides |
 | ppt-master | ppt-master@ppt-master | hugohe3/ppt-master |
-| claude-mem | claude-mem@thedotmack | thedotmack/claude-mem |
 | claude-health | health@claude-health | tw93/claude-health |
 | ai-research | [六个分类插件组成一个安装项](#ai-research) | Orchestra-Research/AI-research-SKILLs |
 
-读取所用 manifest 核实完整成员和插件要求。example-skills 已含 frontend-design，选择整包后复用；同一服务的 MCP 不再另外注册。Claude-Mem 的 worker、hooks、数据库与普通 skill 不同，保留已有数据；使用原生安装/初始化流程。
+读取所用 manifest 核实完整成员和插件要求。example-skills 已含 frontend-design，选择整包后复用；同一服务的 MCP 不再另外注册。
 
 更新用本机帮助核实 `claude plugin update <selector>`，显式卸载用 `claude plugin uninstall <selector> --scope user`；只操作用户选择且归属明确的项。原来由用户安装的插件复用时不接管所有权。
 
@@ -74,13 +73,11 @@ claude plugin list --json
 
 共享目录 ../../skills 下的 paper-reading 是自有 skill，storage-analyzer 是保留上游署名的本仓库定制版，分别完整复制到目标 skills 同名目录。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)，不再从本仓库复制。
 
-本目录 skills 下的 adversarial-review、update-config 是 Claude 专属版本，分别安装到 skills/adversarial-review、skills/update-config。更新入口使用本 home 记录的仓库来源与选择。上游获取的 DeepXiv、ResearchStudio、lieflat-charts 见 [共享源码说明](../sources.md)。
+本目录 skills/adversarial-review 是 Claude 专属版本，安装到 skills/adversarial-review。共享 ../../skills/edit-config 完整部署到 skills/edit-config，处理配置查询与增删改，跟踪本仓库 agent-config-for-agents 分支；具体来源冲突与更新流程由该 skill 定义。安装全局指令不会暗中补装它；模板也提供同一工作流的读取入口。旧更新 skill 见[迁移说明](../../docs/migration.md#edit-config)。上游获取的 DeepXiv、ResearchStudio、lieflat-charts 见 [共享源码说明](../sources.md)。
 
 adversarial-review 是基于 poteto/noodle 的定制版，来源与修改见其 UPSTREAM.md。handoff 已包含在 Matt 原生包内，不提供独立安装项。
 
 <a id="mcp"></a>
-## Lark MCP
+## MCP
 
-可选服务 Lark 参考 templates/mcp/mcp-servers.json，核实上游 [lark-openapi-mcp](https://github.com/larksuite/lark-openapi-mcp) 的当前参数。用户补齐凭据后，用 `claude mcp add --help` 确定用户 scope 与参数形式并注册，再检查连接。占位凭据不构成可用服务，也不写入成功记录。
-
-Context7 和 Playwright 已通过上述原生插件提供，选择它们时不要再从参考 JSON 重复注册。其他未选服务不因配置合并而启用。
+Context7 和 Playwright 通过上述原生插件提供，选择它们时复用插件的 MCP，无需另行注册。其他未选服务不因配置合并而启用。

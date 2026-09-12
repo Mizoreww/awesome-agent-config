@@ -170,3 +170,18 @@ Example lessons (invisible to `cat`, visible in editors):
 **Mistake**: Offered the six AI Research groups as separate top-level installation choices.
 **Rule**: Present one ai-research bundle containing tokenization, fine-tuning, post-training, inference-serving, distributed-training and optimization. Keep each group's members visible and retain the platform's upstream installation methods. Legacy partial selections do not authorize adding the rest of the bundle.
 **Clarification**: The author explicitly selected the complete upstream 31-member AI Research bundle for both agents, replacing Codex's 24-member curation for new bundle installs. Existing partial installations still require an explicit migration choice before adding members.
+
+## 2026-09-13 - Replace Claude common rules with the full writing rule
+**Context**: Revising the Claude writing instructions and auditing configuration consistency.
+**Mistake**: The initial change placed a condensed writing section in the CLAUDE.md template; the author subsequently requested the complete English version as a rule instead.
+**Rule**: Remove the other Claude common rules and place the complete English translation, including examples, in one writing rule. Remove the duplicate condensed template section. Keep the language-specific rules unless separately requested, and reconcile their references with the new common rule layout.
+
+## 2026-09-13 - Associate update skills with the active development branch
+**Context**: Connecting update-config to the branch the author is developing.
+**Mistake**: The generic recorded-source workflow did not explicitly associate the update skills with this development branch.
+**Rule**: Both update skills must identify Mizoreww/awesome-claude-code-config and agent-config-for-agents as their update target. Keep installation choices, ownership and customizations; handle conflicting source records explicitly. This supersedes the earlier prohibition on naming the development branch in these update entrypoints, without making archived Claude/Codex branches installation dependencies.
+
+## 2026-09-13 - Read exact text before document replacements
+**Context**: Synchronizing bilingual README and configuration changes.
+**Mistake**: Repeatedly prepared text replacements from remembered wording, causing patch failures and one partially updated bilingual pair.
+**Rule**: Read the exact current lines before replacements; use verified anchors, check each file's resulting state after a failed batch, and complete bilingual synchronization before validation.

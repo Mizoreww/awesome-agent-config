@@ -44,7 +44,6 @@ GitHub 官方插件使用 connector，和直接配置 GitHub MCP 的授权入口
 | karpathy | andrej-karpathy-skills@karpathy-skills | forrestchang/andrej-karpathy-skills | 上游兼容包；核对 karpathy-guidelines 及资源 |
 | frontend-design | frontend-design@claude-plugins-official | anthropics/claude-plugins-official | Anthropic 兼容包；实际加载 frontend-design，已有提供方则复用 |
 | context7 | context7@claude-plugins-official | anthropics/claude-plugins-official | Upstash 兼容包；包含 HTTP MCP，另验证实际连接及环境变量展开；连接未通过不能标记可用 |
-| claude-mem | claude-mem@thedotmack | thedotmack/claude-mem | 上游提供 Codex manifest；完整 hooks / MCP / worker 的初始化见[专用步骤](README.md#claude-mem) |
 
 只添加所选 marketplace。存在 [sources.md](../sources.md) 的 revision 约束时使用它；已存在的 marketplace 先核对来源、ref 与其他选择，不能为新条目悄悄改变既有版本策略。
 
@@ -64,9 +63,9 @@ codex plugin list --json
 | Humanizer | 3.0.0 上游 manifest 指定 `skills: ["./"]`；CLI 0.153.4 显示 installed，但实际加载忽略根目录入口。使用[上游源码](../sources.md#writing)；以后确实加载成功才能改为插件优先 |
 | PPT Master | 同样使用根目录 skill 入口；此外 marketplace 的嵌套 git-subdir 未固定 revision，实装资源与记录版本不同。保持[固定源码](../sources.md#slides)，业务依赖留到首次调用 |
 | Matt | Codex 固定 v1.1.0 快照没有可用 marketplace，工作流二十项与 code-review 的选择边界也需保留；使用[精选源码](../sources.md#matt) |
-| examples / PUA | 原生 Claude 整包不等于 Codex 各自的三个所选成员；按[明确范围](../sources.md)获取源码 |
+| examples | 原生 Claude 整包包含十二项，Codex 精选三个成员；按[明确范围](../sources.md#anthropic)获取源码 |
 | Playwright | 可见的 Claude 兼容插件使用 @playwright/mcp@latest，不能满足本仓库 0.0.78 和旧 Node launcher 约束；保留[原生 MCP](README.md#mcp) |
 | Humanizer-zh / neat-freak / DeepXiv / ResearchStudio | 已核对的上游 revision 没有对应可用插件入口；保留[上游安装配方](../sources.md)，ResearchStudio 仅准备源码和适配 |
-| OpenAI docs / Lark | 使用[原生 MCP](README.md#mcp)；保持文档专用范围和服务的实际凭据要求 |
+| OpenAI docs | 使用[原生 MCP](README.md#mcp)，保持文档专用范围 |
 
 自有与定制 skills 继续由本仓库提供完整源码。上述结论是当前兼容性约束；维护者要求升级时重新核对对应上游。网络失败不静默切换渠道，不制造本仓库 wrapper 冒充上游插件。

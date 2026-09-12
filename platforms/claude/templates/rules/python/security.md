@@ -1,7 +1,5 @@
 # Python Security
 
-> This file extends [common/security.md](../common/security.md) with Python specific content.
-
 ## Secret Management
 
 ```python
@@ -22,4 +20,4 @@ api_key = os.environ["OPENAI_API_KEY"]  # Raises KeyError if missing
 
 ## Reference
 
-See skill: `django-security` for Django-specific security guidelines (if applicable).
+If separately installed, consult the skill `django-security` for Django-specific security guidelines when applicable.

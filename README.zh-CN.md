@@ -21,9 +21,9 @@
 
 > 请读取我提供的 checkout 或仓库页面中的 INSTALL.md，使用与这份 README 相同的分支/revision。默认配置当前对话使用的 agent。检查系统、client 和已有配置，按分类完整列出支持的安装项，连续编号，标注作者推荐与已安装状态，并解释用途。根据我的选择安装和验证，保留已有定制。
 
-Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自然语言选择。插件整包占一个编号并列出成员，包内已有能力不会再重复安装。作者推荐分别为 Claude、Codex 维护，目前尚未填写；推荐标记不代表你已同意安装。
+Agent 会列全当前 agent 支持的目录。你可以用编号、名称或自然语言选择。插件整包占一个编号并列出成员，包内已有能力不会再重复安装。推荐草案按当前 main/Codex 安装菜单默认项整理，[映射关系](catalog.md#recommendations)已注明，待作者最终确认；推荐标记不代表你已同意安装。
 
-之后直接说“添加 paper-reading”“更新我上次选择的内容”或“移除 storage-analyzer”。已有选择会沿用，没有提到的已安装项不会被卸载。可选更新 skill 在 Claude 中叫 `/update-config`，Codex 中叫 `update_config`；不安装它们也能通过普通对话维护。
+之后直接说“添加 paper-reading”“更新我上次选择的内容”或“移除 storage-analyzer”。已有选择会沿用，没有提到的已安装项不会被卸载。两端统一使用 `edit-config` 查询、增删改、修复和更新配置，跟踪本仓库的 `agent-config-for-agents` 分支。查询只读；未安装 skill 时，全局指令提供同一工作流的读取入口。
 
 优先使用原生插件/MCP 命令；所选范围或 client 需要时，agent 再按仓库说明采用源码安装。你无需自己判断 npx、插件和 skill 复制渠道。Codex 安装会关闭外部 agent 自动导入，使安装内容遵循你的选择。Windows 与 WSL 分别检测配置，共用 home 的 App/CLI 会复用已有安装。
 
@@ -33,21 +33,21 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 ## 分类目录
 
-保留原有分类，合并 Claude 与 Codex 的能力。第三方原版从上游安装，本仓库保存自有 skill 与保留署名的定制版。handoff 仅作为 Matt 包成员提供。`—` 表示本仓库未为该 agent 提供该项，agent 展示选择时会过滤它。平台列中的 **★** 表示作者为该 agent 推荐该项，目前尚无推荐。准确渠道、稳定 ID 与推荐标记以 [catalog.md](catalog.md) 为准。
+保留原有分类，合并 Claude 与 Codex 的能力。第三方原版从上游安装，本仓库保存自有 skill 与保留署名的定制版。handoff 仅作为 Matt 包成员提供。`—` 表示本仓库未为该 agent 提供该项，agent 展示选择时会过滤它。平台列中的 **★** 表示该 agent 的候选推荐，待作者最终确认。准确渠道、稳定 ID 与推荐标记以 [catalog.md](catalog.md) 为准。
 
 ### Core · 基础配置
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **CLAUDE.md / AGENTS.md** | [本仓库](platforms/claude/README.md#configuration) | 各 agent 独立的全局指令 | 模板 | 模板 |
-| **Base settings** | [本仓库](platforms/codex/README.md#configuration) | 局部合并模型、推理与运行设置 | 模板 | 模板 |
-| **Permissions** | [本仓库](platforms/codex/README.md#configuration) | 用户选择可信环境后，单独配置高自主权限 | 模板 | 模板 |
-| **Common rules** | [本仓库](platforms/claude/README.md#configuration) | 编码风格、Git、安全与测试规则 | 模板 | — |
-| **StatusLine** | [本仓库](platforms/claude/README.md#configuration) | Claude 渐变上下文/用量栏与字体；Codex 原生状态栏 | 模板 | 模板 |
-| **Lessons** | [本仓库](platforms/codex/README.md#configuration) | 独立空白全局记录及记忆规则，保留真实纠错历史 | 模板 | 模板 |
-| **explorer** | [本仓库](platforms/codex/README.md#configuration) | 探索代码路径、定位实现的子 agent | — | 模板 |
-| **reviewer** | [本仓库](platforms/codex/README.md#configuration) | 检查缺陷、回归和验证缺口的子 agent | — | 模板 |
-| **docs-researcher** | [本仓库](platforms/codex/README.md#configuration) | 核实文档与 API 用法的子 agent | — | 模板 |
+| **CLAUDE.md / AGENTS.md** | [本仓库](platforms/claude/README.md#configuration) | 各 agent 独立的全局指令 | 模板 ★ | 模板 ★ |
+| **Base settings** | [本仓库](platforms/codex/README.md#configuration) | 局部合并模型、推理与运行设置 | 模板 ★ | 模板 ★ |
+| **Permissions** | [本仓库](platforms/codex/README.md#configuration) | 用户选择可信环境后，单独配置高自主权限 | 模板 ★ | 模板 ★ |
+| **Writing style rule** | [本仓库](platforms/claude/README.md#configuration) | 完整英文写作要求与示例，替代原 Common rules | 规则 ★ | — |
+| **StatusLine** | [本仓库](platforms/claude/README.md#configuration) | Claude 渐变上下文/用量栏与字体；Codex 原生状态栏 | 模板 ★ | 模板 ★ |
+| **Lessons** | [本仓库](platforms/codex/README.md#configuration) | 独立空白全局记录及记忆规则，保留真实纠错历史 | 模板 ★ | 模板 ★ |
+| **explorer** | [本仓库](platforms/codex/README.md#configuration) | 探索代码路径、定位实现的子 agent | — | 模板 ★ |
+| **reviewer** | [本仓库](platforms/codex/README.md#configuration) | 检查缺陷、回归和验证缺口的子 agent | — | 模板 ★ |
+| **docs-researcher** | [本仓库](platforms/codex/README.md#configuration) | 核实文档与 API 用法的子 agent | — | 模板 ★ |
 
 ### Language Rules · 语言规则
 
@@ -61,37 +61,37 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **Claude code-review** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 基于置信度的 PR 代码审查 | 原生插件 | — |
-| **Matt code-review** | [Matt Pocock](https://github.com/mattpocock/skills) | Standards / Spec 双轴审查；Codex 可单独选择 | Matt 包内 | 精选源码 |
-| **adversarial-review** | [poteto/noodle](https://github.com/poteto/noodle/blob/main/.agents/skills/adversarial-review/SKILL.md) | Skeptic、Architect、Minimalist 视角的跨模型审查 | 内置 skill | — |
+| **Claude code-review** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 基于置信度的 PR 代码审查 | 原生插件 ★ | — |
+| **Matt code-review** | [Matt Pocock](https://github.com/mattpocock/skills) | Standards / Spec 双轴审查；Codex 可单独选择 | Matt 包内 | 精选源码 ★ |
+| **adversarial-review** | [poteto/noodle](https://github.com/poteto/noodle/blob/main/.agents/skills/adversarial-review/SKILL.md) | Skeptic、Architect、Minimalist 视角的跨模型审查 | 内置 skill ★ | — |
 | **codex-in-claude** | [OpenAI](https://github.com/openai/codex-plugin-cc) | 在 Claude 内调用 Codex CLI，按需选择审查方式 | 原生插件 | — |
 
 ### Workflow · 工作流
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **andrej-karpathy-skills** | [Karpathy skills](https://github.com/forrestchang/andrej-karpathy-skills) | 先思考、保持简单与改动集中、明确可验证结果 | 原生插件 | 插件 / 源码 |
+| **andrej-karpathy-skills** | [Karpathy skills](https://github.com/forrestchang/andrej-karpathy-skills) | 先思考、保持简单与改动集中、明确可验证结果 | 原生插件 ★ | 插件 / 源码 ★ |
 | **superpowers** | [obra / OpenAI curated](https://github.com/obra/superpowers) | 头脑风暴、调试、TDD、worktree 与规划，14 项整包 | 原生插件 | 插件 / 源码 |
-| **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | 规划、TDD、研究、grilling 与交付；Claude 整包，Codex v1.1.0 精选 20 项，含 handoff | 原生插件 | 精选源码 |
-| **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | 对齐项目文档、agent 规则、获准维护的记忆及工作区残留 | 上游安装 | 上游安装 |
-| **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 代码简化与重构 agent | 原生插件 | — |
-| **update-config / update_config** | [本仓库](INSTALL.md) | 从已记录的仓库来源维护用户所选安装内容 | 内置 skill | 内置 skill |
+| **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | 规划、TDD、研究、grilling 与交付；Claude 整包，Codex v1.1.0 精选 20 项，含 handoff | 原生插件 ★ | 精选源码 ★ |
+| **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | 对齐项目文档、agent 规则、获准维护的记忆及工作区残留 | 上游安装 ★ | 上游安装 ★ |
+| **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 代码简化与重构 agent | 原生插件 ★ | — |
+| **edit-config** | [本仓库](skills/edit-config/SKILL.md) | 查询和管理 agent-config-for-agents 的配置，两端共用 | 内置 skill ★ | 内置 skill ★ |
 
 ### Integrations · 开发集成
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **context7** | [Upstash](https://github.com/upstash/context7) | 查询最新库文档 | 原生插件 | 插件 / MCP |
-| **playwright** | [Microsoft](https://github.com/microsoft/playwright-mcp) | 浏览器自动化、E2E 与截图；Codex MCP 固定 0.0.78 | 原生插件 | MCP |
+| **context7** | [Upstash](https://github.com/upstash/context7) | 查询最新库文档 | 原生插件 ★ | 插件 / MCP ★ |
+| **playwright** | [Microsoft](https://github.com/microsoft/playwright-mcp) | 浏览器自动化、E2E 与截图；Codex MCP 固定 0.0.78 | 原生插件 ★ | MCP ★ |
 
 ### Design & Content · 设计与内容
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | 创建和编辑 PDF、DOCX、PPTX、XLSX；优先复用 Codex 已有同等内置能力 | 原生插件 | 内置能力 / 兼容插件 / 源码 |
-| **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude：12 项示例；Codex：canvas-design、algorithmic-art、mcp-builder 三项 | 原生插件 | 精选源码 |
-| **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 前端视觉与界面设计，examples 整包已提供时复用 | 原生插件 | 插件 / 源码 |
-| **humanizer** | [blader](https://github.com/blader/humanizer) | 去除英文写作中的机械化 AI 表达 | 插件 / 源码 | 上游安装 |
+| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | 创建和编辑 PDF、DOCX、PPTX、XLSX；优先复用 Codex 已有同等内置能力 | 原生插件 ★ | 内置能力 / 兼容插件 / 源码 ★ |
+| **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude：12 项示例；Codex：canvas-design、algorithmic-art、mcp-builder 三项 | 原生插件 ★ | 精选源码 ★ |
+| **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 前端视觉与界面设计，examples 整包已提供时复用 | 原生插件 ★ | 插件 / 源码 ★ |
+| **humanizer** | [blader](https://github.com/blader/humanizer) | 去除英文写作中的机械化 AI 表达 | 插件 / 源码 ★ | 上游安装 ★ |
 | **humanizer-zh** | [op7418](https://github.com/op7418/Humanizer-zh) | 去除中文写作中的机械化 AI 表达 | 上游安装 | 上游安装 |
 | **lieflat-charts** | [lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | Lupi / Basics / Glance / Maps HTML 图表与 12 个双语报告模板；源码不含预览媒体，仅限非商业用途 | 精选源码 | — |
 
@@ -106,9 +106,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **claude-mem** | [thedotmack](https://github.com/thedotmack/claude-mem) | 持久记忆、检索与时间线，包含 skills、hooks、MCP 和 worker | 原生插件 | Codex 插件¹ |
 | **claude-health** | [tw93](https://github.com/tw93/claude-health) | Claude 会话的健康与状态面板 | 原生插件 | — |
-| **pua / pua-en / pua-ja** | [tanweai](https://github.com/tanweai/pua) | 三种语言的 Codex 效率提示及完整引用资源 | — | 精选源码 |
 
 ### Storage · 存储分析
 
@@ -120,7 +118,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **paper-reading** | [本仓库](skills/paper-reading/) | 论文阅读、图表提取、证据检查与 HTML 报告 | 内置 skill | 内置 skill |
+| **paper-reading** | [本仓库](skills/paper-reading/) | 论文阅读、图表提取、证据检查与 HTML 报告 | 内置 skill ★ | 内置 skill ★ |
 | **AI Research skills** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | 一个整包：分词、微调、后训练、推理服务、分布式训练与优化；[两端共用 31 项成员](catalog.md#ai-research-members) | 6 个原生插件 | 6 个兼容插件 / 源码 |
 | **deepxiv-cli** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | arXiv / PMC 论文混合检索与阅读 CLI | 精选源码 | 精选源码 |
 | **deepxiv-trending-digest** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | 近期热门论文的 Markdown 摘要 | 精选源码 | 精选源码 |
@@ -132,12 +130,9 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **Lark / Feishu** | [飞书](https://github.com/larksuite/lark-openapi-mcp) | 飞书集成，在本机环境或原生设置中配置凭据 | MCP | MCP |
-| **GitHub** | [OpenAI 插件 / GitHub MCP](platforms/codex/plugins.md) | 仓库与 issue 工具，需要授权；官方插件可用时优先采用 | — | 官方插件 / MCP |
-| **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | OpenAI 官方开发文档 | — | MCP |
+| **GitHub** | [OpenAI 插件 / GitHub MCP](platforms/codex/plugins.md) | 仓库与 issue 工具，需要授权；官方插件可用时优先采用 | — | 官方插件 / MCP ★ |
+| **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | OpenAI 官方开发文档 | — | MCP ★ |
 
-
-¹ Claude-Mem 提供有独立 manifest、hooks、MCP 与 worker 的 Codex 包。Agent 会核实当前包及原生初始化；仅发现 manifest 或保留数据库不代表完整记忆流程已验证。
 
 完整包成员见 [catalog.md](catalog.md#members)，源码 revision 与适配见 [sources.md](platforms/sources.md)。存储分析的定制记录在 [UPSTREAM.md](skills/storage-analyzer/UPSTREAM.md)，已通过 [khazix-skills#50](https://github.com/KKKKhazix/khazix-skills/pull/50) 提交上游。Context7、Playwright 统一放在开发集成，不重复列为独立 MCP 选项。
 
@@ -165,8 +160,8 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 - **对话选型**：完整编号列表、用途解释与用户选择记录。插件、MCP 使用目标 agent 的原生工具管理；自管文件通过受控复制和局部合并部署。
 - **独立记忆**：Claude 使用自己的全局 `lessons.md` 与项目 `memory/MEMORY.md`；Codex 使用自己的全局 `lessons.md` 与项目根目录 `lessons.md`。模板和真实历史各自保留，仅在缺少全局记录时创建空白文件。
-- **分层规则与状态栏**：Claude 通用规则扩展到 Python / TypeScript / Go，渐变状态栏展示模型、目录、venv、Git、上下文与用量。Codex 使用独立子 agent 模板和原生状态栏。
-- **基于仓库来源更新**：记录仓库 URL、解析后的 revision 与更新策略，沿用用户提供的分支、固定 commit、本地 checkout 或明确选择的远端默认分支。安装与维护不需要旧 Claude/Codex 分支。
+- **规则与状态栏**：Claude 提供一份写作规则，以及独立的 Python / TypeScript / Go 规则；渐变状态栏展示模型、目录、venv、Git、上下文与用量。Codex 使用独立子 agent 模板和原生状态栏。
+- **分支配置管理**：edit-config 跟踪 agent-config-for-agents 并记录实际 revision；来源策略冲突时明确选择是否迁移，保留已有选择与定制。安装与维护不需要旧 Claude/Codex 分支。
 - **限定修改范围**：保留用户定制、凭据、hooks 和记忆数据库，通过备份与文件归属支持更新和明确移除。ResearchStudio Idea/Reel、PPT Master 只准备完整源码，运行依赖留到首次使用。
 
 ## 默认设置
@@ -202,7 +197,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 | “添加一种语言规则” | `platforms/claude/templates/rules/<lang>/` 及目录条目 |
 | “调整 Claude / Codex 指令或 lessons 策略” | 对应 agent 的模板与配套记忆规则 |
 
-修改自己已安装的配置时使用 [INSTALL.md](INSTALL.md)。根目录 AGENTS.md、CLAUDE.md、lessons.md 属于本仓库；待部署的全局文件在各平台的 templates 中。
+查询和修改已安装的配置时使用 [edit-config](skills/edit-config/SKILL.md)，修改操作遵循 [INSTALL.md](INSTALL.md)。根目录 AGENTS.md、CLAUDE.md、lessons.md 属于本仓库；待部署的全局文件在各平台的 templates 中。
 
 ## 致谢
 

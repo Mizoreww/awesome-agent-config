@@ -21,9 +21,9 @@ Open this checkout in Claude or Codex, or share **the URL of the repository page
 
 > Read INSTALL.md from the checkout or repository page I shared, using the same branch/revision as its README. Configure the agent I am talking to. Detect my OS, client and existing configuration. List every supported installation option by category with continuous numbers, mark author recommendations and existing installations, and explain each option. Install and verify my choices, preserving my customizations.
 
-The agent lists the complete catalogue for your agent. Reply with numbers, names or a description of what you want. A plugin bundle gets one number and lists its members; capabilities included in that bundle are not installed twice. Author recommendations are separate for Claude and Codex and remain empty until the author supplies them. Recommendations do not select items for you.
+The agent lists the complete catalogue for your agent. Reply with numbers, names or a description of what you want. A plugin bundle gets one number and lists its members; capabilities included in that bundle are not installed twice. The recommendation draft follows the current main/Codex installer defaults, with [explicit mappings](catalog.md#recommendations), and awaits the author's final confirmation. Recommendations do not select items for you.
 
-For later changes, say “add paper-reading”, “update my previous selections” or “remove storage-analyzer”. Existing choices are reused; omitting an installed item never uninstalls it. The optional update skills are `/update-config` on Claude and `update_config` on Codex; normal conversation works without them.
+For later changes, say “add paper-reading”, “update my previous selections” or “remove storage-analyzer”. Existing choices are reused; omitting an installed item never uninstalls it. Both agents use `edit-config` for configuration queries, additions, edits, removals, repairs and updates. It tracks this repository’s `agent-config-for-agents` branch. Queries are read-only; if the skill is absent, the global instructions link to the same workflow.
 
 Native plugin/MCP commands are preferred; the agent chooses source installation when the documented scope or client requires it. You do not need to choose between npx, plugins and skill copies yourself. Codex setup disables external-agent auto-import so installations follow your selections. Windows and WSL are detected and configured separately; App/CLI installations sharing a home are reused.
 
@@ -33,21 +33,21 @@ For Codex, the agent checks the available OpenAI official/curated directory, the
 
 ## Catalogue
 
-The tables retain the original categories and merge the Claude and Codex capabilities. Third-party originals are installed from their upstream sources; this repository stores author-owned and intentionally customized skills with attribution. Handoff belongs to the Matt bundle only. `—` means this repository does not offer that item for the agent. The agent hides those entries when presenting your choices. A platform cell marked **★** means the author recommends it for that agent; no recommendations are set yet. Exact routes, stable IDs and recommendation markers live in [catalog.md](catalog.md).
+The tables retain the original categories and merge the Claude and Codex capabilities. Third-party originals are installed from their upstream sources; this repository stores author-owned and intentionally customized skills with attribution. Handoff belongs to the Matt bundle only. `—` means this repository does not offer that item for the agent. The agent hides those entries when presenting your choices. A platform cell marked **★** identifies a proposed recommendation for that agent, pending final confirmation. Exact routes, stable IDs and recommendation markers live in [catalog.md](catalog.md).
 
 ### Core
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **CLAUDE.md / AGENTS.md** | [Repository](platforms/claude/README.md#configuration) | Separate global instructions for each agent | Template | Template |
-| **Base settings** | [Repository](platforms/codex/README.md#configuration) | Partially merge model, reasoning and runtime settings | Template | Template |
-| **Permissions** | [Repository](platforms/codex/README.md#configuration) | Optional high-autonomy permissions for a user-selected trusted environment | Template | Template |
-| **Common rules** | [Repository](platforms/claude/README.md#configuration) | Coding style, Git, security and testing rules | Template | — |
-| **StatusLine** | [Repository](platforms/claude/README.md#configuration) | Claude gradient context/usage bar and fonts; Codex native footer | Template | Template |
-| **Lessons** | [Repository](platforms/codex/README.md#configuration) | Independent blank global logs and memory routing; preserve real corrections | Template | Template |
-| **explorer** | [Repository](platforms/codex/README.md#configuration) | Subagent for tracing code paths and locating implementations | — | Template |
-| **reviewer** | [Repository](platforms/codex/README.md#configuration) | Subagent for defects, regressions and missing coverage | — | Template |
-| **docs-researcher** | [Repository](platforms/codex/README.md#configuration) | Subagent for checking documentation and API usage | — | Template |
+| **CLAUDE.md / AGENTS.md** | [Repository](platforms/claude/README.md#configuration) | Separate global instructions for each agent | Template ★ | Template ★ |
+| **Base settings** | [Repository](platforms/codex/README.md#configuration) | Partially merge model, reasoning and runtime settings | Template ★ | Template ★ |
+| **Permissions** | [Repository](platforms/codex/README.md#configuration) | Optional high-autonomy permissions for a user-selected trusted environment | Template ★ | Template ★ |
+| **Writing style rule** | [Repository](platforms/claude/README.md#configuration) | Complete English writing requirements and examples; replaces the previous common rules | Rule ★ | — |
+| **StatusLine** | [Repository](platforms/claude/README.md#configuration) | Claude gradient context/usage bar and fonts; Codex native footer | Template ★ | Template ★ |
+| **Lessons** | [Repository](platforms/codex/README.md#configuration) | Independent blank global logs and memory routing; preserve real corrections | Template ★ | Template ★ |
+| **explorer** | [Repository](platforms/codex/README.md#configuration) | Subagent for tracing code paths and locating implementations | — | Template ★ |
+| **reviewer** | [Repository](platforms/codex/README.md#configuration) | Subagent for defects, regressions and missing coverage | — | Template ★ |
+| **docs-researcher** | [Repository](platforms/codex/README.md#configuration) | Subagent for checking documentation and API usage | — | Template ★ |
 
 ### Language Rules
 
@@ -61,37 +61,37 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **Claude code-review** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Confidence-based pull request review | Native plugin | — |
-| **Matt code-review** | [Matt Pocock](https://github.com/mattpocock/skills) | Separate Standards and Spec reviews; a standalone choice on Codex | In Matt bundle | Selected source |
-| **adversarial-review** | [poteto/noodle](https://github.com/poteto/noodle/blob/main/.agents/skills/adversarial-review/SKILL.md) | Cross-model review through Skeptic, Architect and Minimalist lenses | Bundled skill | — |
+| **Claude code-review** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Confidence-based pull request review | Native plugin ★ | — |
+| **Matt code-review** | [Matt Pocock](https://github.com/mattpocock/skills) | Separate Standards and Spec reviews; a standalone choice on Codex | In Matt bundle | Selected source ★ |
+| **adversarial-review** | [poteto/noodle](https://github.com/poteto/noodle/blob/main/.agents/skills/adversarial-review/SKILL.md) | Cross-model review through Skeptic, Architect and Minimalist lenses | Bundled skill ★ | — |
 | **codex-in-claude** | [OpenAI](https://github.com/openai/codex-plugin-cc) | Call Codex CLI from Claude; choose alongside review tools according to need | Native plugin | — |
 
 ### Workflow
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **andrej-karpathy-skills** | [Karpathy skills](https://github.com/forrestchang/andrej-karpathy-skills) | Think before coding, keep changes focused, define verifiable outcomes | Native plugin | Plugin / source |
+| **andrej-karpathy-skills** | [Karpathy skills](https://github.com/forrestchang/andrej-karpathy-skills) | Think before coding, keep changes focused, define verifiable outcomes | Native plugin ★ | Plugin / source ★ |
 | **superpowers** | [obra / OpenAI curated](https://github.com/obra/superpowers) | Brainstorming, debugging, TDD, worktrees and planning; 14-skill bundle | Native plugin | Plugin / source |
-| **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | Planning, TDD, research, grilling and delivery; Claude full package, Codex 20 selected v1.1.0 skills, including handoff | Native plugin | Selected source |
-| **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | Reconcile project docs, agent rules, authorized memory and workspace residue | Upstream install | Upstream install |
-| **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Code simplification and refactoring agent | Native plugin | — |
-| **update-config / update_config** | [Repository](INSTALL.md) | Maintain the selected installation from its recorded repository source | Bundled skill | Bundled skill |
+| **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | Planning, TDD, research, grilling and delivery; Claude full package, Codex 20 selected v1.1.0 skills, including handoff | Native plugin ★ | Selected source ★ |
+| **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | Reconcile project docs, agent rules, authorized memory and workspace residue | Upstream install ★ | Upstream install ★ |
+| **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Code simplification and refactoring agent | Native plugin ★ | — |
+| **edit-config** | [Repository](skills/edit-config/SKILL.md) | Inspect and manage configuration on agent-config-for-agents; shared by both agents | Bundled skill ★ | Bundled skill ★ |
 
 ### Integrations
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **context7** | [Upstash](https://github.com/upstash/context7) | Up-to-date library documentation lookup | Native plugin | Plugin / MCP |
-| **playwright** | [Microsoft](https://github.com/microsoft/playwright-mcp) | Browser automation, E2E testing and screenshots; Codex MCP pinned to 0.0.78 | Native plugin | MCP |
+| **context7** | [Upstash](https://github.com/upstash/context7) | Up-to-date library documentation lookup | Native plugin ★ | Plugin / MCP ★ |
+| **playwright** | [Microsoft](https://github.com/microsoft/playwright-mcp) | Browser automation, E2E testing and screenshots; Codex MCP pinned to 0.0.78 | Native plugin ★ | MCP ★ |
 
 ### Design & Content
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | PDF, DOCX, PPTX and XLSX creation and editing; reuse equivalent built-in Codex tools | Native plugin | Built-in / compatible plugin / source |
-| **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude: 12 examples; Codex: canvas-design, algorithmic-art and mcp-builder | Native plugin | Selected source |
-| **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Distinctive frontend interfaces; reused when already supplied by the examples bundle | Native plugin | Plugin / source |
-| **humanizer** | [blader](https://github.com/blader/humanizer) | Remove mechanical AI writing patterns in English | Plugin / source | Upstream install |
+| **document-skills** | [Anthropic](https://github.com/anthropics/skills) | PDF, DOCX, PPTX and XLSX creation and editing; reuse equivalent built-in Codex tools | Native plugin ★ | Built-in / compatible plugin / source ★ |
+| **example-skills** | [Anthropic](https://github.com/anthropics/skills) | Claude: 12 examples; Codex: canvas-design, algorithmic-art and mcp-builder | Native plugin ★ | Selected source ★ |
+| **frontend-design** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Distinctive frontend interfaces; reused when already supplied by the examples bundle | Native plugin ★ | Plugin / source ★ |
+| **humanizer** | [blader](https://github.com/blader/humanizer) | Remove mechanical AI writing patterns in English | Plugin / source ★ | Upstream install ★ |
 | **humanizer-zh** | [op7418](https://github.com/op7418/Humanizer-zh) | Remove mechanical AI writing patterns in Chinese | Upstream install | Upstream install |
 | **lieflat-charts** | [lieflat-charts](https://github.com/larashero3-dotcom/lieflat-charts) | Lupi / Basics / Glance / Maps HTML galleries and 12 bilingual report templates; source excludes preview media; noncommercial use only | Selected source | — |
 
@@ -106,9 +106,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **claude-mem** | [thedotmack](https://github.com/thedotmack/claude-mem) | Persistent memory, search and timelines; includes skills, hooks, MCP and a worker | Native plugin | Codex plugin¹ |
 | **claude-health** | [tw93](https://github.com/tw93/claude-health) | Health and wellness dashboard for Claude sessions | Native plugin | — |
-| **pua / pua-en / pua-ja** | [tanweai](https://github.com/tanweai/pua) | Three Codex-specific productivity prompts with their references | — | Selected source |
 
 ### Storage
 
@@ -120,7 +118,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **paper-reading** | [Repository](skills/paper-reading/) | Research paper reading, figure extraction, evidence checks and HTML reports | Bundled skill | Bundled skill |
+| **paper-reading** | [Repository](skills/paper-reading/) | Research paper reading, figure extraction, evidence checks and HTML reports | Bundled skill ★ | Bundled skill ★ |
 | **AI Research skills** | [AI Research](https://github.com/Orchestra-Research/AI-research-SKILLs) | One bundle: tokenization, fine-tuning, post-training, inference, distributed training and optimization; [the same 31 members on both agents](catalog.md#ai-research-members) | 6 native plugins | 6 compatible plugins / source |
 | **deepxiv-cli** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | arXiv / PMC hybrid paper search and reading CLI | Selected source | Selected source |
 | **deepxiv-trending-digest** | [DeepXiv](https://github.com/DeepXiv/deepxiv_sdk) | Markdown digests of recently trending papers | Selected source | Selected source |
@@ -132,12 +130,9 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **Lark / Feishu** | [Lark](https://github.com/larksuite/lark-openapi-mcp) | Lark integration; supply credentials through the local environment / native setup | MCP | MCP |
-| **GitHub** | [OpenAI plugin / GitHub MCP](platforms/codex/plugins.md) | Repository and issue tools; requires authorization; prefer the official plugin when available | — | Official plugin / MCP |
-| **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | Official OpenAI developer documentation | — | MCP |
+| **GitHub** | [OpenAI plugin / GitHub MCP](platforms/codex/plugins.md) | Repository and issue tools; requires authorization; prefer the official plugin when available | — | Official plugin / MCP ★ |
+| **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | Official OpenAI developer documentation | — | MCP ★ |
 
-
-¹ Claude-Mem has a Codex package with its own manifest, hooks, MCP and worker. The agent verifies the current package and native initialization; preserving a database or discovering a manifest alone does not prove the memory lifecycle works.
 
 Complete bundle membership is listed in [catalog.md](catalog.md#members). Selected source revisions and adaptations are in [sources.md](platforms/sources.md). Storage analyzer modifications are documented in [UPSTREAM.md](skills/storage-analyzer/UPSTREAM.md) and submitted as [khazix-skills#50](https://github.com/KKKKhazix/khazix-skills/pull/50). Context7 and Playwright appear under Integrations and are not duplicated as separate MCP choices.
 
@@ -165,8 +160,8 @@ Complete bundle membership is listed in [catalog.md](catalog.md#members). Select
 
 - **Agent-guided choices** — complete numbered lists, explanations and a record of the user's selections. Plugins and MCP servers are managed through the target agent's native tools; custom files use protected copies and partial merges.
 - **Independent memory** — Claude uses its own global `lessons.md` plus project `memory/MEMORY.md`; Codex uses its own global `lessons.md` plus project-root `lessons.md`. Templates and real histories remain separate. Only missing global logs are seeded.
-- **Layered rules and status lines** — Claude common rules extend into Python / TypeScript / Go; the gradient status line shows model, directory, venv, Git, context and usage. Codex has separate subagent templates and a native footer.
-- **Repository-based updates** — record the repository URL, resolved revision and update policy. Follow the user-supplied branch, pinned commit, local checkout or explicitly chosen remote default. Installation and maintenance need no legacy Claude/Codex branches.
+- **Rules and status lines** — Claude has one writing rule and independent Python / TypeScript / Go rules; the gradient status line shows model, directory, venv, Git, context and usage. Codex has separate subagent templates and a native footer.
+- **Branch-specific configuration management** — edit-config follows agent-config-for-agents and records the actual revision. Conflicting source policies require an explicit migration choice; user selections and customizations are preserved. Installation and maintenance need no legacy Claude/Codex branches.
 - **Scoped changes** — preserve user edits, credentials, hooks and memory databases. Backups and file ownership support safe updates and explicit removals. ResearchStudio Idea/Reel and PPT Master prepare complete source only; runtime dependencies are handled on first use.
 
 ## Settings Defaults
@@ -202,7 +197,7 @@ You can ask the agent to maintain the repository itself. It follows [MAINTAIN.md
 | “Add language rules” | `platforms/claude/templates/rules/<lang>/` and its catalogue entry |
 | “Change Claude / Codex instructions or lessons policy” | That agent's templates and matching memory rules |
 
-To change your installed configuration instead, use [INSTALL.md](INSTALL.md). The root AGENTS.md, CLAUDE.md and lessons.md belong to this repository; deployable global files live under each platform's templates.
+For installed configuration queries and changes, use [edit-config](skills/edit-config/SKILL.md), which follows [INSTALL.md](INSTALL.md) for modifications. The root AGENTS.md, CLAUDE.md and lessons.md belong to this repository; deployable global files live under each platform's templates.
 
 ## Acknowledgements
 

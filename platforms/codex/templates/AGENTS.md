@@ -41,6 +41,8 @@ Before the first substantive response in a session, ensure lessons context is lo
 
 ## Workflow
 
+- Configuration: invoke `edit-config` for inspecting, adding, changing, removing, repairing, or updating this repository's Claude/Codex configuration, templates, or catalogue. If unavailable, read and follow [its branch-specific instructions](https://github.com/Mizoreww/awesome-claude-code-config/blob/agent-config-for-agents/skills/edit-config/SKILL.md) without installing extra content. Queries remain read-only; changes follow the user's selected scope.
+
 - Web search: before searching, determine the current real date — prefer system command (`date '+%Y-%m-%d'`), fall back to web time API if system clock may be inaccurate. Include the year (and month if relevant) in search queries. Never rely solely on model knowledge or system prompt for the date.
 - Use explicit planning for non-trivial tasks
 - Verify before marking done (tests/logs where applicable)
@@ -66,8 +68,7 @@ When making version-level changes to a project (new features, major refactors, a
 
 ## Rule Set
 
-- Use project standards and any selected language-specific skills when available, such as:
-  - `python-patterns`, `golang-patterns`, `frontend-patterns`
+- Use the project's documented standards and language-specific skills that are actually installed. This repository does not install additional language skills implicitly.
 
 ## Code Review
 

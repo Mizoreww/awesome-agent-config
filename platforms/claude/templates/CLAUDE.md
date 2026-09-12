@@ -48,6 +48,10 @@ Use the project's existing interpreter or environment. Activate Conda only when 
 - When the user says a cause is **not** the problem, **immediately stop** that direction and pivot
 - Prefer writing code over repeated questions; after multiple requests, just implement with assumptions noted in comments
 
+## Configuration Maintenance
+
+Invoke `edit-config` when the user wants to inspect, add, change, remove, repair, or update Claude/Codex configuration managed by this repository, including its templates and catalogue. If it is unavailable, read and follow [its branch-specific instructions](https://github.com/Mizoreww/awesome-claude-code-config/blob/agent-config-for-agents/skills/edit-config/SKILL.md) without installing extra content. Queries remain read-only; changes follow the user's selected scope.
+
 ## Workflow
 
 - Web search: before searching, determine the current real date — prefer system command (`date '+%Y-%m-%d'` / `Get-Date -Format 'yyyy-MM-dd'`), fall back to web time API if system clock may be inaccurate. Include the year (and month if relevant) in search queries. Never rely solely on model knowledge or system prompt for the date.

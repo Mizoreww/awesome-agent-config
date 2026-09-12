@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.0.0-dev.4] - 2026-09-13
+
+### Features
+- Retire Lark/Feishu MCP, Claude-Mem and all three PUA skills from the active catalogue, recipes and templates.
+- Replace Claude's eight common rules with one complete English writing rule, including every supplied editing example. Keep the language rules independent and remove references to missing common files or assumed skills/hooks.
+- Replace both update skills with shared edit-config for configuration queries, additions, edits, removals, repairs and updates. Global templates route to it; it follows agent-config-for-agents and keeps queries read-only.
+- Align the Context7 reference template with its HTTP recipe and synchronize configuration entry points. Propose 20 Claude and 22 Codex recommendations from the current release-branch installer defaults, pending the author's final confirmation.
+
+### Design Rationale
+- One configuration skill avoids platform-specific update instructions diverging. Explicit source checks preserve deliberate forks, pins and local policies during migration.
+- Writing requirements belong in a dedicated rule; language guidance remains independently selectable. Recommendation mappings are recorded in the current catalogue without creating legacy-branch installation dependencies.
+
+### Notes & Caveats
+- The catalogue has 43 active IDs. Retired entries, old common rules and update skill paths have explicit migration guidance; existing installations, customizations and memory are not automatically deleted.
+- Recommendations use matching Bash/PowerShell menu defaults. Permissions split from old base config and the new writing rule are identified as mapping decisions; recommendation markers do not authorize installation or higher permissions.
+- Source changes are verified in isolated homes. Windows/WSL execution and authenticated integrations still require their target environments.
+
 ## [4.0.0-dev.3] - 2026-09-12
 
 ### Features

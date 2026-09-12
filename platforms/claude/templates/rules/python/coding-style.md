@@ -1,7 +1,5 @@
 # Python Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Python specific content.
-
 ## Standards
 
 - Follow **PEP 8** conventions
@@ -34,4 +32,4 @@ class Point(NamedTuple):
 
 ## Reference
 
-See skill: `python-patterns` for comprehensive Python idioms and patterns.
+If separately installed, consult the skill `python-patterns` for comprehensive Python idioms and patterns.

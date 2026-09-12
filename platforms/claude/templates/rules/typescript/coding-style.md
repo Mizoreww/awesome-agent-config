@@ -1,7 +1,5 @@
 # TypeScript/JavaScript Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
-
 ## Immutability
 
 Use spread operator for immutable updates:
@@ -55,4 +53,4 @@ const validated = schema.parse(input)
 
 - No `console.log` statements in production code
 - Use proper logging libraries instead
-- See hooks for automatic detection
+- The hooks rule describes optional detection; it does not install hooks

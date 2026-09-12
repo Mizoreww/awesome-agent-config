@@ -14,7 +14,6 @@
 | ResearchStudio | https://github.com/microsoft/ResearchStudio | 0597891df1a153b8e4cbdc8c1c685f43a0a6abcf |
 | PPT Master | https://github.com/hugohe3/ppt-master | aee33e5a0f6e6b5582831ef3825a739f334325cb |
 | frontend-slides | https://github.com/zarazhangrui/frontend-slides | 9906a34d640d2111f724544cbc50f7f130569ae1 |
-| PUA | https://github.com/tanweai/pua | e6e6cd237ad17750d179674bff52f8184abea8fd |
 | AI Research | https://github.com/Orchestra-Research/AI-research-SKILLs | 773a52944ba4747a18bd4ae9ade53fff041adcbc |
 | DeepXiv | https://github.com/DeepXiv/deepxiv_sdk | 80be0b195789bf50299ab8d221abb5d17500ded8 |
 | lieflat-charts | https://github.com/larashero3-dotcom/lieflat-charts | eace082a317b696c5570c25826a53a7fa113e984 |
@@ -130,11 +129,6 @@ Reel 适配覆盖各 SKILL.md、引用的 Markdown runbook 和运行诊断中的
 | frontend-slides | plugins/frontend-slides/skills/frontend-slides → skills/frontend-slides |
 
 Claude 优先使用对应原生插件。Codex 的 frontend-slides 已验证原生兼容包实际加载完整 skill，按[插件说明](codex/plugins.md)优先采用；不支持插件的 client 使用上述源码。PPT Master 当前插件的根目录入口被 Codex 忽略，且嵌套 Git 来源没有固定 revision，保持上述固定源码路径。它的 Python/浏览器环境留到首次调用，验收不执行安装业务依赖的命令。
-
-<a id="pua"></a>
-## PUA（Codex）
-
-复制 `codex/pua`、`codex/pua-en`、`codex/pua-ja` 到同名 skills 目录。保留各自 `references/` 等资源；这些是上游 Codex 专用版本。新出现的其他 PUA skills 不随本选项自动安装。
 
 <a id="ai-research"></a>
 ## AI Research 整包（两端统一 31 项）

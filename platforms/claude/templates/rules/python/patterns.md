@@ -1,7 +1,5 @@
 # Python Patterns
 
-> This file extends [common/patterns.md](../common/patterns.md) with Python specific content.
-
 ## Protocol (Duck Typing)
 
 ```python
@@ -31,4 +29,4 @@ class CreateUserRequest:
 
 ## Reference
 
-See skill: `python-patterns` for comprehensive patterns including decorators, concurrency, and package organization.
+If separately installed, consult the skill `python-patterns` for comprehensive patterns including decorators, concurrency, and package organization.

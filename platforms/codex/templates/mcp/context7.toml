@@ -1,4 +1,2 @@
 [mcp_servers.context7]
-command = "npx"
-args = ["-y", "@upstash/context7-mcp"]
-startup_timeout_sec = 30
+url = "https://mcp.context7.com/mcp"

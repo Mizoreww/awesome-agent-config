@@ -4,6 +4,8 @@
 
 本仓库是未来统一的主要开发线。旧 Claude/Codex 分支将来可归档，但安装、更新与维护从现在开始只依赖当前仓库内容及所选外部上游。归档分支和切换远端默认分支是之后的操作，不在本次修改范围内。
 
+2026-09-13 追加要求：移除 Lark / Feishu MCP、Claude-Mem、PUA 三语言包；删除 Claude 原八个 Common rules，将完整八条写作要求及全部示例译成英文，作为独立 rules/writing-style.md。语言规则仍可单独选择，并清理失效依赖。两端配置查询与增删改统一调用共享 edit-config，明确关联 agent-config-for-agents；查询只读。全面核对目录、模板、来源、安装及更新说明的一致性。
+
 ## 用户入口
 
 README 提供一段可以直接交给 agent 的请求：
@@ -32,9 +34,9 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 先用 Markdown 维护目录即可。每项写清用途、适用场景、Claude/Codex 渠道、重要限制、来源和固定版本要求；Claude 与 Codex 的作者推荐标记分别维护。具体命令集中在平台说明里。特殊能力的安装细节按需链接，不让 agent 每次读取所有插件文档。
 
-作者尚未提供推荐名单时，相关标记留空，不把历史默认安装项或 agent 自己的建议当成作者推荐。Agent 可以补充适合当前用户的解释，作者标记仍以目录为准。
+作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 22 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
 
-根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。只有用户请求安装、更新、修复或卸载时才加载安装流程，普通代码工作不会触发安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
+根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。配置查询与修改由 edit-config 区分目标和操作，普通代码工作不会触发安装；模板在缺少 skill 时提供同一分支工作流的读取入口。查询不写记录、不改配置，也不隐式安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
 
 源码归属按用户最新选择区分：第三方原版提供第三方上游安装方式，仓库只保存自有 skill 和明确维护的定制衍生版，并保留上游署名。Humanizer、Humanizer-zh、neat-freak 原样副本移出仓库，条目改为从上游安装。paper-reading、storage-analyzer 定制版及 adversarial-review 定制版继续在这里维护。
 
@@ -71,7 +73,7 @@ Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平
 
 Codex 尽量采用官方目录与可用插件：明确区分 OpenAI 发布、OpenAI curated 中的第三方作者、上游 Codex 专用包、Claude 格式兼容插件。从实际目录读取 selector，兼容性结论包括实际加载和完整资源，不能只凭 installed/enabled。可复用 OpenAI 文档能力或 GitHub 插件时优先复用；其余文档四件套、frontend-slides、AI Research 使用已验证的上游兼容包。
 
-无法满足范围、版本或入口约束的条目保留明确后备路径：Matt 固定精选、Codex examples/PUA、Humanizer、PPT Master 及没有插件入口的研究/写作 skills 使用上游源码，Playwright 保持固定 MCP，OpenAI 文档 MCP 不被更大的 Developers 插件替换。维护理由与具体配方集中在 platforms/codex/plugins.md，账号不可见的官方插件不宣称已验证可用。
+无法满足范围、版本或入口约束的条目保留明确后备路径：Matt 固定精选、Codex examples、Humanizer、PPT Master 及没有插件入口的研究/写作 skills 使用上游源码，Playwright 保持固定 MCP，OpenAI 文档 MCP 不被更大的 Developers 插件替换。维护理由与具体配方集中在 platforms/codex/plugins.md，账号不可见的官方插件不宣称已验证可用。
 
 ## 保留的可靠性措施
 
@@ -81,19 +83,21 @@ Agent 负责理解需求、选型解释、查阅平台说明和处理异常。�
 
 每个 agent home 下留一份简短安装记录，保存选择、来源/revision、受管文件及部署 hash、备份位置、待完成项。原生插件版本以原生查询为准；这份记录用于后续对话和文件保护，不实现另一套插件数据库。操作中断后先核对原生状态，归属不明的内容保留；卸载也只针对归属明确且用户要求移除的内容。
 
-仓库来源记录包含 URL、解析后的 revision 和 branch / default-branch / pinned / local 更新策略；具体字段定义在 INSTALL。两个更新 skill 均使用记录中的来源，不按 agent 名猜测分支。缺失来源时从可靠旧记录或用户给出的 checkout / URL 补齐；无法确定才补问。新版本中已消失的 ID 需提示退役或迁移，不能被当作更新成功或自动删除。
+仓库来源记录包含 URL、解析后的 revision 和 branch / default-branch / pinned / local 更新策略；具体字段定义在 INSTALL。共享 edit-config 明确使用 Mizoreww/awesome-claude-code-config 的 agent-config-for-agents 分支，替代旧 update-config / update_config。匹配的来源可直接更新；缺失来源时使用 skill 的明确目标；其他 fork、分支、固定或本地策略按明确迁移选择处理，不能静默覆盖。已有选择、文件归属和来源历史保持可追溯。新版本中已消失的 ID 需提示退役或迁移，不能被当作更新成功或自动删除。
 
 Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生迁移经过入口、资源和所选成员验证后再采用。Playwright 保留固定版本、旧 Node 的兼容路径和 MCP initialize 检查。ResearchStudio Idea/Reel 与 PPT Master 按已有约定仅安装必要源码，依赖由首次调用准备。
 
 ## 实施验收
 
 - 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
-- 当前仓库独立保存自有和保留的定制 skill payload；第三方原版与外部 skill 组均有上游安装说明，能力不遗漏，不从历史 Claude/Codex 分支安装或更新。
-- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 46 个 ID；旧独立 ID 和 24 项范围在迁移说明中有明确处理。
+- 当前仓库独立保存自有和保留的定制 skill payload；未退役的第三方原版与外部 skill 组均有上游安装说明，不从历史 Claude/Codex 分支安装或更新。
+- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 43 个 ID；退役集成、Common rules、旧更新入口及 24 项范围在迁移说明中有明确处理。
+- Claude 写作 rule 包含八条完整英文要求、全部替换示例、统一中性状态标签、条目可独立陈述事实、未知原因及已验证结论的处理；CLAUDE 模板不重复保存缩略版。原 Common 文件全部移除，语言规则无悬空引用。
+- edit-config 在两端模板中可自动触发配置查询与增删改，安装到各自 skills/edit-config；本仓库仅保留一份源码。查询和修改、仓库和已安装内容分别处理，版本与来源校验遵循明确分支。
 - Codex 原生优先渠道通过当前 CLI、实际 skill 加载和完整资源核实；官方目录受账号/client 限制，失败、待授权和待首次使用准备分别记录。组合包部分失败时保留成功组件，只续装未完成项。
 - 双语 README 保留原有 11 类和完整说明/表格；catalog 的稳定 ID、支持范围、来源和推荐与之相符。
 - 根指令能将仓库增删改路由到 MAINTAIN，将用户安装变更路由到 INSTALL；历史 provenance 不充当当前不可修改的清单。
 - Claude/Codex 分别使用独立指令和 lessons 模板，现有真实记录保持不变。
-- 作者推荐未提供时留空；不从历史默认安装项推断推荐。
+- 推荐草案按作者指定的默认菜单来源核对并标记待确认；权限拆分、Common 替换、handoff 合包及旧更新入口改名的映射明确，推荐不扩大用户已选范围。
 - 本地文件保护、原生插件与最小源码安装在隔离配置目录验证；当前文件导出到没有 .git / 旧 refs 的目录后，相关模板和共享 skill 安装仍可完成。
 - 保留相关既有测试；临时新验收脚本不加入发布分支。

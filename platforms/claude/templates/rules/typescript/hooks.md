@@ -1,10 +1,8 @@
 # TypeScript/JavaScript Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with TypeScript/JavaScript specific content.
-
 ## PostToolUse Hooks
 
-Configure in `~/.claude/settings.json`:
+This rule describes optional hooks. Configure them only when requested in the actual Claude home's `settings.json` (respect `CLAUDE_CONFIG_DIR`):
 
 - **Prettier**: Auto-format JS/TS files after edit
 - **TypeScript check**: Run `tsc` after editing `.ts`/`.tsx` files
