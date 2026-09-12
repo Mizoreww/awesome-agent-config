@@ -1,0 +1,4 @@
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "--loglevel=error", "--package=node@24", "--package=@playwright/mcp@0.0.78", "--", "playwright-mcp"]
+startup_timeout_sec = 30

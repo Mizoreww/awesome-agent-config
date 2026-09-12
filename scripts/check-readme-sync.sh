@@ -1,25 +1,20 @@
 #!/usr/bin/env bash
-# Lightweight check that README.md and README.zh-CN.md stay structurally in sync.
+# Check the shared entry points and structure without a GNU grep dependency.
 set -euo pipefail
-
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-EN="$DIR/README.md"
-ZH="$DIR/README.zh-CN.md"
-
-ok=true
-compare() {
-    local label="$1" en_count="$2" zh_count="$3"
-    if [[ "$en_count" != "$zh_count" ]]; then
-        echo "MISMATCH $label: EN=$en_count ZH=$zh_count"
-        ok=false
-    else
-        echo "OK       $label: $en_count"
-    fi
-}
-
-compare "Headings"    "$(grep -c '^#' "$EN")" "$(grep -c '^#' "$ZH")"
-compare "Code blocks" "$(grep -c '^\`\`\`' "$EN")" "$(grep -c '^\`\`\`' "$ZH")"
-compare "Table rows"  "$(grep -c '^|' "$EN")" "$(grep -c '^|' "$ZH")"
-compare "Links"       "$(grep -oP '\[.*?\]\(.*?\)' "$EN" | wc -l)" "$(grep -oP '\[.*?\]\(.*?\)' "$ZH" | wc -l)"
-
-$ok && echo "All checks passed." || { echo "Structural differences found."; exit 1; }
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+python3 - "$repo_dir" <<'PY'
+from pathlib import Path
+import re
+import sys
+root = Path(sys.argv[1])
+en, zh = ((root / name).read_text(encoding="utf-8") for name in ("README.md", "README.zh-CN.md"))
+for label, pattern in (("headings", r"^#+ "), ("code fences", r"^```"), ("table rows", r"^\|")):
+    counts = [len(re.findall(pattern, text, re.M)) for text in (en, zh)]
+    if counts[0] != counts[1]:
+        sys.exit(f"{label} differ: {counts}")
+links = [re.findall(r"\]\(([^)]+)\)", text) for text in (en, zh)]
+normalize = lambda targets: [p.replace("CHANGELOG.zh-CN.md", "CHANGELOG.md").replace("README.zh-CN.md", "README.md") for p in targets]
+if normalize(links[0]) != normalize(links[1]):
+    sys.exit("README link targets differ")
+print("README structure and entry points match.")
+PY

@@ -2,13 +2,8 @@ from __future__ import annotations
 
 import ast
 import hashlib
-import os
-from pathlib import Path
 import re
-import subprocess
-
-import pytest
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills" / "storage-analyzer"
@@ -131,58 +126,3 @@ def test_destructive_allowlist_rejects_privileged_and_out_of_home_paths() -> Non
     assert "_crosses_mount(rp)" in source              # bind-mount escape barred
     assert "_same_fs_as_trash(rp)" in source           # cross-filesystem barred
     assert "dir_fd=parent_fd" in source                # fd-anchored execution
-
-
-def test_claude_installers_register_default_off_storage_skill() -> None:
-    bash = (ROOT / "install.sh").read_text(encoding="utf-8")
-    powershell = (ROOT / "install.ps1").read_text(encoding="utf-8")
-
-    assert 'GROUP_LABELS+=("Storage")' in bash
-    assert 'GROUP_HINTS+=("disk usage analysis · default off")' in bash
-    item = re.search(
-        r'GROUP_ITEMS\+=\("storage-analyzer\|([^|]*)\|(\d)\|(skill-storage-analyzer)"\)',
-        bash,
-    )
-    assert item, "storage-analyzer entry not found in install.sh"
-    assert item.group(2) == "0", "storage-analyzer must default to OFF"
-    assert "KKKKhazix/khazix-skills" in item.group(1), "attribution missing from the menu label"
-    assert (
-        'skill-storage-analyzer) INSTALL_SKILLS=true; '
-        'SELECTED_SKILLS+=("storage-analyzer") ;;'
-    ) in bash
-
-    assert '@{ Label = "Storage"; Hint = "disk usage analysis | default off"' in powershell
-    assert 'Default = $false; Id = "skill-storage-analyzer"' in powershell
-    assert (
-        '"skill-storage-analyzer" { $result.Skills = $true; '
-        '$result.SelectedSkills += "storage-analyzer" }'
-    ) in powershell
-
-
-def test_readmes_document_the_upstream_and_default_off() -> None:
-    for readme_name in ("README.md", "README.zh-CN.md"):
-        readme = (ROOT / readme_name).read_text(encoding="utf-8")
-        assert UPSTREAM_URL in readme, f"{readme_name} must link the pinned upstream"
-        assert "storage-analyzer" in readme
-
-
-@pytest.mark.integration
-def test_bash_installer_copies_the_skill_in_all_mode(tmp_path: Path) -> None:
-    installer = ROOT / "install.sh"
-    syntax = subprocess.run(
-        ["bash", "-n", str(installer)], capture_output=True, text=True, check=False
-    )
-    assert syntax.returncode == 0, syntax.stderr
-
-    dry_home = tmp_path / "dry-home"
-    dry_home.mkdir()
-    result = subprocess.run(
-        ["bash", str(installer), "--dry-run", "--all"],
-        capture_output=True,
-        text=True,
-        check=False,
-        env=os.environ | {"HOME": str(dry_home)},
-        cwd=str(ROOT),
-    )
-    assert result.returncode == 0, result.stderr
-    assert "skills/storage-analyzer/" in result.stdout

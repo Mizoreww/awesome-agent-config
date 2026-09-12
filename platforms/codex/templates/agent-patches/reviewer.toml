@@ -1,0 +1,7 @@
+[agents]
+max_threads = 4
+max_depth = 1
+
+[agents.reviewer]
+description = "Reviews diffs for bugs, regressions, and missing tests"
+config_file = "agents/reviewer.toml"

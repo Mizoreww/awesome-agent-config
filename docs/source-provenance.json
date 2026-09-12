@@ -1,0 +1,766 @@
+{
+  "sources": {
+    "claude": "d65cbda0058be09e4771f4603ccf45b3a589583b",
+    "codex": "fdd3e50aca09d1b80ac416f320f42bc0ecef5faa"
+  },
+  "files": [
+    {
+      "agent": "claude",
+      "source": "CLAUDE.md",
+      "blob": "8b07c2f30fd1169cc236d865af658d25d169cf0d",
+      "target": "platforms/claude/templates/CLAUDE.md",
+      "adaptation": "Adapted for optional workflows, existing Python environments and custom Claude homes; preserved the memory and changelog policies."
+    },
+    {
+      "agent": "claude",
+      "source": "settings.json",
+      "blob": "27bb9e20376ce6894088e5990758b9c8f4fd7c87",
+      "target": "platforms/claude/templates/settings.json",
+      "adaptation": "Split into base settings.json, permissions.json, statusline.json and lessons-hooks.json; all 21 offered plugin selectors move to platforms/claude/README.md and are selected explicitly."
+    },
+    {
+      "agent": "claude",
+      "source": "rules/README.md",
+      "blob": "57de9d382e9355aff3004aa9a228da5aef61bc9e",
+      "target": "platforms/claude/templates/rules/README.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/agents.md",
+      "blob": "e2843315c96252626a9ec26bb02b34eaa0e85650",
+      "target": "platforms/claude/templates/rules/common/agents.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/coding-style.md",
+      "blob": "2ee4fdeb179c7d2c88833b896c09ba6a973423ff",
+      "target": "platforms/claude/templates/rules/common/coding-style.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/git-workflow.md",
+      "blob": "a32d0bc3938f6e3a73477228ca540a2ff6441929",
+      "target": "platforms/claude/templates/rules/common/git-workflow.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/hooks.md",
+      "blob": "54394083ed2324705f8a588ea8b9e9b34c1ff12e",
+      "target": "platforms/claude/templates/rules/common/hooks.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/patterns.md",
+      "blob": "959939f42bd9deb17cc4221ed191d7d7ce40898b",
+      "target": "platforms/claude/templates/rules/common/patterns.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/performance.md",
+      "blob": "e3284a4306f68192a4bcca265e7b0868ee1cb1ec",
+      "target": "platforms/claude/templates/rules/common/performance.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/security.md",
+      "blob": "49624c03a981a0e16e1cbfd22846936c2ebfc287",
+      "target": "platforms/claude/templates/rules/common/security.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/common/testing.md",
+      "blob": "fdcd94935f954fea8c75c99f305a0b7c730ecfbd",
+      "target": "platforms/claude/templates/rules/common/testing.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/golang/coding-style.md",
+      "blob": "21884535e68049d6030b597bdbcc1fd2b100885a",
+      "target": "platforms/claude/templates/rules/golang/coding-style.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/golang/hooks.md",
+      "blob": "1a85291e0099f983ea0233b63e2d3a1e6c3df4a0",
+      "target": "platforms/claude/templates/rules/golang/hooks.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/golang/patterns.md",
+      "blob": "6d219dd1b03a95581ac207d2be8eb4c3893cf61e",
+      "target": "platforms/claude/templates/rules/golang/patterns.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/golang/security.md",
+      "blob": "0a118c316aadda1b078b47b14265afbf70cc4a67",
+      "target": "platforms/claude/templates/rules/golang/security.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/golang/testing.md",
+      "blob": "ac87e13a5776392f1996d04ebdc37500f44a74f9",
+      "target": "platforms/claude/templates/rules/golang/testing.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/python/coding-style.md",
+      "blob": "c96bba4296954bac2356e51ea51e8b8fce7cb769",
+      "target": "platforms/claude/templates/rules/python/coding-style.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/python/hooks.md",
+      "blob": "0ced0dce03a673601674b0d4860605a779a3d004",
+      "target": "platforms/claude/templates/rules/python/hooks.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/python/patterns.md",
+      "blob": "96b96c1ea77226f8e3856d3ebc29998cda48f8a1",
+      "target": "platforms/claude/templates/rules/python/patterns.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/python/security.md",
+      "blob": "d9aec929501e973cbd96ab55293ff8ad90f47bcd",
+      "target": "platforms/claude/templates/rules/python/security.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/python/testing.md",
+      "blob": "29a3a6692904c2263101d5e4a0a099d605618249",
+      "target": "platforms/claude/templates/rules/python/testing.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/typescript/coding-style.md",
+      "blob": "333f52d7297ccfa37e7b80c00a5458c502adebd8",
+      "target": "platforms/claude/templates/rules/typescript/coding-style.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/typescript/hooks.md",
+      "blob": "861d9e5f19b977435660fe999eb2d18abe5b28e3",
+      "target": "platforms/claude/templates/rules/typescript/hooks.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/typescript/patterns.md",
+      "blob": "1c5d3da4566f54f4c814a13e0726dbb4a7fb025f",
+      "target": "platforms/claude/templates/rules/typescript/patterns.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/typescript/security.md",
+      "blob": "5ec60e2600dab2f3d9111289da5f69be645eca89",
+      "target": "platforms/claude/templates/rules/typescript/security.md"
+    },
+    {
+      "agent": "claude",
+      "source": "rules/typescript/testing.md",
+      "blob": "60531afb44155e6958c780d732bf6dca5121b883",
+      "target": "platforms/claude/templates/rules/typescript/testing.md"
+    },
+    {
+      "agent": "claude",
+      "source": "hooks/statusline.sh",
+      "blob": "6f1de4141cf2472ba5ab9949cb16e53c7d263776",
+      "target": "platforms/claude/templates/hooks/statusline.sh",
+      "adaptation": "Resolve jq and file credentials against CLAUDE_CONFIG_DIR; preserve status rendering and quote the launch path in statusline.json."
+    },
+    {
+      "agent": "claude",
+      "source": "fonts/LICENSE",
+      "blob": "b78476970a5221f9d570a1e4aa7b7ffed4a27da8",
+      "target": "platforms/claude/templates/fonts/LICENSE"
+    },
+    {
+      "agent": "claude",
+      "source": "fonts/MesloLGS NF Bold Italic.ttf",
+      "blob": "9548f2ba31bdcab71042eb8090f08cfdad446a36",
+      "target": "platforms/claude/templates/fonts/MesloLGS NF Bold Italic.ttf"
+    },
+    {
+      "agent": "claude",
+      "source": "fonts/MesloLGS NF Bold.ttf",
+      "blob": "e0e39544b02ddb8b7541418f26cdf716e904c544",
+      "target": "platforms/claude/templates/fonts/MesloLGS NF Bold.ttf"
+    },
+    {
+      "agent": "claude",
+      "source": "fonts/MesloLGS NF Italic.ttf",
+      "blob": "95c2cadab0c85215abceead61037b249f38c36bd",
+      "target": "platforms/claude/templates/fonts/MesloLGS NF Italic.ttf"
+    },
+    {
+      "agent": "claude",
+      "source": "fonts/MesloLGS NF Regular.ttf",
+      "blob": "88b81490cd7cdb9b2c7404a3b6fb7d1a9ec0779a",
+      "target": "platforms/claude/templates/fonts/MesloLGS NF Regular.ttf"
+    },
+    {
+      "agent": "claude",
+      "source": "mcp/README.md",
+      "blob": "a0a8f9c579c0f74805c06adb30b3a9135498e572",
+      "target": "platforms/claude/templates/mcp/README.md"
+    },
+    {
+      "agent": "claude",
+      "source": "mcp/mcp-servers.json",
+      "blob": "acccbbbb6820aa9f0ceb24d0852ac18a0a7ca0e2",
+      "target": "platforms/claude/templates/mcp/mcp-servers.json"
+    },
+    {
+      "agent": "codex",
+      "source": "AGENTS.md",
+      "blob": "e69fb1a0379f69dad4c28d1a81c79cfd16b4f0eb",
+      "target": "platforms/codex/templates/AGENTS.md",
+      "adaptation": "Read global lessons explicitly, respect CODEX_HOME and the detected shell, and condition workflow references on selected capabilities."
+    },
+    {
+      "agent": "codex",
+      "source": "config.toml",
+      "blob": "cb0b71e25416f1bdef4aacc7f7851175e5657200",
+      "target": "platforms/codex/templates/config.toml",
+      "adaptation": "Split into base config.toml, import-sync.toml, permissions.toml, statusline.toml, agent-patches and mcp reference snippets; remove the legacy model_instructions_file lessons override and disable external-agent import sync."
+    },
+    {
+      "agent": "codex",
+      "source": "agents/docs-researcher.toml",
+      "blob": "f55c5c5f1240527c3169cde5d00b14482ed5066a",
+      "target": "platforms/codex/templates/agents/docs-researcher.toml"
+    },
+    {
+      "agent": "codex",
+      "source": "agents/explorer.toml",
+      "blob": "781e011eba49290f066a9c0a8d5ce5fe0a194996",
+      "target": "platforms/codex/templates/agents/explorer.toml"
+    },
+    {
+      "agent": "codex",
+      "source": "agents/reviewer.toml",
+      "blob": "c3475e5f4adf41b7397bcdbfe3ce1666fb655789",
+      "target": "platforms/codex/templates/agents/reviewer.toml"
+    },
+    {
+      "agent": "codex",
+      "source": "templates/global-lessons.md",
+      "blob": "5331c107212cd02dfb0550a7e7222346e3b3e77a",
+      "target": "platforms/global-lessons.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/humanizer/SKILL.md",
+      "blob": "ef422538ef9d44640287e1e10987800ba1edfe2a",
+      "target": "skills/humanizer/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/humanizer-zh/SKILL.md",
+      "blob": "3b39d9a3729b6e5e5aaf5de4ce11d33e8af4655b",
+      "target": "skills/humanizer-zh/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/LICENSE",
+      "blob": "2d848c9f3fed5317d59e0b88cafa289b42a29d2d",
+      "target": "skills/neat-freak/LICENSE"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/SKILL.md",
+      "blob": "51333e97c010a8ba13b10dc3c89d17021d915aa8",
+      "target": "skills/neat-freak/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/references/agent-paths.md",
+      "blob": "0076648377cd36a1a1826b95fb9473be9defce2b",
+      "target": "skills/neat-freak/references/agent-paths.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/references/governance.md",
+      "blob": "9626951828ed7986762fa39d9c7139d6dcd8aa94",
+      "target": "skills/neat-freak/references/governance.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/references/sync-matrix.md",
+      "blob": "170d1c039f041cbd4f1dee0ba0a3488d272daa5b",
+      "target": "skills/neat-freak/references/sync-matrix.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/references/verification.md",
+      "blob": "25b371fd9b21fa4411b137b01f8e2b16602fb5c9",
+      "target": "skills/neat-freak/references/verification.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/neat-freak/scripts/audit-inventory.sh",
+      "blob": "d4cee4e40214b31d12a717382babd5b5544fe846",
+      "target": "skills/neat-freak/scripts/audit-inventory.sh"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/SKILL.md",
+      "blob": "9f527d1b56af7941e2663324ad8641547f048e4c",
+      "target": "skills/paper-reading/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/assets/report-template.html",
+      "blob": "747f5c8c54bdd6548e0d55d95e9ce17247ef8cf4",
+      "target": "skills/paper-reading/assets/report-template.html"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/assets/report.css",
+      "blob": "2ac551285e23479286169383de7d5d8eecb82e8c",
+      "target": "skills/paper-reading/assets/report.css"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/assets/report.js",
+      "blob": "be46ca5b540411f00191890b36467cab2bd88481",
+      "target": "skills/paper-reading/assets/report.js"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/code-audit.md",
+      "blob": "04db2a993edf30b816b79630334ace3e0e40efe8",
+      "target": "skills/paper-reading/references/code-audit.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/empirical.md",
+      "blob": "dc6c1c04f1d439369c41faece8ef395aacee4fc6",
+      "target": "skills/paper-reading/references/empirical.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/evidence.md",
+      "blob": "2d5179d4d05c4295f7a67c17a289e62182dbccb2",
+      "target": "skills/paper-reading/references/evidence.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/html-report.md",
+      "blob": "7cd403e0ee9180d6f3fb75756cd6a273206832e2",
+      "target": "skills/paper-reading/references/html-report.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/shared-sections.md",
+      "blob": "b02f855aad314872e2093d4a443b09e36fba51f4",
+      "target": "skills/paper-reading/references/shared-sections.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/survey.md",
+      "blob": "828e3e1a51697a61e091a7ec27abfd6b7d47d51d",
+      "target": "skills/paper-reading/references/survey.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/systems.md",
+      "blob": "07b3f931b197a7031a8957a4c7f9e2288b1de041",
+      "target": "skills/paper-reading/references/systems.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/theoretical.md",
+      "blob": "a3577ad31eb5aa65b35c97359ef6ec173dc4f752",
+      "target": "skills/paper-reading/references/theoretical.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/references/visuals.md",
+      "blob": "1dd3245048786f17426f5c44177a307b9ef66cb6",
+      "target": "skills/paper-reading/references/visuals.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/scripts/extract_paper.py",
+      "blob": "cef39fdf65bb8c296a6253d84a8510519674bdd4",
+      "target": "skills/paper-reading/scripts/extract_paper.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/scripts/mathml_policy.py",
+      "blob": "e7fcc39d220f4ac1ee21e0ac3164fc697f666a84",
+      "target": "skills/paper-reading/scripts/mathml_policy.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/scripts/render_math.py",
+      "blob": "ba17f011f79c1af744d5fff7ae0d0f30eb98568d",
+      "target": "skills/paper-reading/scripts/render_math.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/scripts/scaffold_report.py",
+      "blob": "6c7206cafdc128da3970e768e4d98450e9ee73fa",
+      "target": "skills/paper-reading/scripts/scaffold_report.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/paper-reading/scripts/validate_report.py",
+      "blob": "b17f4228bb77e2ac34a1fc3aa17cd84d383671f5",
+      "target": "skills/paper-reading/scripts/validate_report.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/LICENSE",
+      "blob": "2d848c9f3fed5317d59e0b88cafa289b42a29d2d",
+      "target": "skills/storage-analyzer/LICENSE"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/SKILL.md",
+      "blob": "21d42fe424ecf7729960d868396d541e68fb5df6",
+      "target": "skills/storage-analyzer/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/UPSTREAM.md",
+      "blob": "e17b6fb6c02a2ae22dee028868dfb5839d62ec44",
+      "target": "skills/storage-analyzer/UPSTREAM.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/assets/report_template.html",
+      "blob": "695484bae00373dfaaf431ca35e1401fb8eef129",
+      "target": "skills/storage-analyzer/assets/report_template.html"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/references/linux.md",
+      "blob": "b7aba0fe8cd4946a20371e96d7101c6bb52f3791",
+      "target": "skills/storage-analyzer/references/linux.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/references/macos.md",
+      "blob": "95ba62e8ef9e4d69f5a5ba3ce63c305e8025555f",
+      "target": "skills/storage-analyzer/references/macos.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/references/windows.md",
+      "blob": "1b398b4b4699821f7c42b8b49321bd560a3a8b38",
+      "target": "skills/storage-analyzer/references/windows.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/scripts/build_report.py",
+      "blob": "d453303e34a95765c44821304e5458050d1ac54b",
+      "target": "skills/storage-analyzer/scripts/build_report.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/scripts/scan.py",
+      "blob": "080ab0b67f5d86c825ec4bac39d521bf1c0d8e6a",
+      "target": "skills/storage-analyzer/scripts/scan.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/storage-analyzer/scripts/server.py",
+      "blob": "970411fbc78a5a1a48ce5bbe2eb12bf37f7480eb",
+      "target": "skills/storage-analyzer/scripts/server.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/humanizer/SKILL.md",
+      "blob": "ef422538ef9d44640287e1e10987800ba1edfe2a",
+      "target": "skills/humanizer/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/humanizer-zh/SKILL.md",
+      "blob": "3b39d9a3729b6e5e5aaf5de4ce11d33e8af4655b",
+      "target": "skills/humanizer-zh/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/LICENSE",
+      "blob": "2d848c9f3fed5317d59e0b88cafa289b42a29d2d",
+      "target": "skills/neat-freak/LICENSE"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/SKILL.md",
+      "blob": "51333e97c010a8ba13b10dc3c89d17021d915aa8",
+      "target": "skills/neat-freak/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/references/agent-paths.md",
+      "blob": "0076648377cd36a1a1826b95fb9473be9defce2b",
+      "target": "skills/neat-freak/references/agent-paths.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/references/governance.md",
+      "blob": "9626951828ed7986762fa39d9c7139d6dcd8aa94",
+      "target": "skills/neat-freak/references/governance.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/references/sync-matrix.md",
+      "blob": "170d1c039f041cbd4f1dee0ba0a3488d272daa5b",
+      "target": "skills/neat-freak/references/sync-matrix.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/references/verification.md",
+      "blob": "25b371fd9b21fa4411b137b01f8e2b16602fb5c9",
+      "target": "skills/neat-freak/references/verification.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/neat-freak/scripts/audit-inventory.sh",
+      "blob": "d4cee4e40214b31d12a717382babd5b5544fe846",
+      "target": "skills/neat-freak/scripts/audit-inventory.sh"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/SKILL.md",
+      "blob": "9f527d1b56af7941e2663324ad8641547f048e4c",
+      "target": "skills/paper-reading/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/assets/report-template.html",
+      "blob": "747f5c8c54bdd6548e0d55d95e9ce17247ef8cf4",
+      "target": "skills/paper-reading/assets/report-template.html"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/assets/report.css",
+      "blob": "2ac551285e23479286169383de7d5d8eecb82e8c",
+      "target": "skills/paper-reading/assets/report.css"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/assets/report.js",
+      "blob": "be46ca5b540411f00191890b36467cab2bd88481",
+      "target": "skills/paper-reading/assets/report.js"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/code-audit.md",
+      "blob": "04db2a993edf30b816b79630334ace3e0e40efe8",
+      "target": "skills/paper-reading/references/code-audit.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/empirical.md",
+      "blob": "dc6c1c04f1d439369c41faece8ef395aacee4fc6",
+      "target": "skills/paper-reading/references/empirical.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/evidence.md",
+      "blob": "2d5179d4d05c4295f7a67c17a289e62182dbccb2",
+      "target": "skills/paper-reading/references/evidence.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/html-report.md",
+      "blob": "7cd403e0ee9180d6f3fb75756cd6a273206832e2",
+      "target": "skills/paper-reading/references/html-report.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/shared-sections.md",
+      "blob": "b02f855aad314872e2093d4a443b09e36fba51f4",
+      "target": "skills/paper-reading/references/shared-sections.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/survey.md",
+      "blob": "828e3e1a51697a61e091a7ec27abfd6b7d47d51d",
+      "target": "skills/paper-reading/references/survey.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/systems.md",
+      "blob": "07b3f931b197a7031a8957a4c7f9e2288b1de041",
+      "target": "skills/paper-reading/references/systems.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/theoretical.md",
+      "blob": "a3577ad31eb5aa65b35c97359ef6ec173dc4f752",
+      "target": "skills/paper-reading/references/theoretical.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/references/visuals.md",
+      "blob": "1dd3245048786f17426f5c44177a307b9ef66cb6",
+      "target": "skills/paper-reading/references/visuals.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/scripts/extract_paper.py",
+      "blob": "cef39fdf65bb8c296a6253d84a8510519674bdd4",
+      "target": "skills/paper-reading/scripts/extract_paper.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/scripts/mathml_policy.py",
+      "blob": "e7fcc39d220f4ac1ee21e0ac3164fc697f666a84",
+      "target": "skills/paper-reading/scripts/mathml_policy.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/scripts/render_math.py",
+      "blob": "ba17f011f79c1af744d5fff7ae0d0f30eb98568d",
+      "target": "skills/paper-reading/scripts/render_math.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/scripts/scaffold_report.py",
+      "blob": "6c7206cafdc128da3970e768e4d98450e9ee73fa",
+      "target": "skills/paper-reading/scripts/scaffold_report.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/paper-reading/scripts/validate_report.py",
+      "blob": "b17f4228bb77e2ac34a1fc3aa17cd84d383671f5",
+      "target": "skills/paper-reading/scripts/validate_report.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/LICENSE",
+      "blob": "2d848c9f3fed5317d59e0b88cafa289b42a29d2d",
+      "target": "skills/storage-analyzer/LICENSE"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/SKILL.md",
+      "blob": "21d42fe424ecf7729960d868396d541e68fb5df6",
+      "target": "skills/storage-analyzer/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/UPSTREAM.md",
+      "blob": "e17b6fb6c02a2ae22dee028868dfb5839d62ec44",
+      "target": "skills/storage-analyzer/UPSTREAM.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/assets/report_template.html",
+      "blob": "695484bae00373dfaaf431ca35e1401fb8eef129",
+      "target": "skills/storage-analyzer/assets/report_template.html"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/references/linux.md",
+      "blob": "b7aba0fe8cd4946a20371e96d7101c6bb52f3791",
+      "target": "skills/storage-analyzer/references/linux.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/references/macos.md",
+      "blob": "95ba62e8ef9e4d69f5a5ba3ce63c305e8025555f",
+      "target": "skills/storage-analyzer/references/macos.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/references/windows.md",
+      "blob": "1b398b4b4699821f7c42b8b49321bd560a3a8b38",
+      "target": "skills/storage-analyzer/references/windows.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/scripts/build_report.py",
+      "blob": "d453303e34a95765c44821304e5458050d1ac54b",
+      "target": "skills/storage-analyzer/scripts/build_report.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/scripts/scan.py",
+      "blob": "080ab0b67f5d86c825ec4bac39d521bf1c0d8e6a",
+      "target": "skills/storage-analyzer/scripts/scan.py"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/storage-analyzer/scripts/server.py",
+      "blob": "970411fbc78a5a1a48ce5bbe2eb12bf37f7480eb",
+      "target": "skills/storage-analyzer/scripts/server.py"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/adversarial-review/SKILL.md",
+      "blob": "dbce9b1ecfdd85629b468b2c5d0fd9a220585db4",
+      "target": "platforms/claude/skills/adversarial-review/SKILL.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/adversarial-review/references/reviewer-lenses.md",
+      "blob": "53cc6cf1d72fb5ca7ebcc7dc8e041271ea879dae",
+      "target": "platforms/claude/skills/adversarial-review/references/reviewer-lenses.md"
+    },
+    {
+      "agent": "claude",
+      "source": "skills/update-config/SKILL.md",
+      "blob": "459b1c025c2007c0e15998731a8aa48375f6aa48",
+      "target": "platforms/claude/skills/update-config/SKILL.md",
+      "adaptation": "Keep the update-config invocation name; replace the retired installer with selected-item conversational maintenance on agent-config-for-agents."
+    },
+    {
+      "agent": "codex",
+      "source": "skills/adversarial-review/SKILL.md",
+      "blob": "f05ffab896b98ebf8b0ce8dc51da6c4a042322c1",
+      "target": "platforms/codex/skills/adversarial-review/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/adversarial-review/references/reviewer-lenses.md",
+      "blob": "53cc6cf1d72fb5ca7ebcc7dc8e041271ea879dae",
+      "target": "platforms/codex/skills/adversarial-review/references/reviewer-lenses.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/handoff/SKILL.md",
+      "blob": "187f6e6f7a9d076da1559c618694fb086fae4efc",
+      "target": "platforms/codex/skills/handoff/SKILL.md"
+    },
+    {
+      "agent": "codex",
+      "source": "skills/update/SKILL.md",
+      "blob": "4eae010638f3e2e3adda70d8569b31d73c464e9e",
+      "target": "platforms/codex/skills/update/SKILL.md",
+      "adaptation": "Keep the update_config invocation name and skills/update destination; use the selected-item conversational maintenance flow."
+    },
+    {
+      "agent": "claude",
+      "source": "CHANGELOG.md",
+      "blob": "17e45eb7335cc4dfff6057e44783c34834aee68b",
+      "target": "platforms/claude/CHANGELOG.previous.md"
+    },
+    {
+      "agent": "claude",
+      "source": "CHANGELOG.zh-CN.md",
+      "blob": "e651d1029b4493ca57ba38220e92ba8e83ba68e2",
+      "target": "platforms/claude/CHANGELOG.previous.zh-CN.md"
+    },
+    {
+      "agent": "codex",
+      "source": "CHANGELOG.md",
+      "blob": "bbc646c29c4ea90a6d215f40fda2ab4ea81eea61",
+      "target": "platforms/codex/CHANGELOG.previous.md"
+    },
+    {
+      "agent": "codex",
+      "source": "CHANGELOG.zh-CN.md",
+      "blob": "b466ab9f7972134e7932a00b2f411001aed9813f",
+      "target": "platforms/codex/CHANGELOG.previous.zh-CN.md"
+    }
+  ],
+  "description": "Source git blobs before relocation/adaptation. Unannotated mappings remain byte-identical; adaptations and splits are documented in migration.md."
+}

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "LESSONS_FILE=\"${CLAUDE_CONFIG_DIR:-${USERPROFILE:-$HOME}/.claude}/lessons.md\"; if [ -f \"$LESSONS_FILE\" ]; then echo '=== Lessons Learned (auto-loaded via SessionStart hook) ==='; cat \"$LESSONS_FILE\"; echo '=== End of Lessons ==='; echo 'IMPORTANT: You MUST briefly confirm you have loaded these lessons at session start.'; else echo 'No lessons.md found at ~/.claude/lessons.md'; fi",
+            "statusMessage": "Loading lessons..."
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "LESSONS_FILE=\"${CLAUDE_CONFIG_DIR:-${USERPROFILE:-$HOME}/.claude}/lessons.md\"; if [ -f \"$LESSONS_FILE\" ]; then echo '=== Lessons Learned (reloaded after compaction) ==='; cat \"$LESSONS_FILE\"; echo '=== End of Lessons ==='; echo 'IMPORTANT: You MUST briefly confirm you have loaded these lessons.'; else echo 'No lessons.md found at ~/.claude/lessons.md'; fi",
+            "statusMessage": "Reloading lessons after compaction..."
+          }
+        ]
+      }
+    ]
+  }
+}

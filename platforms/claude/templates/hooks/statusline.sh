@@ -4,10 +4,11 @@
 
 # Cross-platform home directory (Windows $HOME may be wrong)
 _HOME="${USERPROFILE:-$HOME}"
+_CLAUDE_DIR="${CLAUDE_CONFIG_DIR:-$_HOME/.claude}"
 
 # Ensure jq is available (check ~/.claude/bin/ for Windows installs)
 if ! command -v jq &>/dev/null; then
-    for _p in "$_HOME/.claude/bin/jq.exe" "$_HOME/.claude/bin/jq"; do
+    for _p in "$_CLAUDE_DIR/bin/jq.exe" "$_CLAUDE_DIR/bin/jq"; do
         if [ -x "$_p" ]; then
             export PATH="$(dirname "$_p"):$PATH"
             break
@@ -15,7 +16,7 @@ if ! command -v jq &>/dev/null; then
     done
 fi
 if ! command -v jq &>/dev/null; then
-    printf "Claude (jq not found - run installer or install jq)"
+    printf "Claude (jq not found - install jq)"
     exit 0
 fi
 
@@ -120,7 +121,7 @@ bg_fetch_usage() {
     fi
     # 3) Fall back to credentials file
     if [ -z "$token" ]; then
-        local creds="$_HOME/.claude/.credentials.json"
+        local creds="$_CLAUDE_DIR/.credentials.json"
         [ -f "$creds" ] || { rm -f "$USAGE_LOCK"; return; }
         token=$(jq -r '.claudeAiOauth.accessToken // empty' "$creds" 2>/dev/null)
     fi

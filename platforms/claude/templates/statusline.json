@@ -1,0 +1,6 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"${CLAUDE_CONFIG_DIR:-${USERPROFILE:-$HOME}/.claude}/hooks/statusline.sh\""
+  }
+}

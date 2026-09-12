@@ -1,0 +1,11 @@
+# Base settings. Existing user values are preserved by default.
+model = "gpt-5.6-sol"
+model_reasoning_effort = "max"
+web_search = "live"
+
+[shell_environment_policy]
+inherit = "all"
+
+[features]
+multi_agent = true
+concurrent_reasoning_summaries = false
