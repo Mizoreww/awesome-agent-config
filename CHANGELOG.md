@@ -1,5 +1,25 @@
 # Changelog
 
+## [4.0.0-dev.2] - 2026-09-12
+
+### Features
+- Restore the full bilingual README, including the original 11 categories, usage guidance, tables, showcases, settings and customization. Align all 51 active catalogue entries with the same category order.
+- Make installation and updates independent of legacy branches. Record the repository source and its branch, default-branch, pinned or local update policy; both update skills follow that record.
+- Add MAINTAIN.md so agents maintain skill payloads, upstream recipes, recommendations and both READMEs together, including explicit handling of retired IDs.
+- Split Claude and Codex blank lessons templates and require an explicit agent when seeding a log. Keep their global instructions and project memory conventions independent.
+- Replace vendored Humanizer, Humanizer-zh and neat-freak originals with upstream installation recipes. Keep author-owned and intentionally customized skills here with attribution.
+- Fold handoff into the Matt bundle, using its upstream version; remove the independent option and local copy. Codex's selected Matt bundle now has 20 members.
+
+### Design Rationale
+- The current repository is the authority for ongoing development. Historical mappings prove the initial consolidation and remain available for provenance without freezing future skill changes.
+- Preserve the detailed user-facing guide while letting the agent own platform detection, explanations and installation commands.
+
+### Notes & Caveats
+- Existing lessons remain untouched. Direct helper callers must use `seed-lessons --agent claude` or `--agent codex`.
+- Older selection receipts need a verified repository source before updates; a missing or incompatible source is not replaced with a guessed legacy branch.
+- Existing standalone handoff and third-party copies remain until the user chooses a migration. Humanizer's current upstream is 3.0.0; explain the change from the previously bundled 2.2.0 before migrating.
+- No branch archival or remote default-branch change is performed. During the transition, share the current README page URL with its ref or open its checkout.
+
 ## [4.0.0-dev.1] - 2026-09-12
 
 ### Features

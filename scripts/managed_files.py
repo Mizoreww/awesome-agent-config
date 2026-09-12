@@ -321,13 +321,15 @@ class ManagedFiles:
             raise ValueError("Local modification or missing target: preserve and inspect before removal")
         return self.commit(relative, None, None, before)
 
-    def seed_lessons(self):
+    def seed_lessons(self, agent):
+        if agent not in ("claude", "codex"):
+            raise ValueError("Choose claude or codex for the lessons template")
         target = self.path("lessons.md")
         if target.exists():
             return {"status": "preserved", "target": "lessons.md"}
+        template = Path(__file__).resolve().parents[1] / "platforms" / agent / "templates/lessons.md"
+        data = template.read_bytes()
         if not self.dry_run:
-            template = Path(__file__).resolve().parents[1] / "platforms/global-lessons.md"
-            data = template.read_bytes()
             target.parent.mkdir(parents=True, exist_ok=True)
             try:
                 fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
@@ -355,7 +357,7 @@ def main():
             sub.add_argument("--replace", action="append", default=[], help="Explicitly replace this JSON pointer")
             sub.add_argument("--remove", action="append", default=[], help="Remove the obsolete lessons override")
     commands.add_parser("remove").add_argument("target")
-    commands.add_parser("seed-lessons")
+    commands.add_parser("seed-lessons").add_argument("--agent", choices=("claude", "codex"), required=True)
     commands.add_parser("status")
     args = parser.parse_args()
     manager = ManagedFiles(args.root, args.dry_run)
@@ -374,7 +376,7 @@ def main():
         elif args.action == "remove":
             result = manager.remove(args.target)
         else:
-            result = manager.seed_lessons()
+            result = manager.seed_lessons(args.agent)
     print(json.dumps(result, indent=2))
 
 

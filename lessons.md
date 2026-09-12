@@ -149,3 +149,18 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: Counting preserved Claude plugin options while consolidating main and codex.
 **Mistake**: Attributed all 21 offered plugins to settings.json and inferred their enabled/optional breakdown from a summary instead of the actual template.
 **Rule**: Count settings keys, enabled values and installer menu entries separately. main has 20 settings selectors (15 true, 5 false), with Matt offered additionally by the menu; source coverage is their union, not the enabled-only subset.
+
+## 2026-09-12 - Maintain one independent repository, with the original README experience
+**Context**: Refining the unified repository before it becomes the primary development line and the old Claude/Codex branches become legacy archives.
+**Mistake**: Framed the repository around preserving two release branches, hard-coded the development branch in update entrypoints, and replaced main's detailed README categories, usage guidance and tables with a short landing page.
+**Rule**: Treat this repository's current contents as the installation and maintenance authority. Legacy branch names and snapshot mappings are historical provenance only, never required for installation, updates or skill edits. Preserve main's README category order, showcases, practical usage sections and tables while merging both agents' skills and showing support/recommendations separately. Keep each agent's global instructions and lesson templates/state independent. Document how the agent adds, updates and removes skills and keeps catalogue, README and recipes consistent. Do not rename/archive branches or change the remote default merely because that is the user's future plan.
+
+## 2026-09-12 - Keep upstream skills at their upstream source
+**Context**: Refining ownership in the unified skill repository.
+**Mistake**: Treated existing bundled third-party skill copies as shared repository payloads without distinguishing upstream ownership from locally maintained work.
+**Rule**: For third-party skills, publish the upstream installation method and source instead of maintaining a duplicate payload here. Keep the user's own skills in this repository. Inspect local adaptations before moving a derived skill upstream; preserve intentionally maintained custom versions unless the user chooses the upstream version, and keep catalogue, READMEs and recipes aligned.
+
+## 2026-09-12 - Handoff belongs to the Matt bundle
+**Context**: Deciding which derived skills remain local in the unified repository.
+**Mistake**: Kept handoff as an independent Codex option and local customized payload when the user wants it only within Matt skills.
+**Rule**: Offer handoff solely as a member of matt-workflow. Use the selected Matt source, remove the independent catalogue entry and local handoff copy, and document the old handoff ID as a migration to the bundle. Existing installations are migrated only when requested. This supersedes earlier requirements to preserve the customized handoff variant.

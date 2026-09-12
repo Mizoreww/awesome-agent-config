@@ -9,6 +9,8 @@ schedule: "After cook sessions that produce large diffs (200+ lines), implement 
 
 # Adversarial Review
 
+Source and local adaptations: [UPSTREAM.md](UPSTREAM.md).
+
 Spawn reviewers on the **opposite model** to challenge work. Reviewers attack from distinct
 lenses grounded in brain principles. The deliverable is a synthesized verdict — do NOT make
 changes.

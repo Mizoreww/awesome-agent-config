@@ -1,28 +1,43 @@
-# 两条发布分支的合并说明
+# 历史合并与迁移说明
 
-开发分支 `agent-config-for-agents` 从 main `d65cbda0058be09e4771f4603ccf45b3a589583b`（3.2.0）建立，额外读取 codex `fdd3e50aca09d1b80ac416f320f42bc0ecef5faa`（2.11.0）。只向该开发分支提交，不合并或重写原发布分支。
+首次合并从 main `d65cbda0058be09e4771f4603ccf45b3a589583b`（3.2.0）建立开发分支，纳入 codex `fdd3e50aca09d1b80ac416f320f42bc0ecef5faa`（2.11.0）的能力。以下来源名称和 SHA 记录这次历史合并，不是安装依赖。
+
+当前仓库是统一维护的依据；旧分支今后归档也不影响安装和维护。本次不执行分支归档或默认分支切换。实际源码、平台配方和 catalog 可按 [MAINTAIN.md](../MAINTAIN.md) 演进，无需再与历史分支同步。
 
 ## 本地 skill 覆盖
 
-main 的 7 个与 codex 的 8 个本地 skill 目录，映射为 10 个实际目录。两端相同的五份只维护一次；包含脚本、资源、许可的完整 payload 均保留。
+首次合并时，main 的 7 个与 codex 的 8 个本地 skill 目录映射为 10 个目录；两端相同的五份共用副本。下表记录初始落点，之后的第三方源码调整与 handoff 合并见下方“当前源码归属”和“条目退役与改名”。
 
-| 来源 | 新位置 | 处理 |
+| 来源 | 初始位置 | 首次合并时的处理 |
 | --- | --- | --- |
 | 两端 humanizer、humanizer-zh、neat-freak、paper-reading、storage-analyzer | skills/同名目录 | 两端原始文件完全相同，保留共同副本 |
 | main adversarial-review | platforms/claude/skills/adversarial-review | 保留 main 专属全文与 references |
 | codex adversarial-review | platforms/codex/skills/adversarial-review | 保留历史全文与 references；Codex 当前审查策略采用 Matt code-review，因此不列为可安装项 |
-| codex handoff | platforms/codex/skills/handoff | 保留定制版本，不被 Matt 上游副本替代 |
+| codex handoff | platforms/codex/skills/handoff | 首次保留定制版本；现按用户选择改为 Matt 上游成员 |
 | main update-config | platforms/claude/skills/update-config | 保留调用名，入口改为对话维护 |
 | codex update | platforms/codex/skills/update | 保留 update_config 调用名，入口改为对话维护 |
 
-[source-provenance.json](source-provenance.json) 记录 125 项原始文件映射及 Git blob ID，覆盖 skill、配置、规则、字体、hooks 和两端历史 changelog。未标 adaptation 的目标与来源逐字节一致；被拆分/适配的文件在记录中说明原因。root lessons.md 保留项目纠错历史，安装只使用 platforms/global-lessons.md 的空白模板。
+[source-provenance.json](source-provenance.json) 记录首次合并时 125 项原始文件映射及 Git blob ID，覆盖 skill、配置、规则、字体、hooks 和两端历史 changelog。当时未标 adaptation 的文件经过逐字节核对；记录中的路径与适配说明描述首次合并状态。它是历史快照，不要求后续版本仍与旧 blob 相等，也不参与安装校验。
+
+root lessons.md 保留本仓库纠错历史，安装使用各自 platforms/claude/templates/lessons.md 和 platforms/codex/templates/lessons.md 的空白模板。历史映射中的 shared global-lessons 路径已由这两个模板替代；真实全局日志不会随模板变化被替换。
+
+## 当前源码归属
+
+| 内容 | 当前维护方式 |
+| --- | --- |
+| paper-reading、两端更新 skill | 自有源码保存在本仓库 |
+| storage-analyzer、adversarial-review | 保留定制源码及上游署名；Codex 历史 adversarial-review 仍不作为安装项 |
+| humanizer、humanizer-zh、neat-freak | 移除原样副本，稳定 ID 与能力保留；从 [第三方上游](../platforms/sources.md#writing) 安装 |
+| handoff | 移除独立副本与选择，统一使用 Matt 包中的上游成员 |
+
+已有第三方本地副本不会因仓库移除 vendored 目录而自动卸载。按当前上游配方更新或切换原生插件前，核对原版本、归属和本地修改；原有 Humanizer 2.2.0 升到当前 3.0.0 需说明差异。原样保存 neat-freak 的快照测试随 vendored 目录退役，源码下载与完整资源验证在隔离目录进行。
 
 ## 外部获取的能力
 
 本地目录不是安装能力的全集。[catalog.md](../catalog.md) 和 [sources.md](../platforms/sources.md) 还覆盖：
 
 - main settings 中的 20 个原生插件 selector（15 个启用、5 个关闭）加上安装菜单的 Matt 插件，共 21 个可选插件，以及 DeepXiv、ResearchStudio Idea 和 lieflat-charts 源码入口。
-- Codex 的 Matt v1.1.0 十九项工作流、独立 code-review、定制 handoff；Superpowers 十四项；Karpathy；PUA 三项。
+- Codex 的 Matt v1.1.0 工作流目前包含上游 handoff 共二十项，另有独立 code-review；Superpowers 十四项；Karpathy；PUA 三项。
 - Anthropic 文档四项、Codex examples 精选三项、独立 frontend-design；frontend-slides、PPT Master。
 - AI Research 六组精选（24 项）、DeepXiv 三项、ResearchStudio Idea 三项与 Reel 五项，以及既有 MCP 配置能力。
 
@@ -46,9 +61,24 @@ Codex 关闭 `desktop.external-agent-import-sync-enabled`。旧 `model_instructi
 
 现有同内容文件可以复用；不同内容的 AGENTS/CLAUDE、skills、hooks 或配置先备份并准备具体合并。旧版 marker、npx lock 和导入 cache 仅作为识别线索，不自动证明新工具拥有删除权。数据库和真实 lessons 不搬移、不清空。
 
-旧 install.sh/install.ps1 现在只显示对话安装入口，返回退出码 2 表示需要迁移；原 `--all`、`--force` 等参数不会安装、覆盖或卸载。原发布分支仍可提供旧流程。此开发版不要求用户先安装一个安装 skill。
+旧 install.sh/install.ps1 现在只显示对话安装入口，返回退出码 2 表示需要迁移；原 `--all`、`--force` 等参数不会安装、覆盖或卸载。使用同一份当前仓库的 INSTALL.md 继续，无需安装一个安装 skill 或返回旧分支。
 
 文件归属、hash 和备份由 `agent-config/files.json` 保存；agent 的选择/原生操作记录由 `agent-config/selection.json` 保存。失败或中断后先恢复/核实真实状态，避免把计划当成成功。卸载只处理明确选择且归属可靠的内容。
+
+安装记录增加仓库 URL、revision 与更新策略，具体见 [INSTALL.md](../INSTALL.md#repository-source)。旧记录缺少来源时，从可靠的原记录或用户给出的仓库页面 / checkout 补齐。不会因为当前 agent 是 Claude 或 Codex 就选择同名分支；指定 ref 也不会被默认分支取代。
+
+## 条目退役与改名
+
+活动目录现为 51 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+
+<a id="handoff"></a>
+### handoff → matt-workflow 成员
+
+handoff 已取消独立设置，两平台均由 Matt 包提供。新装 Matt 包时展示其 handoff 成员；旧 Matt 选择的成员记录若尚无 handoff，先说明新增范围，再按用户选择更新。
+
+检测到旧独立 handoff 时，说明迁移将改为 Matt 上游版本，并展示包的完整范围；不能仅因旧 ID 存在就自动安装整个 Matt 包。用户选择迁移后，在隔离目录验证上游 handoff，核对旧 skills/handoff 的归属与修改；未修改的自管副本可受控替换并把归属改为 matt-workflow，外部或已修改副本先保留并准备具体合并。Claude 插件渠道切换时也先验证新包，再按明确移除选择处理旧副本。
+
+验证成功后，将旧 ID 标记已迁移并保留对应记录，活动选择指向 matt-workflow。未选择迁移时记录“旧独立安装保留”，不报告更新成功。新入口只有 Matt 包，不再提供独立 handoff 配方。
 
 ## 支持边界
 

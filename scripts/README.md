@@ -17,11 +17,13 @@ The complete directory is copied and verified, including assets/references/scrip
 
 ```sh
 python3 scripts/managed_files.py --root "$target_dir" status
-python3 scripts/managed_files.py --root "$target_dir" seed-lessons
+python3 scripts/managed_files.py --root "$target_dir" seed-lessons --agent codex
 python3 scripts/managed_files.py --root "$target_dir" remove skills/paper-reading
 ```
 
-The last command is only for an explicit removal request. Only helper-created, unchanged copies are removable. Lessons are always preserved and only seeded from the bundled blank template. JSON/TOML merge targets cannot be removed with this operation.
+Use `--agent claude` for a Claude home. Each agent has its own blank template under `platforms/<agent>/templates/lessons.md`; the helper never infers the agent from a directory name. Existing lessons are always preserved, including when upgrading from the previous shared blank template. Never deploy the repository's project lessons as global memory.
+
+The last command is only for an explicit removal request. Only helper-created, unchanged copies are removable. JSON/TOML merge targets cannot be removed with this operation.
 
 ## Partial configuration merge
 

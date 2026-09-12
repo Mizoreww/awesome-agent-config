@@ -1,6 +1,8 @@
 # Agent 引导的配置安装方案
 
-2026-09-12。设计决策已通过 grilling 问答确认：用户与已有的 Claude/Codex 对话完成选型和安装。此前的 Go 二进制、终端菜单和通用安装核心提案已撤回。本文件作为开发分支的验收依据；Codex 配置由本仓库显式管理。
+2026-09-12。设计决策已通过 grilling 问答确认：用户与已有的 Claude/Codex 对话完成选型和安装。此前的 Go 二进制、终端菜单和通用安装核心提案已撤回。本文件是当前实现的验收依据；Codex 配置由本仓库显式管理。
+
+本仓库是未来统一的主要开发线。旧 Claude/Codex 分支将来可归档，但安装、更新与维护从现在开始只依赖当前仓库内容及所选外部上游。归档分支和切换远端默认分支是之后的操作，不在本次修改范围内。
 
 ## 用户入口
 
@@ -10,12 +12,17 @@ README 提供一段可以直接交给 agent 的请求：
 
 已有 agent 就能开始，无需先安装一个用于安装其他内容的 skill。以后也可以说“给 Codex 增加论文工具”“更新我上次选择的内容”。
 
+README 保留原 main 的双语分类、使用说明、表格、展示示例、目录结构、关键机制、设置、自定义、致谢及许可，合并 Codex 能力并更新已过时的安装说明。分类顺序为 Core、Language Rules、Review、Workflow、Integrations、Design & Content、Slides、Memory & Lifestyle、Storage、Academic Research、MCP Servers；catalog 沿用同一顺序。Codex 子 agents 放在 Core，训练与推理条目留在 Academic Research。
+
+入口让用户打开 checkout 或分享当前 README 页面 URL；安装沿用该页面的 ref，不写死开发/历史分支，也不丢掉 ref 后静默落回旧默认分支。
+
 ## 仓库只维护这些内容
 
 ```text
-README.md                  给用户的简介与上述入口
+README.md / README.zh-CN.md 给用户的完整分类表格、使用说明与上述入口
 AGENTS.md / CLAUDE.md       本仓库的工作说明，按需指向 INSTALL.md
 INSTALL.md                 两个 agent 共用的对话安装流程
+MAINTAIN.md                Agent 增删改仓库内容时的维护流程
 catalog.md                 完整分类目录、两平台作者推荐、来源与安装渠道
 platforms/claude/           Claude 操作说明与待部署的配置模板
 platforms/codex/            Codex 操作说明与待部署的配置模板
@@ -28,6 +35,12 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 作者尚未提供推荐名单时，相关标记留空，不把历史默认安装项或 agent 自己的建议当成作者推荐。Agent 可以补充适合当前用户的解释，作者标记仍以目录为准。
 
 根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。只有用户请求安装、更新、修复或卸载时才加载安装流程，普通代码工作不会触发安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
+
+源码归属按用户最新选择区分：第三方原版提供第三方上游安装方式，仓库只保存自有 skill 和明确维护的定制衍生版，并保留上游署名。Humanizer、Humanizer-zh、neat-freak 原样副本移出仓库，条目改为从上游安装。paper-reading、storage-analyzer 定制版及 adversarial-review 定制版继续在这里维护。
+
+handoff 不再独立设置，删除独立目录项和本地定制副本，只作为 Matt 包成员提供。Codex 的 Matt 精选范围加入上游 handoff，合计 20 项；其他版本与成员约束保持有效。旧 handoff ID 记录迁移关系，不自动扩大或覆盖已有用户安装。
+
+Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平台/上游安装配方；作者推荐仍由作者决定。历史来源映射用于追溯首次合并，不能限制今后正常的 skills 增删改。稳定 ID 不复用于无关能力；删除或改名在迁移说明中记录，保留已安装用户的选择与归属直到明确迁移或卸载。
 
 ## INSTALL.md 的六步流程
 
@@ -58,16 +71,22 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 Agent 负责理解需求、选型解释、查阅平台说明和处理异常。插件安装/更新/卸载交给原生 CLI；文件操作中反复出现且容易出错的部分，才从现有安装脚本提取小工具。每个工具承担一个明确动作，不新增菜单、推荐系统、通用 resolver 或自更新框架。
 
-保留现有有用的保护：配置局部合并、备份、文件归属和修改检查、完整资源校验。真实 lessons、凭据、未受管 hooks/skills 及记忆数据库保持原样；只在缺少全局 lessons 时创建空白模板。Codex lessons 由 AGENTS 明确读取，不借 `model_instructions_file` 替换内置指令。
+保留现有有用的保护：配置局部合并、备份、文件归属和修改检查、完整资源校验。真实 lessons、凭据、未受管 hooks/skills 及记忆数据库保持原样；只在缺少全局 lessons 时创建目标 agent 的空白模板。Claude 的 CLAUDE.md / lessons 与 Codex 的 AGENTS.md / lessons 独立维护。Claude 项目纠错写入其项目 memory/MEMORY.md；Codex 项目纠错写入项目根目录 lessons.md。Codex lessons 由 AGENTS 明确读取，不借 `model_instructions_file` 替换内置指令。
 
 每个 agent home 下留一份简短安装记录，保存选择、来源/revision、受管文件及部署 hash、备份位置、待完成项。原生插件版本以原生查询为准；这份记录用于后续对话和文件保护，不实现另一套插件数据库。操作中断后先核对原生状态，归属不明的内容保留；卸载也只针对归属明确且用户要求移除的内容。
 
-Codex 的 Matt 包继续固定现有 commit，原生迁移经过入口、资源和定制 handoff 验证后再采用。Playwright 保留固定版本、旧 Node 的兼容路径和 MCP initialize 检查。ResearchStudio Idea/Reel 与 PPT Master 按已有约定仅安装必要源码，依赖由首次调用准备。
+仓库来源记录包含 URL、解析后的 revision 和 branch / default-branch / pinned / local 更新策略；具体字段定义在 INSTALL。两个更新 skill 均使用记录中的来源，不按 agent 名猜测分支。缺失来源时从可靠旧记录或用户给出的 checkout / URL 补齐；无法确定才补问。新版本中已消失的 ID 需提示退役或迁移，不能被当作更新成功或自动删除。
+
+Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生迁移经过入口、资源和所选成员验证后再采用。Playwright 保留固定版本、旧 Node 的兼容路径和 MCP initialize 检查。ResearchStudio Idea/Reel 与 PPT Master 按已有约定仅安装必要源码，依赖由首次调用准备。
 
 ## 实施验收
 
-- 从最新 main 创建 agent-config-for-agents；只推送该开发分支。
-- main 和 codex 的所有本地 skill payload 有明确落点，外部获取的活跃 skill 组均在目录和安装说明中。
+- 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
+- 当前仓库独立保存自有和保留的定制 skill payload；第三方原版与外部 skill 组均有上游安装说明，能力不遗漏，不从历史 Claude/Codex 分支安装或更新。
+- handoff 仅在 Matt 包中，活动目录共 51 个 ID；旧独立 ID 在迁移说明中有明确处理。
+- 双语 README 保留原有 11 类和完整说明/表格；catalog 的稳定 ID、支持范围、来源和推荐与之相符。
+- 根指令能将仓库增删改路由到 MAINTAIN，将用户安装变更路由到 INSTALL；历史 provenance 不充当当前不可修改的清单。
+- Claude/Codex 分别使用独立指令和 lessons 模板，现有真实记录保持不变。
 - 作者推荐未提供时留空；不从历史默认安装项推断推荐。
-- 本地文件保护、原生插件与最小源码安装在隔离配置目录验证。
+- 本地文件保护、原生插件与最小源码安装在隔离配置目录验证；当前文件导出到没有 .git / 旧 refs 的目录后，相关模板和共享 skill 安装仍可完成。
 - 保留相关既有测试；临时新验收脚本不加入发布分支。

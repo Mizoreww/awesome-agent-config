@@ -762,5 +762,5 @@
       "target": "platforms/codex/CHANGELOG.previous.zh-CN.md"
     }
   ],
-  "description": "Source git blobs before relocation/adaptation. Unannotated mappings remain byte-identical; adaptations and splits are documented in migration.md."
+  "description": "Historical snapshot of the first consolidation: original git blobs and initial destination paths. Unannotated copies were verified byte-identical at that time. Current files may evolve under MAINTAIN.md; this snapshot is not an installation source, runtime integrity manifest or restriction on later edits."
 }

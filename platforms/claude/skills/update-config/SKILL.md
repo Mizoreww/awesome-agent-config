@@ -1,15 +1,16 @@
 ---
 name: update-config
-description: Update this agent's selected configuration from the agent-config-for-agents branch. Use when the user asks to update, add, or remove this repository's installed configuration.
+description: Maintain this repository's installed configuration when the user asks to update, add, remove or repair selected content.
 ---
 
 # Maintain the selected configuration
 
-Target **claude** unless the user explicitly names another agent. Read the target's `agent-config/selection.json` and `agent-config/files.json` when present. Query actual native installation state; without a receipt, preserve existing external content.
+Target **claude** unless the user explicitly names another agent. Resolve its actual config home from the environment or the user's chosen path. Read `agent-config/selection.json` and `agent-config/files.json` there when present; query native installation state before changing anything.
 
-Read `INSTALL.md` from the same resolved revision of:
-https://github.com/Mizoreww/awesome-claude-code-config/tree/agent-config-for-agents
+Resolve the repository from the receipt's `repository` object: `url`, `revision`, and `update`. For `update.kind = branch`, fetch `update.ref`; for `default-branch`, query the remote HEAD with `git ls-remote --symref <url> HEAD`; for `pinned`, retain the recorded commit; for `local`, read `update.path`. Work in a temporary checkout when fetching. Preserve the user's existing checkout and local changes.
 
-Follow its update/add/remove flow and the claude platform instructions. Default to the recorded selections. For changed selections, show the complete supported catalogue by category with continuous numbers, author recommendations and installed status. An omitted item remains installed; removal requires an explicit request.
+If an older receipt lacks repository metadata, use a reliably recorded repository origin or the URL/ref/checkout explicitly supplied in this request. If neither identifies the source, ask for it. A missing branch or local path requires a source decision; never guess a branch from the agent's name or fall back to a legacy installer.
 
-Preserve pinned sources, user edits, credentials and real lessons. Verify each selected operation and update its receipt. A matching repository version alone does not establish that all items are installed or up to date.
+Read `INSTALL.md`, `catalog.md` and `platforms/claude/README.md` from that same resolved source. If it lacks this agent-guided layout, report the incompatible source and request the intended one. Follow INSTALL for receipt fields, installation, updates, additions, explicit removals and retired IDs.
+
+Default to recorded selections. When changing choices, show the complete supported catalogue by category with continuous numbers, author recommendations and installed status. Omitted items stay installed. Preserve pinned upstream sources, user edits, credentials and this agent's real lessons. Verify each operation and update its receipt; a repository version alone is not proof of success.

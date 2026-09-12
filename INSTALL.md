@@ -4,7 +4,7 @@
 
 ## 1. 读取与检测
 
-把本仓库的同一个 revision 下载到临时目录或用户指定的稳定 checkout；同时读取本文件、[catalog.md](catalog.md) 和目标的 [Claude](platforms/claude/README.md) / [Codex](platforms/codex/README.md) 说明。当前开发分支为 `agent-config-for-agents`；已有 checkout 不切分支、不丢弃用户修改。
+使用用户交给你的仓库页面、ref 或 checkout，按下方[仓库来源](#repository-source)确定版本和更新策略。把该 revision 下载到临时目录，或使用用户指定的 checkout；同时读取本文件、[catalog.md](catalog.md) 和目标的 [Claude](platforms/claude/README.md) / [Codex](platforms/codex/README.md) 说明。所有操作都基于这份仓库内容，已有 checkout 不切分支、不丢弃用户修改。
 
 检查 OS、shell、agent CLI 版本、实际配置目录，以及原生插件/MCP/skills 安装状态。尊重 `CLAUDE_CONFIG_DIR`、`CODEX_HOME` 与用户指定路径；仅发现一个目录不代表 CLI 可用。PATH 缺少 CLI 时检查已安装 App 提供的入口，并用 `--version` / `--help` 验证。无法识别当前 agent 才补问目标。
 
@@ -38,7 +38,7 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 
 原生插件/MCP 由原生命令管理，不直接修改插件数据库或 cache。自管文件使用 [受控文件工具](scripts/README.md)；实际操作前按工具输出预览变更。保留真实 lessons、凭据、用户 hooks/skills、本地改动和记忆数据库。
 
-每个目标的 `agent-config/selection.json` 保存简短记录：仓库 revision、agent/client、所选 catalog ID、来源/revision、原生 selector、是否由本次创建、状态及待处理项。先写入待执行记录，再操作；完成后查询真实状态再标记成功。工具维护 `agent-config/files.json` 中的文件 hash、备份与操作恢复信息。两份记录各有职责，不复制原生插件数据库。
+每个目标的 `agent-config/selection.json` 保存简短记录：下方定义的 repository 来源、agent/client、所选 catalog ID、每项部署所用的仓库及上游 revision、原生 selector、是否由本次创建、状态及待处理项。先写入待执行记录，再操作；完成后查询真实状态再标记成功。新目录版本不代表所有条目都已升级，部分失败时保留每项实际版本。工具维护 `agent-config/files.json` 中的文件 hash、备份与操作恢复信息。两份记录各有职责，不复制原生插件数据库。
 
 没有旧记录时，先查询实际安装状态，复用已有项，不把它们当成自己创建的内容。失败或中断后重新核实实际状态；归属不明的对象保留。别的 agent 成功的操作不随一项失败而撤销。
 
@@ -55,8 +55,36 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 
 ## 6. 后续增减与更新
 
-默认读取已选 ID，更新对应来源；源码固定 revision 不自动解锁。作者新增推荐不扩大用户选择。用户要求改选时重新列完整目录，保留已安装标记。
+先按已记录的仓库来源获取本次 revision 的 INSTALL 与 catalog，再读取已选 ID，更新对应来源；源码固定 revision 不自动解锁。作者新增推荐不扩大用户选择。用户要求改选时重新列完整目录，保留已安装标记。
+
+旧记录中的 ID 在当前目录消失或改名时，查阅当前仓库[迁移说明](docs/migration.md)；保留已安装对象和原记录，标记退役或待迁移并说明选择。只有用户要求迁移/移除才执行，不把未知 ID 忽略成“更新成功”。
 
 卸载前核对来源、创建归属和本地改动；整包还被其他已选项引用时先解释影响。原生插件用原生命令，文件工具仅移除自己创建且 hash 未变化的副本；混合配置通过具体的局部逆向修改处理。外部内容只取消关联。
 
 来源迁移先在隔离目录验证新方案，再安排切换；不要用安装任务干预当前正在运行的会话。缺少安全切换方式时说明需要重新打开客户端，保留旧渠道直到能够完成切换。
+
+<a id="repository-source"></a>
+## 仓库来源与更新策略
+
+当前仓库自包含 Claude/Codex 的目录、模板、skills 和配方。历史分支及 provenance 不参与安装、校验或更新；两种 agent 也不按名字选择不同 Git 分支。外部插件和源码继续从 catalog 指定的上游获取。
+
+在 selection.json 的 `repository` 对象中记录：
+
+| 字段 | 内容 |
+| --- | --- |
+| `url` | 实际仓库 URL；本地独立来源可以为 null。去除 URL 中的 token / 凭据 |
+| `revision` | 本次读取的完整 commit SHA；无 Git 信息时为 null，并记录实际本地路径 |
+| `update` | 下表对应的对象；保存用户选择的来源策略，不保存根据 agent 名猜出的分支 |
+
+| 输入 / 策略 | `update` 对象 | 后续行为 |
+| --- | --- | --- |
+| 用户指定分支 URL / ref，或已核实来源的干净 Git 分支 checkout | `{"kind":"branch","ref":"<实际分支名>"}` | 从该仓库获取此分支，再解析完整 SHA；分支改名或不存在时保留现状并向用户确认新来源 |
+| 用户只给仓库根 URL，或明确要求跟随默认分支 | `{"kind":"default-branch"}` | 每次用 `git ls-remote --symref <url> HEAD` 查询远端默认分支，再获取该 revision |
+| 指定 tag / commit，或 detached checkout | `{"kind":"pinned","ref":"<完整 SHA>"}` | 保持该 revision，用户要求升级时才切换 |
+| 无远端、无 Git 信息或带本地改动的目录 | `{"kind":"local","path":"<绝对路径>"}` | 读取该目录的当前内容并注明本地修改；路径消失时补问来源，不伪称跟踪远端 |
+
+明确给出的策略优先。分支 checkout 的仓库与远端跟踪分支应核实后记录；不清楚其发布来源时使用 local。README 页面 URL 带有 ref 时沿用该 ref；不能丢掉它后落回另一个默认分支。在默认分支尚未切换的过渡期尤其如此。
+
+获取后的版本必须包含 INSTALL.md、catalog.md 和目标平台说明，才能继续本流程。若没有，说明来源不兼容并请求正确来源，不能运行旧安装器或切到历史分支。
+
+已有记录缺少这些字段时，从记录中的仓库来源或用户此次明确给出的 URL / checkout 补齐；没有可靠来源才补问。目录内容使用完整相同 revision；来源策略改变只更新来源记录，不重置选择和文件归属。Claude 与 Codex 各自在自己的 home 保存记录与 lessons。

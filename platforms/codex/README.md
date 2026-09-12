@@ -14,13 +14,15 @@
 | instructions | templates/AGENTS.md → AGENTS.md；已有不同内容先具体合并 |
 | settings | 仅合并 templates/config.toml → config.toml |
 | permissions | 选择高自主权限后，合并 templates/permissions.toml；明确替换 /approval_policy 和 /sandbox_mode，不影响其它配置 |
-| lessons | seed-lessons；将 templates/AGENTS.md 的 Memory System 段合并到全局 AGENTS（若未随 instructions 部署），显式读取 global/project lessons，保留其余用户指令 |
+| lessons | seed-lessons --agent codex 从 templates/lessons.md 创建空白记录；将 templates/AGENTS.md 的 Memory System 段合并到全局 AGENTS（若未随 instructions 部署），显式读取 global/project lessons，保留其余用户指令 |
 | statusline | 合并 templates/statusline.toml；用户选择采用此 footer 时显式替换 /tui/status_line |
 | agent-explorer | templates/agents/explorer.toml → agents/explorer.toml；合并 templates/agent-patches/explorer.toml |
 | agent-reviewer | templates/agents/reviewer.toml → agents/reviewer.toml；合并 templates/agent-patches/reviewer.toml |
 | agent-docs-researcher | templates/agents/docs-researcher.toml → agents/docs-researcher.toml；合并 templates/agent-patches/docs_researcher.toml |
 
 子 agent 配置先复制验证，再注册其 config_file；失败不留下悬空配置。已有 AGENTS.md 引用的工作流应与用户所选内容对齐，缺少前提时解释，不暗中补装。
+
+Codex 的跨项目纠错写入本 home 的 lessons.md，项目纠错写入项目根目录 lessons.md。模板和真实记录均与 Claude 独立；已有 lessons 不替换为新的空白模板。
 
 旧模板把 `model_instructions_file = "lessons.md"` 用作记忆入口。这会替换内置指令。先部署显式读取 lessons 的 AGENTS，再仅对这个确切旧值执行文件工具的 `--remove model_instructions_file`；其他自定义路径保持不变。
 
@@ -45,14 +47,14 @@ codex plugin list --json
 
 原生命令不支持 plugins 的 client，或包不能保持用户选定范围时，使用 [源码说明](../sources.md) 中已有的相应路径，并说明渠道。网络/安装失败不静默切换成源码。
 
-Matt 继续固定 v1.1.0 commit 与精选范围。它的旧快照没有 marketplace；本分支使用下述源码方式。只有实际验证了固定 source、入口、资源和定制 handoff 的兼容插件，才进行明确迁移；不因为最新上游已有 marketplace 就升级版本。
+Matt 固定 v1.1.0 commit 与精选范围，具体来源由本仓库 sources.md 定义。此上游快照没有 marketplace，使用源码方式，包含上游 handoff。只有实际验证了固定 source、入口与完整成员的兼容插件，才进行明确迁移；不因为最新上游已有 marketplace 就升级版本。
 
 更新只升级相关 marketplace，再用原生 add/update 能力更新所选包，最后查询实际版本；不无参数升级所有 marketplace。卸载使用 `codex plugin remove <selector>`，先核实创建归属和依赖关系。原生插件 cache 与内部数据库不由文件工具修改。
 
 <a id="local-skills"></a>
 ## Skills
 
-共享 ../../skills 下的 humanizer、humanizer-zh、neat-freak、paper-reading、storage-analyzer 完整部署到 skills 同名目录。本目录 skills/handoff、skills/update 分别部署到 skills/handoff、skills/update；保留 update_config 调用名。
+共享 ../../skills 下的 paper-reading 是自有 skill，storage-analyzer 是保留上游署名的本仓库定制版，完整部署到 skills 同名目录。本目录 skills/update 部署到 skills/update，保留 update_config 调用名。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)。handoff 仅随 Matt 包从其上游获取，不再使用独立的本地副本。
 
 本目录仍保存 Codex 历史 adversarial-review 源码以防遗失；它不是当前可选安装项。Codex 审查使用 Matt code-review，不运行 Claude 对审工具。
 

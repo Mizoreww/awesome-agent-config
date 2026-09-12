@@ -8,7 +8,7 @@
 
 ## 本仓库所做的修改
 
-**与 `neat-freak` 不同，这份 skill 不是原样保留** —— 在上游基线之上增加了 Linux 支持并加固了安全模型，
+本仓库在上游基线之上增加了 Linux 支持并加固了安全模型，
 相对基线约 +998/−63 行（`scripts/scan.py`、`scripts/server.py` 为主）。
 
 这些修改已提交回上游：[KKKKhazix/khazix-skills#50](https://github.com/KKKKhazix/khazix-skills/pull/50)。

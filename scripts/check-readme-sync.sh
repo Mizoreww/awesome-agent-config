@@ -13,7 +13,7 @@ for label, pattern in (("headings", r"^#+ "), ("code fences", r"^```"), ("table 
     if counts[0] != counts[1]:
         sys.exit(f"{label} differ: {counts}")
 links = [re.findall(r"\]\(([^)]+)\)", text) for text in (en, zh)]
-normalize = lambda targets: [p.replace("CHANGELOG.zh-CN.md", "CHANGELOG.md").replace("README.zh-CN.md", "README.md") for p in targets]
+normalize = lambda targets: [p.replace(".zh-CN.md", ".md") for p in targets]
 if normalize(links[0]) != normalize(links[1]):
     sys.exit("README link targets differ")
 print("README structure and entry points match.")

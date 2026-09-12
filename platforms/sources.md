@@ -4,7 +4,7 @@
 
 ## 获取与部署
 
-下表是本开发版核对的源码 revision。按 revision 获取并记录来源；Matt 的 v1.1.0 是必须保留的版本约束。更新跟随本仓库的新来源记录；用户明确要求更新某个上游时，核实新 revision 的成员与适配后再更新该项。
+下表是当前仓库采用的源码 revision，安装无需查询本仓库的历史分支。按 revision 获取并记录来源；Matt 的 v1.1.0 是当前明确的版本约束。维护者要求升级时，按 [MAINTAIN.md](../MAINTAIN.md) 核实新 revision、成员与适配并修改本表；已安装内容按 INSTALL 的选择与来源规则更新。
 
 | 来源 | Repository | Revision |
 | --- | --- | --- |
@@ -19,6 +19,9 @@
 | DeepXiv | https://github.com/DeepXiv/deepxiv_sdk | 80be0b195789bf50299ab8d221abb5d17500ded8 |
 | lieflat-charts | https://github.com/larashero3-dotcom/lieflat-charts | eace082a317b696c5570c25826a53a7fa113e984 |
 | OpenAI plugins | https://github.com/openai/plugins | d416fd5a43426019986b1e489506db3db66dee3d |
+| Humanizer | https://github.com/blader/humanizer | 9862685f575c65a8247f90369951df1b3416e3d6 |
+| Humanizer-zh | https://github.com/op7418/Humanizer-zh | 91f3d394db8419c20d67ebe22a96cf8fee0a404b |
+| neat-freak | https://github.com/KKKKhazix/khazix-skills | 2b4a645cfdc894156ae347d897723562f719ce95 |
 
 在新的临时目录获取源码。例如下面是 Bash 参数形式；PowerShell 使用同样参数及其变量语法。`source_url`、`revision`、`checkout` 由当前所选项确定；不要修改用户现有 checkout。
 
@@ -43,14 +46,31 @@ python3 scripts/managed_files.py --root "$target_dir" install "$checkout/<skill-
 <a id="matt"></a>
 ## Matt（Codex 固定精选）
 
-`matt-workflow` 安装以下 19 个目录，目标名为最后一级目录名：
+`matt-workflow` 安装以下 20 个目录，目标名为最后一级目录名：
 
 - `skills/engineering/` 下：ask-matt、diagnosing-bugs、grill-with-docs、triage、implement、improve-codebase-architecture、setup-matt-pocock-skills、tdd、to-spec、to-tickets、wayfinder、prototype、domain-modeling、codebase-design、research。
-- `skills/productivity/` 下：grill-me、grilling、teach、writing-great-skills。
+- `skills/productivity/` 下：grill-me、grilling、teach、writing-great-skills、handoff。
 
 `matt-code-review` 独立选项：`skills/engineering/code-review` → `skills/code-review`。
 
-`handoff` 使用本仓库 `platforms/codex/skills/handoff`；保留其定制内容。固定快照内的其他 skills 不在旧 Codex 活跃安装范围，不能把整个 repo 都装入。Claude 的 Matt 原生包保留 main 的完整范围，成员见 [目录](../catalog.md#members)。
+`handoff` 使用上述 Matt 上游目录，归属 `matt-workflow`，不再单独选择或维护本地版本。旧独立 handoff 的迁移见 [迁移说明](../docs/migration.md#handoff)。安装范围由上面的成员列表定义，不复制整个上游 repo。Claude 的 Matt 原生包成员见 [目录](../catalog.md#members)。
+
+<a id="writing"></a>
+## Humanizer、Humanizer-zh 与 neat-freak
+
+这三项是第三方原版，本仓库仅维护上游入口与部署配方。安装到用户的 agent home 后，源码仍以各自上游为准；本仓库中没有原版副本。
+
+| ID | 上游提供的安装方式 | 所选源码的完整部署范围 |
+| --- | --- | --- |
+| humanizer | [blader/humanizer 安装说明](https://github.com/blader/humanizer#installation)：Claude 原生插件优先；也支持 Skills CLI 或手动复制 | 根目录 SKILL.md、LICENSE、agents/ → skills/humanizer；只复制 skill 内容，不复制仓库 AGENTS.md、CI 或验证工具 |
+| humanizer-zh | [op7418/Humanizer-zh 安装说明](https://github.com/op7418/Humanizer-zh)：Skills CLI、Git 或手动安装 | 根目录 SKILL.md、LICENSE → skills/humanizer-zh |
+| neat-freak | [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills)：让 agent 从上游获取所选 skill | neat-freak/ 的完整运行内容（SKILL.md、references/、scripts/）及根 LICENSE → skills/neat-freak；evals 是上游评估数据，不需部署 |
+
+上游 Skills CLI 入口分别为 `npx skills add blader/humanizer` 和 `npx skills add https://github.com/op7418/Humanizer-zh.git`。执行前核实其本机帮助、agent 参数、目标目录、所选范围与 revision；仅在能满足这些条件时直接使用。它可能默认写入共享目录，不能因此把 Codex 的权威副本改到 `.agents/skills`，也不能扩大到所有 agents。
+
+需要固定 revision、自定义 home，或 CLI 无法满足目标路径时，使用上游同样支持的手动方案：按本页获取步骤下载表中 revision，在临时 stage 准备上述完整范围（保留执行位及许可），再通过文件工具部署。这仍从第三方原仓库安装，没有本仓库 vendored 副本。逐一验证所有资源的来源及目标路径。
+
+Humanizer 当前上游为 3.0.0，旧内置版本为 2.2.0；原生包只含 humanizer 这一项。新安装按当前配方处理；已有副本迁移先说明版本与调用名变化（Claude 插件调用名为 `/humanizer:humanizer`），保留本地修改并由用户选择迁移。neat-freak 的运行源码继续保持上述已核对的固定 revision。
 
 <a id="anthropic"></a>
 ## Anthropic
@@ -119,7 +139,7 @@ Claude 优先使用对应原生插件。Codex 原生兼容包经验证能提供�
 <a id="ai-research"></a>
 ## AI Research（Codex 精选）
 
-Claude 用六个分类原生插件；Codex 保持原分支成员。表中省略目标名时使用最后一级目录名；不要把上游目录前缀误当成 skill 名。
+Claude 用六个分类原生插件；Codex 安装下表精选成员。表中省略目标名时使用最后一级目录名；不要把上游目录前缀误当成 skill 名。
 
 | Catalog ID | 源码路径 → 目标名 |
 | --- | --- |
@@ -150,4 +170,4 @@ python3 scripts/managed_files.py --root "$target_dir" --dry-run install "$stage"
 python3 scripts/managed_files.py --root "$target_dir" install "$stage" skills/lieflat-charts --item lieflat-charts --origin "$source_url@$revision"
 ```
 
-stage 只含根文件及四个目录，保留 LICENSE；排除 `.git` 和 `docs/` 预览媒体。与 main 一样，预览索引中的缩略图/文档链接可能缺失，图表和报告的文本选择资源完整。旧 marker 只作为识别线索，不据此覆盖用户已修改的目录。
+stage 只含根文件及四个目录，保留 LICENSE；排除 `.git` 和 `docs/` 预览媒体。预览索引中的缩略图/文档链接可能缺失，图表和报告的文本选择资源完整。旧 marker 只作为识别线索，不据此覆盖用户已修改的目录。
