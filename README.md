@@ -146,6 +146,7 @@ Launches a two-level interactive selector. Append `--all` / `-All` to skip the m
 | Item | Source | What It Does | Default |
 |------|--------|--------------|---------|
 | [**Lark MCP server**](https://github.com/larksuite/lark-openapi-mcp) | `mcp/` | Feishu / Lark integration (replace `YOUR_APP_ID`/`YOUR_APP_SECRET` after install) | off |
+| [mblode/agent-skills](https://github.com/mblode/agent-skills) | Nobody ships AI slop on purpose. These skills make sure you don't. UI audits, typography, docs, PR review, and releases. |
 
 ## Directory Structure
 
