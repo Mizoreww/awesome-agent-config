@@ -1,5 +1,26 @@
 # 变更记录
 
+## [4.0.0] - 2026-09-17
+
+### Features
+- 仓库改名为 **awesome-agent-config**，统一 Claude/Codex 配置发布在 **main**。旧 Claude main 保存为 `archive/legacy-claude`，其他暂存分支统一使用 `archive/legacy-` 前缀；保留其提交历史及已有 tags/releases。
+- 用 agent 引导的对话安装替代两套独立安装器。当前 agent 检测环境，直接在聊天中按分类完整展示支持项，通过原生多选问答或编号回复收集选择。
+- 保留完整双语 README、11 个分类、使用说明与表格。共享目录包含 39 个活动 ID，采用当前作者推荐：Claude 20 项、Codex 18 项。
+- 优先采用兼容原生插件及上游安装方式；自有与定制 skills 保留在仓库并注明来源。AI Research 为一个 31 项整包，handoff 仅通过 Matt 提供。
+- 共享 edit-config 处理配置查询、增删改、修复与更新；它和两端全局模板均指向新仓库 main，识别旧仓库名并保留明确的来源策略。
+- 两端指令与 lessons 独立。Claude 完整英文写作规则替代原 Common rules，语言规则仍可单选；Codex 安装关闭外部 agent 自动导入，保留原生子 agent 功能并移除自定义角色预设。
+
+### Design Rationale
+- 共享目录与对话流程让 agent 维护平台配方，减少独立安装框架与第三方源码副本的维护。
+- 统一 main 作为当前安装与开发来源，归档分支和历史 provenance 用于追溯，不构成运行依赖。
+- 推荐表达作者偏好，实际安装和修改范围仍由用户选择、文件归属与现有定制决定。
+
+### Notes & Caveats
+- **安装方式变更：** install.sh / install.ps1 仅说明 agent 入口并以状态码 2 退出。请使用 README 请求和 INSTALL.md，旧菜单参数不再安装配置。
+- Lark/Feishu MCP、Claude-Mem、所有 PUA 变体、GitHub MCP 及其插件替代渠道、原 Common rules、Codex 角色预设从活动安装范围退役；旧更新 skills 迁移至 edit-config。已有安装、凭据、hooks、记忆及修改文件，仅在明确请求并核实归属后变更。
+- 仓库改名不会自动将已安装的开发分支、固定 revision、fork 或本地来源迁移至 main。按[来源迁移说明](docs/migration.md#repository-identity)处理，保留旧来源记录和整包的部分选择。
+- ResearchStudio Idea/Reel、PPT Master 只安装源码与必要适配，运行环境留到首次使用。插件可用性取决于 client/账号；受影响配置已在隔离 macOS 目录验证，原生 Windows/WSL 与凭据类集成仍需对应环境验收。
+
 ## [4.0.0-dev.7] - 2026-09-17
 
 ### Features

@@ -35,7 +35,7 @@ AI Research 是[一个 31 项整包](../sources.md#ai-research)，通过六个�
 <a id="local-skills"></a>
 ## Skills
 
-共享 ../../skills 下的 paper-reading、edit-config 是自有 skills，storage-analyzer 是保留上游署名的本仓库定制版，完整部署到 skills 同名目录。edit-config 处理配置查询与增删改，跟踪本仓库 agent-config-for-agents 分支；具体来源冲突与更新流程由该 skill 定义。安装全局指令不会暗中补装它；模板也提供同一工作流的读取入口。旧更新 skill 见[迁移说明](../../docs/migration.md#edit-config)。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)。handoff 仅随 Matt 包从其上游获取，不再使用独立的本地副本。
+共享 ../../skills 下的 paper-reading、edit-config 是自有 skills，storage-analyzer 是保留上游署名的本仓库定制版，完整部署到 skills 同名目录。edit-config 处理配置查询与增删改，跟踪本仓库 main 分支；具体来源冲突与更新流程由该 skill 定义。安装全局指令不会暗中补装它；模板也提供同一工作流的读取入口。旧更新 skill 见[迁移说明](../../docs/migration.md#edit-config)。Humanizer、Humanizer-zh、neat-freak 从 [上游安装](../sources.md#writing)。handoff 仅随 Matt 包从其上游获取，不再使用独立的本地副本。
 
 本目录仍保存 Codex 历史 adversarial-review 源码以防遗失；它不是当前可选安装项。Codex 审查使用 Matt code-review，不运行 Claude 对审工具。
 

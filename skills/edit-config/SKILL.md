@@ -1,14 +1,14 @@
 ---
 name: edit-config
-description: Inspect, add, change, remove, repair, or update Claude and Codex configuration from Mizoreww/awesome-claude-code-config on agent-config-for-agents. Use for configuration queries and edits, installed skills/plugins/rules/MCP, and changes to this repository's configuration templates or catalogue.
+description: Inspect, add, change, remove, repair, or update Claude and Codex configuration from Mizoreww/awesome-agent-config on main. Use for configuration queries and edits, installed skills/plugins/rules/MCP, and changes to this repository's configuration templates or catalogue.
 ---
 
 # Edit agent configuration
 
 This skill serves both Claude and Codex and tracks one repository branch:
 
-- Repository: `https://github.com/Mizoreww/awesome-claude-code-config.git`
-- Branch: `agent-config-for-agents`
+- Repository: `https://github.com/Mizoreww/awesome-agent-config.git`
+- Branch: `main`
 
 ## 1. Identify the request and target
 
@@ -20,11 +20,11 @@ Completion: the operation, target, existing state, and authorization are clear.
 
 ## 2. Resolve the branch for changes
 
-Fetch the branch above into a fresh temporary checkout and resolve its full commit SHA. Use files from that same SHA throughout an installation/update operation. Preserve existing user checkouts and local edits. A missing branch or incompatible layout is an error; do not fall back to `main`, `codex`, or the remote default branch.
+Fetch the branch above into a fresh temporary checkout and resolve its full commit SHA. Use files from that same SHA throughout an installation/update operation. Preserve existing user checkouts and local edits. A missing branch or incompatible layout is an error; report it without substituting another branch or the remote default.
 
-For installed configuration, compare the receipt's repository URL and update policy with this target. Equivalent HTTPS/SSH URLs for this GitHub repository identify the same source. Matching branch records can proceed. Missing source metadata uses this skill's explicit target without inventing installation ownership. A conflicting fork, branch, pinned commit, or local source remains unchanged until the user chooses migration; reuse an already explicit migration request instead of asking again. Record the previous source when migrating, and keep all selections, hashes, and backups.
+For installed configuration, compare the receipt's repository URL and update policy with this target. Read [repository identity and migration](../../docs/migration.md#repository-identity) from the resolved source: equivalent HTTPS/SSH URLs and the documented repository rename identify the same source. Matching branch records can proceed; a default-branch policy can proceed when the remote default resolves to main, preserving that policy. Missing source metadata uses this skill's explicit target without inventing installation ownership. A conflicting fork, branch (including agent-config-for-agents), pinned commit, or local source remains unchanged until the user chooses migration; reuse an already explicit migration request instead of asking again. Record the previous source when migrating, and keep all selections, hashes, and backups.
 
-For repository edits, use the user's designated checkout, verify its repository and branch, and read its current `MAINTAIN.md`. A checkout already on the target branch may contain authorized uncommitted changes; preserve and work with them rather than substituting the remote snapshot. Installation changes still use a single resolved source as described above.
+For repository edits, use the user's designated checkout on main or their chosen work branch, verify its repository and branch, and read its current `MAINTAIN.md`. Preserve authorized uncommitted changes and work with them. Installation changes still use a single resolved source as described above.
 
 Completion: the source, revision, and any source migration are established.
 
@@ -39,6 +39,6 @@ Completion: each requested change has an actual result, including failures and p
 
 ## 4. Verify and record
 
-Verify the changed files or native resources. For installed changes, record `repository.url`, the actual `repository.revision`, and `repository.update = {"kind":"branch","ref":"agent-config-for-agents"}` after source resolution; preserve per-item revisions and provenance. Repository edits follow their own commit and validation workflow. A repository version alone does not establish installation success.
+Verify the changed files or native resources. For installed changes, record the canonical `repository.url`, actual `repository.revision`, and the policy established in step 2: `repository.update = {"kind":"branch","ref":"main"}` for the explicit target, or the retained `{"kind":"default-branch"}` policy. Preserve previous source metadata when normalizing the renamed URL, plus per-item revisions and provenance. Repository edits follow their own commit and validation workflow. A repository version alone does not establish installation success.
 
 Report what changed and what remains pending. Keep the two agent homes and their records independent. The old `update-config` / `update_config` names migrate to this skill through the repository's migration instructions.

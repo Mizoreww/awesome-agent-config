@@ -50,7 +50,7 @@ Use the project's existing interpreter or environment. Activate Conda only when 
 
 ## Configuration Maintenance
 
-Invoke `edit-config` when the user wants to inspect, add, change, remove, repair, or update Claude/Codex configuration managed by this repository, including its templates and catalogue. If it is unavailable, read and follow [its branch-specific instructions](https://github.com/Mizoreww/awesome-claude-code-config/blob/agent-config-for-agents/skills/edit-config/SKILL.md) without installing extra content. Queries remain read-only; changes follow the user's selected scope.
+Invoke `edit-config` when the user wants to inspect, add, change, remove, repair, or update Claude/Codex configuration managed by this repository, including its templates and catalogue. If it is unavailable, read and follow [its branch-specific instructions](https://github.com/Mizoreww/awesome-agent-config/blob/main/skills/edit-config/SKILL.md) without installing extra content. Queries remain read-only; changes follow the user's selected scope.
 
 ## Workflow
 

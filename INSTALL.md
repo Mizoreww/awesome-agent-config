@@ -4,7 +4,7 @@
 
 **安装选型直接在当前对话中完成。** 检测后就在对话中展示目标 agent 的用途说明、完整选项与作者推荐，并按[选型交互](#choose-options)发起问答。只有用户明确要求导出时才生成选型文档；不要用新建 Markdown 文件、报告或文件链接替代对话中的选项和提问。安装记录仍按第 4 步保存。
 
-后续配置查询、增删改、修复与更新统一由 [edit-config](skills/edit-config/SKILL.md) 发起。该 skill 明确跟踪本仓库的 agent-config-for-agents 分支，并先区分只读查询与修改。首次安装可以直接执行本流程；查询不执行下面的安装和记录步骤。
+后续配置查询、增删改、修复与更新统一由 [edit-config](skills/edit-config/SKILL.md) 发起。该 skill 明确跟踪本仓库的 main 分支，并先区分只读查询与修改。首次安装可以直接执行本流程；查询不执行下面的安装和记录步骤。
 
 ## 1. 读取与检测
 
@@ -72,7 +72,7 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 
 先按已记录的仓库来源获取本次 revision 的 INSTALL 与 catalog，再读取已选 ID，更新对应来源；源码固定 revision 不自动解锁。作者新增推荐不扩大用户选择。用户要求改选时，按[第 2 步](#choose-options)在对话中重新列完整目录并收集选择，保留已安装标记。
 
-通过 edit-config 发起时，先执行该 skill 的分支与来源冲突检查，再使用解析后的同一 revision。它的目标为 `Mizoreww/awesome-claude-code-config` 的 `agent-config-for-agents` 分支；记录中的其他 fork、分支、固定 commit 或本地来源须按明确选择迁移，不被此默认目标静默覆盖。
+通过 edit-config 发起时，先执行该 skill 的分支与来源冲突检查，再使用解析后的同一 revision。它的目标为 `Mizoreww/awesome-agent-config` 的 `main` 分支；仓库改名和已有更新策略按[主线迁移](docs/migration.md#repository-identity)处理。匹配 main 的 branch / default-branch 策略可续用；其他 fork、分支、固定 commit 或本地来源须按明确选择迁移。
 
 旧记录中的 ID 在当前目录消失或改名时，查阅当前仓库[迁移说明](docs/migration.md)；保留已安装对象和原记录，标记退役或待迁移并说明选择。只有用户要求迁移/移除才执行，不把未知 ID 忽略成“更新成功”。
 
@@ -100,7 +100,7 @@ App 与 CLI 共用目录时只处理一次；内置能力按实际 client、scop
 | 指定 tag / commit，或 detached checkout | `{"kind":"pinned","ref":"<完整 SHA>"}` | 保持该 revision，用户要求升级时才切换 |
 | 无远端、无 Git 信息或带本地改动的目录 | `{"kind":"local","path":"<绝对路径>"}` | 读取该目录的当前内容并注明本地修改；路径消失时补问来源，不伪称跟踪远端 |
 
-明确给出的策略优先。分支 checkout 的仓库与远端跟踪分支应核实后记录；不清楚其发布来源时使用 local。README 页面 URL 带有 ref 时沿用该 ref；不能丢掉它后落回另一个默认分支。在默认分支尚未切换的过渡期尤其如此。
+明确给出的策略优先。分支 checkout 的仓库与远端跟踪分支应核实后记录；不清楚其发布来源时使用 local。README 页面 URL 带有 ref 时沿用该 ref；不能丢掉它后落回另一个默认分支。旧开发分支、tag 和 fork 的明确策略同样保留。
 
 获取后的版本必须包含 INSTALL.md、catalog.md 和目标平台说明，才能继续本流程。若没有，说明来源不兼容并请求正确来源，不能运行旧安装器或切到历史分支。
 

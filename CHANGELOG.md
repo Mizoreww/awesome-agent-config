@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.0.0] - 2026-09-17
+
+### Features
+- Rename the repository to **awesome-agent-config** and publish the unified Claude/Codex configuration on **main**. Preserve the former Claude main as `archive/legacy-claude` and move the other retained branches under `archive/legacy-`; keep their commit histories and existing tags/releases.
+- Replace the separate installers with agent-guided setup. The current agent detects its environment, presents every supported option by category directly in chat, and collects choices through native multi-select questions or numbered replies.
+- Keep the full bilingual README, its 11 categories and usage tables. The shared catalogue contains 39 active IDs and the accepted author recommendations: 20 for Claude, 18 for Codex.
+- Prefer compatible native plugins and upstream installation methods. Keep author-owned and customized skills here with attribution; offer AI Research as one 31-skill bundle and handoff only within Matt.
+- Use shared `edit-config` for configuration inspection, additions, edits, removals, repairs and updates. Point it and both global templates to the new repository's main; recognize the old repository name and preserve explicit source policies.
+- Keep each agent's instructions and lessons independent. Claude's complete English writing rule replaces the former Common rules; language rules remain selectable. Codex setup disables external-agent auto-import and uses native subagents without custom role presets.
+
+### Design Rationale
+- One catalogue and conversational workflow let agents maintain platform-specific recipes without another installer framework or duplicated third-party payloads.
+- The unified main is the current installation and development source. Archive branches and historical provenance remain available for reference without becoming runtime dependencies.
+- Recommendations explain the author's preferences; each user's actual selections, ownership and customizations determine what is installed or changed.
+
+### Notes & Caveats
+- **Breaking installation change:** `install.sh` / `install.ps1` now only explain the agent entry point and exit with code 2. Use the README request and INSTALL.md instead of legacy menu flags.
+- Lark/Feishu MCP, Claude-Mem, all PUA variants, GitHub MCP and its plugin alternative, the old Common rules and Codex role presets are retired from active installation. Old update skills migrate to edit-config. Existing installations, credentials, hooks, memory and modified files are preserved until an explicit, ownership-checked change.
+- Repository renaming does not migrate an installed development branch, pinned revision, fork or local source to main. Follow the [source migration guidance](docs/migration.md#repository-identity); preserve previous source records and partial bundle selections.
+- ResearchStudio Idea/Reel and PPT Master install source with necessary adaptation; runtime setup remains a first-use step. Plugin availability depends on the client/account. Isolated macOS checks cover the affected setup; native Windows/WSL and credentialed integrations still need their target environments.
+
 ## [4.0.0-dev.7] - 2026-09-17
 
 ### Features

@@ -2,7 +2,38 @@
 
 首次合并从 main `d65cbda0058be09e4771f4603ccf45b3a589583b`（3.2.0）建立开发分支，纳入 codex `fdd3e50aca09d1b80ac416f320f42bc0ecef5faa`（2.11.0）的能力。以下来源名称和 SHA 记录这次历史合并，不是安装依赖。
 
-当前仓库是统一维护的依据；旧分支今后归档也不影响安装和维护。本次不执行分支归档或默认分支切换。实际源码、平台配方和 catalog 可按 [MAINTAIN.md](../MAINTAIN.md) 演进，无需再与历史分支同步。
+当前仓库是统一维护的依据。v4.0.0 将统一开发线提升到 main，旧 main 保存为 archive/legacy-claude，其他分支统一以 archive/legacy- 前缀暂存。实际源码、平台配方和 catalog 可按 [MAINTAIN.md](../MAINTAIN.md) 演进，无需再与历史分支同步。
+
+<a id="repository-identity"></a>
+## v4.0.0 仓库名称与主线迁移
+
+正式来源为 `https://github.com/Mizoreww/awesome-agent-config.git` 的 `main`。旧名称 `Mizoreww/awesome-claude-code-config` 与新名称指向同一仓库；两者的 HTTPS、`git@github.com:` 和 `ssh://git@github.com/` URL（有无 `.git` 后缀）视为同一来源。只识别此明确的 owner/repository 改名，不把其他 fork 或重定向自动视为相同来源。
+
+| 已有来源策略 | 处理方式 |
+| --- | --- |
+| 此仓库的 `branch: main` | 继续跟踪统一主线；先说明 v4 的安装流程与退役条目，沿用已选内容 |
+| 此仓库的 `default-branch` | 查询远端默认分支，确认解析到 main 后继续，保留 default-branch 策略 |
+| `branch: agent-config-for-agents`、`codex` 或其他分支 | 保留记录；用户明确要求迁移至 main 后才切换，开发分支不会自动跟随 main |
+| 固定 tag / commit、本地目录、其他 fork | 保留原策略；使用既有明确迁移授权，否则先由用户选择 |
+| 缺少来源字段 | 使用 edit-config 的明确来源补齐；不据此认领已有文件或扩大安装范围 |
+
+查询始终只读。获授权的安装或更新完成后，记录规范 URL、实际 SHA 和已确定的更新策略，保留此前的 URL、revision、策略、选择、文件归属、hash 和备份。仓库改名本身不改变分支策略；新版来源不会自动卸载退役项或扩大整包成员。
+
+从开发版迁移时可以直接对 agent 说：“将这个仓库管理的配置更新源迁移到 Mizoreww/awesome-agent-config 的 main，沿用我之前的选择与定制，再按当前 INSTALL.md 更新。”未安装新版 edit-config 时，从该 main 的 skills/edit-config/SKILL.md 读取同一流程，先说明变更范围再执行。旧版 `install.sh` / `install.ps1` 的菜单和参数已退役；v4 的兼容入口仅提示对话安装并以状态码 2 退出。
+
+旧 main 的发布前 SHA 为 `d65cbda0058be09e4771f4603ccf45b3a589583b`。统一版本发布在 `main`，其他分支按以下名称保留提交历史；历史 tags/releases 保留，安装和维护不读取归档分支。
+
+| 原分支 | 归档分支 |
+| --- | --- |
+| main（旧 Claude 版本） | archive/legacy-claude |
+| codex | archive/legacy-codex |
+| codex-dev | archive/legacy-codex-dev |
+| dev | archive/legacy-dev |
+| chore/yolo-trigger | archive/legacy-chore-yolo-trigger |
+| fix/windows-statusline-emoji | archive/legacy-fix-windows-statusline-emoji |
+| agent-config-for-agents（发布时的开发快照） | archive/legacy-agent-config-for-agents |
+
+归档分支用于历史查阅，后续开发与发布使用 main。旧 branch 策略即使因平台重定向找到归档分支，也不据此改写用户记录或宣称已迁移至 main；按上表中的来源策略处理。
 
 ## 本地 skill 覆盖
 
@@ -108,7 +139,7 @@ Codex 关闭 `desktop.external-agent-import-sync-enabled`。旧 `model_instructi
 
 旧 catalog ID `update-config`、Claude `skills/update-config` 与 Codex `skills/update`（调用名 update_config）统一为共享 `skills/edit-config` 和 catalog ID `edit-config`。两端的全局模板均把配置查询、增删改、修复与更新路由到它；查询只读。模板提供缺少 skill 时读取同一分支工作流的入口，不暗中补装。
 
-新 skill 明确跟踪 `https://github.com/Mizoreww/awesome-claude-code-config.git` 的 `agent-config-for-agents` 分支。匹配的记录直接续用；缺失来源时使用此明确来源，但不认领既有安装。记录为其他 fork、分支、固定 commit 或本地来源时，按已明确的迁移选择处理；尚未决定则保留原来源。
+新 skill 明确跟踪 `https://github.com/Mizoreww/awesome-agent-config.git` 的 `main` 分支。来源匹配、仓库改名与旧开发分支的处理遵循[主线迁移](#repository-identity)；缺失来源时使用此明确来源，但不认领既有安装。
 
 用户请求迁移旧更新入口后，先验证共享 skill，保留原选择、来源历史、文件归属和定制，再更新选择 ID 及全局指令中的旧调用名。旧目录仅在归属明确、未修改且移除已获授权时清理；其他副本标记待处理，不作为新入口继续推荐。新的仓库来源不重置其他已安装项的版本或状态。
 

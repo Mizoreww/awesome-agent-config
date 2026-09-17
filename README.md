@@ -2,7 +2,7 @@
 
 **English** | [中文](README.zh-CN.md) | [Changelog](CHANGELOG.md)
 
-# Awesome Claude Code & Codex Configuration
+# Awesome Agent Config
 
 ![Claude Statusline](assets/statusline.png)
 
@@ -17,13 +17,15 @@ One repository for [Claude Code](https://claude.com/claude-code) and [Codex](htt
 
 ## Quick Start
 
+The active release line is [Mizoreww/awesome-agent-config](https://github.com/Mizoreww/awesome-agent-config) on `main`. Upgrading from the previous repository name or development branch? Follow the [v4 migration notes](docs/migration.md#repository-identity).
+
 Open this checkout in Claude or Codex, or share **the URL of the repository page you are reading** along with the request below. Keep its branch/ref when sharing a branch page.
 
 > Read INSTALL.md from the checkout or repository page I shared, using the same branch/revision as its README. Configure the agent I am talking to. Detect my OS, client and existing configuration. Directly in this conversation, list every option supported by this agent by category with continuous numbers, a useful description, author recommendations and installed status. Prefer native multi-select questions when available; otherwise let me choose multiple numbers or names in chat. Keep the choices in the conversation; do not generate a separate Markdown document or report. Install and verify my choices, preserving my customizations.
 
-The agent shows only your target agent's supported options directly in the conversation, with useful descriptions and recommendations. If the client offers a real multi-select question tool, choose options by category there; otherwise reply with multiple numbers, names or a description of what you want. The agent respects the tool's actual limits and reuses choices you already made. A plugin bundle gets one number and lists its members; capabilities included in that bundle are not installed twice. The recommendation draft follows the current main/Codex installer defaults, with [explicit mappings](catalog.md#recommendations), and awaits the author's final confirmation. Recommendations do not select items for you.
+The agent shows only your target agent's supported options directly in the conversation, with useful descriptions and recommendations. If the client offers a real multi-select question tool, choose options by category there; otherwise reply with multiple numbers, names or a description of what you want. The agent respects the tool's actual limits and reuses choices you already made. A plugin bundle gets one number and lists its members; capabilities included in that bundle are not installed twice. Author recommendations follow the recorded legacy main/Codex installer defaults and subsequent changes, with [explicit mappings](catalog.md#recommendations): 20 Claude and 18 Codex recommendations in this release. Recommendations do not select items for you.
 
-For later changes, say “add paper-reading”, “update my previous selections” or “remove storage-analyzer”. Existing choices are reused; omitting an installed item never uninstalls it. Both agents use `edit-config` for configuration queries, additions, edits, removals, repairs and updates. It tracks this repository’s `agent-config-for-agents` branch. Queries are read-only; if the skill is absent, the global instructions link to the same workflow.
+For later changes, say “add paper-reading”, “update my previous selections” or “remove storage-analyzer”. Existing choices are reused; omitting an installed item never uninstalls it. Both agents use `edit-config` for configuration queries, additions, edits, removals, repairs and updates. It tracks this repository’s `main` branch. Queries are read-only; if the skill is absent, the global instructions link to the same workflow.
 
 Native plugin/MCP commands are preferred; the agent chooses source installation when the documented scope or client requires it. You do not need to choose between npx, plugins and skill copies yourself. Codex setup disables external-agent auto-import so installations follow your selections. Windows and WSL are detected and configured separately; App/CLI installations sharing a home are reused.
 
@@ -33,7 +35,7 @@ For Codex, the agent checks the available OpenAI official/curated directory, the
 
 ## Catalogue
 
-The tables retain the original categories and merge the Claude and Codex capabilities. Third-party originals are installed from their upstream sources; this repository stores author-owned and intentionally customized skills with attribution. Handoff belongs to the Matt bundle only. `—` means this repository does not offer that item for the agent. The agent hides those entries when presenting your choices. A platform cell marked **★** identifies a proposed recommendation for that agent, pending final confirmation. Exact routes, stable IDs and recommendation markers live in [catalog.md](catalog.md).
+The tables retain the original categories and merge the Claude and Codex capabilities. Third-party originals are installed from their upstream sources; this repository stores author-owned and intentionally customized skills with attribution. Handoff belongs to the Matt bundle only. `—` means this repository does not offer that item for the agent. The agent hides those entries when presenting your choices. A platform cell marked **★** identifies an author recommendation for that agent. Exact routes, stable IDs and recommendation markers live in [catalog.md](catalog.md).
 
 ### Core
 
@@ -72,7 +74,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | Planning, TDD, research, grilling and delivery; Claude full package, Codex 20 selected v1.1.0 skills, including handoff | Native plugin ★ | Selected source ★ |
 | **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | Reconcile project docs, agent rules, authorized memory and workspace residue | Upstream install ★ | Upstream install ★ |
 | **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Code simplification and refactoring agent | Native plugin ★ | — |
-| **edit-config** | [Repository](skills/edit-config/SKILL.md) | Inspect and manage configuration on agent-config-for-agents; shared by both agents | Bundled skill ★ | Bundled skill ★ |
+| **edit-config** | [Repository](skills/edit-config/SKILL.md) | Inspect and manage configuration on main; shared by both agents | Bundled skill ★ | Bundled skill ★ |
 
 ### Integrations
 
@@ -157,7 +159,7 @@ Complete bundle membership is listed in [catalog.md](catalog.md#members). Select
 - **Agent-guided choices** — complete numbered lists, explanations and a record of the user's selections. Plugins and MCP servers are managed through the target agent's native tools; custom files use protected copies and partial merges.
 - **Independent memory** — Claude uses its own global `lessons.md` plus project `memory/MEMORY.md`; Codex uses its own global `lessons.md` plus project-root `lessons.md`. Templates and real histories remain separate. Only missing global logs are seeded.
 - **Rules and status lines** — Claude has one writing rule and independent Python / TypeScript / Go rules; the gradient status line shows model, directory, venv, Git, context and usage. Codex uses its native footer and subagent capabilities; this repository no longer installs custom role presets.
-- **Branch-specific configuration management** — edit-config follows agent-config-for-agents and records the actual revision. Conflicting source policies require an explicit migration choice; user selections and customizations are preserved. Installation and maintenance need no legacy Claude/Codex branches.
+- **Configuration management** — edit-config follows main and records the actual revision. Conflicting source policies require an explicit migration choice; user selections and customizations are preserved. Installation and maintenance need no legacy Claude/Codex branches.
 - **Scoped changes** — preserve user edits, credentials, hooks and memory databases. Backups and file ownership support safe updates and explicit removals. ResearchStudio Idea/Reel and PPT Master prepare complete source only; runtime dependencies are handled on first use.
 
 ## Settings Defaults

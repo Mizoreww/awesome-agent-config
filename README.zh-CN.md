@@ -2,7 +2,7 @@
 
 [English](README.md) | **中文** | [更新日志](CHANGELOG.zh-CN.md)
 
-# Awesome Claude Code & Codex Configuration
+# Awesome Agent Config
 
 ![Claude 状态栏](assets/statusline.png)
 
@@ -17,13 +17,15 @@
 
 ## 快速开始
 
+当前发布主线为 [Mizoreww/awesome-agent-config](https://github.com/Mizoreww/awesome-agent-config) 的 `main`。从旧仓库名或开发分支升级时，请按 [v4 迁移说明](docs/migration.md#repository-identity)处理。
+
 在 Claude 或 Codex 中打开这份 checkout，或把**当前正在阅读的仓库页面 URL**与下面这段请求一起发给 agent。分享分支页面时保留 URL 中的 branch/ref。
 
 > 请读取我提供的 checkout 或仓库页面中的 INSTALL.md，使用与这份 README 相同的分支/revision。默认配置当前对话使用的 agent。检查系统、client 和已有配置，直接在当前对话中按分类完整列出这个 agent 支持的安装项，连续编号，附上具体用途、作者推荐与已安装状态。优先使用可用的原生多选问答；没有时让我在对话里选择多个编号或名称。选项直接显示在对话中，不生成单独的 Markdown 文档或报告。根据我的选择安装和验证，保留已有定制。
 
-Agent 会在当前对话中只展示目标 agent 支持的完整选项，附上用途与推荐。客户端有真正的多选问答工具时，按分类勾选；没有时，直接回复多个编号、名称或自然语言选择。Agent 会遵守工具的实际限制，并沿用你已经明确的选择。插件整包占一个编号并列出成员，包内已有能力不会再重复安装。推荐草案按当前 main/Codex 安装菜单默认项整理，[映射关系](catalog.md#recommendations)已注明，待作者最终确认；推荐标记不代表你已同意安装。
+Agent 会在当前对话中只展示目标 agent 支持的完整选项，附上用途与推荐。客户端有真正的多选问答工具时，按分类勾选；没有时，直接回复多个编号、名称或自然语言选择。Agent 会遵守工具的实际限制，并沿用你已经明确的选择。插件整包占一个编号并列出成员，包内已有能力不会再重复安装。作者推荐依据已记录的旧 main/Codex 安装菜单默认项及后续调整，[映射关系](catalog.md#recommendations)已注明；本次发布包含 Claude 20 项、Codex 18 项推荐。推荐标记不代表你已同意安装。
 
-之后直接说“添加 paper-reading”“更新我上次选择的内容”或“移除 storage-analyzer”。已有选择会沿用，没有提到的已安装项不会被卸载。两端统一使用 `edit-config` 查询、增删改、修复和更新配置，跟踪本仓库的 `agent-config-for-agents` 分支。查询只读；未安装 skill 时，全局指令提供同一工作流的读取入口。
+之后直接说“添加 paper-reading”“更新我上次选择的内容”或“移除 storage-analyzer”。已有选择会沿用，没有提到的已安装项不会被卸载。两端统一使用 `edit-config` 查询、增删改、修复和更新配置，跟踪本仓库的 `main` 分支。查询只读；未安装 skill 时，全局指令提供同一工作流的读取入口。
 
 优先使用原生插件/MCP 命令；所选范围或 client 需要时，agent 再按仓库说明采用源码安装。你无需自己判断 npx、插件和 skill 复制渠道。Codex 安装会关闭外部 agent 自动导入，使安装内容遵循你的选择。Windows 与 WSL 分别检测配置，共用 home 的 App/CLI 会复用已有安装。
 
@@ -33,7 +35,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 ## 分类目录
 
-保留原有分类，合并 Claude 与 Codex 的能力。第三方原版从上游安装，本仓库保存自有 skill 与保留署名的定制版。handoff 仅作为 Matt 包成员提供。`—` 表示本仓库未为该 agent 提供该项，agent 展示选择时会过滤它。平台列中的 **★** 表示该 agent 的候选推荐，待作者最终确认。准确渠道、稳定 ID 与推荐标记以 [catalog.md](catalog.md) 为准。
+保留原有分类，合并 Claude 与 Codex 的能力。第三方原版从上游安装，本仓库保存自有 skill 与保留署名的定制版。handoff 仅作为 Matt 包成员提供。`—` 表示本仓库未为该 agent 提供该项，agent 展示选择时会过滤它。平台列中的 **★** 表示该 agent 的作者推荐。准确渠道、稳定 ID 与推荐标记以 [catalog.md](catalog.md) 为准。
 
 ### Core · 基础配置
 
@@ -72,7 +74,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 | **mattpocock-skills** | [Matt Pocock](https://github.com/mattpocock/skills) | 规划、TDD、研究、grilling 与交付；Claude 整包，Codex v1.1.0 精选 20 项，含 handoff | 原生插件 ★ | 精选源码 ★ |
 | **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | 对齐项目文档、agent 规则、获准维护的记忆及工作区残留 | 上游安装 ★ | 上游安装 ★ |
 | **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 代码简化与重构 agent | 原生插件 ★ | — |
-| **edit-config** | [本仓库](skills/edit-config/SKILL.md) | 查询和管理 agent-config-for-agents 的配置，两端共用 | 内置 skill ★ | 内置 skill ★ |
+| **edit-config** | [本仓库](skills/edit-config/SKILL.md) | 查询和管理 main 的配置，两端共用 | 内置 skill ★ | 内置 skill ★ |
 
 ### Integrations · 开发集成
 
@@ -157,7 +159,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 - **对话选型**：完整编号列表、用途解释与用户选择记录。插件、MCP 使用目标 agent 的原生工具管理；自管文件通过受控复制和局部合并部署。
 - **独立记忆**：Claude 使用自己的全局 `lessons.md` 与项目 `memory/MEMORY.md`；Codex 使用自己的全局 `lessons.md` 与项目根目录 `lessons.md`。模板和真实历史各自保留，仅在缺少全局记录时创建空白文件。
 - **规则与状态栏**：Claude 提供一份写作规则，以及独立的 Python / TypeScript / Go 规则；渐变状态栏展示模型、目录、venv、Git、上下文与用量。Codex 使用原生状态栏与子 agent 能力，本仓库不再安装自定义角色预设。
-- **分支配置管理**：edit-config 跟踪 agent-config-for-agents 并记录实际 revision；来源策略冲突时明确选择是否迁移，保留已有选择与定制。安装与维护不需要旧 Claude/Codex 分支。
+- **配置管理**：edit-config 跟踪 main 并记录实际 revision；来源策略冲突时明确选择是否迁移，保留已有选择与定制。安装与维护不需要旧 Claude/Codex 分支。
 - **限定修改范围**：保留用户定制、凭据、hooks 和记忆数据库，通过备份与文件归属支持更新和明确移除。ResearchStudio Idea/Reel、PPT Master 只准备完整源码，运行依赖留到首次使用。
 
 ## 默认设置

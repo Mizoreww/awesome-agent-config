@@ -2,7 +2,7 @@
 
 2026-09-12。设计决策已通过 grilling 问答确认：用户与已有的 Claude/Codex 对话完成选型和安装。此前的 Go 二进制、终端菜单和通用安装核心提案已撤回。本文件是当前实现的验收依据；Codex 配置由本仓库显式管理。
 
-本仓库是未来统一的主要开发线。旧 Claude/Codex 分支将来可归档，但安装、更新与维护从现在开始只依赖当前仓库内容及所选外部上游。归档分支和切换远端默认分支是之后的操作，不在本次修改范围内。
+本仓库是 Claude/Codex 统一的主要开发线。安装、更新与维护只依赖当前仓库内容及所选外部上游。2026-09-17 作者已授权将当前开发成果提升至 main，仓库改名 awesome-agent-config，暂存其他分支并发布 changelog、tag 与 release。
 
 2026-09-13 追加要求：移除 Lark / Feishu MCP、Claude-Mem、PUA 三语言包；删除 Claude 原八个 Common rules，将完整八条写作要求及全部示例译成英文，作为独立 rules/writing-style.md。语言规则仍可单独选择，并清理失效依赖。两端配置查询与增删改统一调用共享 edit-config，明确关联 agent-config-for-agents；查询只读。全面核对目录、模板、来源、安装及更新说明的一致性。
 
@@ -11,6 +11,8 @@
 2026-09-17 预设精简：按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 三个自定义角色预设，包括模板、注册 patch、Core 安装项与推荐。保留原生子 agent 能力及已选审查/文档 skills，现有用户安装按迁移说明处理。
 
 2026-09-17 集成精简：按作者要求从 Claude / Codex 移除 GitHub MCP 安装入口，退役 `github` 条目及其插件替代渠道。保留普通 Git/gh 工作流、审查 skills 和上游源码地址，不改动用户现有凭据或外部连接。活动目录为 39 个 ID，推荐草案为 Claude 20 项、Codex 18 项。
+
+2026-09-17 正式发布：v4.0.0 采用当前 39 个活动 ID 和 Claude 20 / Codex 18 项作者推荐。正式仓库为 Mizoreww/awesome-agent-config，main 作为统一主线；旧 main 保存到 archive/legacy-claude，其他分支统一改为 archive/legacy-<原名称>（原名称中的 / 改为 -），历史 tags/releases 保留。edit-config 及模板更新来源同步至新仓库 main；旧名称按明确别名识别，已有分支、固定或本地策略仍按用户选择迁移。本条取代此前仅在开发分支工作、不执行主线发布的限制。
 
 ## 用户入口
 
@@ -40,7 +42,7 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 先用 Markdown 维护目录即可。每项写清用途、适用场景、Claude/Codex 渠道、重要限制、来源和固定版本要求；Claude 与 Codex 的作者推荐标记分别维护。具体命令集中在平台说明里。特殊能力的安装细节按需链接，不让 agent 每次读取所有插件文档。
 
-作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射及之后明确的退役决定调整，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 18 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
+作者未提供推荐依据的新条目标记留空。推荐依据作者指定的历史 main/codex 安装默认项：核对两个来源快照的 Bash / PowerShell 交互菜单，按现有目录映射及之后明确的退役决定调整。v4.0.0 采用双语 README 中当前 Claude 20 项、Codex 18 项的名单，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
 
 根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。配置查询与修改由 edit-config 区分目标和操作，普通代码工作不会触发安装；模板在缺少 skill 时提供同一分支工作流的读取入口。查询不写记录、不改配置，也不隐式安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
 
@@ -89,13 +91,13 @@ Agent 负责理解需求、选型解释、查阅平台说明和处理异常。�
 
 每个 agent home 下留一份简短安装记录，保存选择、来源/revision、受管文件及部署 hash、备份位置、待完成项。原生插件版本以原生查询为准；这份记录用于后续对话和文件保护，不实现另一套插件数据库。操作中断后先核对原生状态，归属不明的内容保留；卸载也只针对归属明确且用户要求移除的内容。
 
-仓库来源记录包含 URL、解析后的 revision 和 branch / default-branch / pinned / local 更新策略；具体字段定义在 INSTALL。共享 edit-config 明确使用 Mizoreww/awesome-claude-code-config 的 agent-config-for-agents 分支，替代旧 update-config / update_config。匹配的来源可直接更新；缺失来源时使用 skill 的明确目标；其他 fork、分支、固定或本地策略按明确迁移选择处理，不能静默覆盖。已有选择、文件归属和来源历史保持可追溯。新版本中已消失的 ID 需提示退役或迁移，不能被当作更新成功或自动删除。
+仓库来源记录包含 URL、解析后的 revision 和 branch / default-branch / pinned / local 更新策略；具体字段定义在 INSTALL。共享 edit-config 明确使用 Mizoreww/awesome-agent-config 的 main 分支，替代旧 update-config / update_config。仓库改名别名及策略处理遵循 docs/migration.md 的主线迁移；匹配 main 的 branch / default-branch 策略可续用，default-branch 仍保留该策略。缺失来源时使用 skill 的明确目标；其他 fork、分支（含旧开发分支）、固定或本地策略按明确迁移选择处理，不能静默覆盖。已有选择、文件归属和来源历史保持可追溯。新版本中已消失的 ID 需提示退役或迁移，不能被当作更新成功或自动删除。
 
 Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生迁移经过入口、资源和所选成员验证后再采用。Playwright 保留固定版本、旧 Node 的兼容路径和 MCP initialize 检查。ResearchStudio Idea/Reel 与 PPT Master 按已有约定仅安装必要源码，依赖由首次调用准备。
 
 ## 实施验收
 
-- 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
+- 将已审查的统一开发成果快进到 main，并以其提交发布 v4.0.0 tag 和正式 GitHub release。仓库改名 awesome-agent-config；旧 main 的 d65cbda0058be09e4771f4603ccf45b3a589583b 保存到 archive/legacy-claude，其他分支改为 archive/legacy-<原名称>（原名称中的 / 改为 -），保留历史 tags/releases，不改写已有历史。
 - 当前仓库独立保存自有和保留的定制 skill payload；未退役的第三方原版与外部 skill 组均有上游安装说明，不从历史 Claude/Codex 分支安装或更新。
 - handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 39 个 ID；退役集成（含两端 GitHub MCP）、Common rules、旧更新入口、Codex 角色预设及 24 项范围在迁移说明中有明确处理。
 - Codex 不再提供三个自定义角色的模板或注册 patch；基础配置保留原生多 agent 功能，不安装替代角色或改动已有用户的 agents 目录。
@@ -106,6 +108,6 @@ Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生�
 - README、根指令、catalog 和 edit-config 均指向对话内选型；当前 agent 的完整选项、用途、推荐与状态实际出现在聊天中。支持多选的工具按 schema 使用并覆盖全部选项；单选/无工具模式接受多个编号。未收到选择不安装，未要求导出不生成选型或安装报告文件。
 - 根指令能将仓库增删改路由到 MAINTAIN，将用户安装变更路由到 INSTALL；历史 provenance 不充当当前不可修改的清单。
 - Claude/Codex 分别使用独立指令和 lessons 模板，现有真实记录保持不变。
-- 推荐草案按作者指定的默认菜单来源核对并标记待确认；权限拆分、Common 替换、handoff 合包及旧更新入口改名的映射明确，推荐不扩大用户已选范围。
+- 作者推荐按指定的默认菜单来源核对，发布采用当前 Claude 20 / Codex 18 项；权限拆分、Common 替换、handoff 合包及旧更新入口改名的映射明确，推荐不扩大用户已选范围。
 - 本地文件保护、原生插件与最小源码安装在隔离配置目录验证；当前文件导出到没有 .git / 旧 refs 的目录后，相关模板和共享 skill 安装仍可完成。
 - 保留相关既有测试；临时新验收脚本不加入发布分支。

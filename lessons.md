@@ -203,3 +203,12 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: The author requested removal of GitHub MCP from both Claude and Codex offerings.
 **Mistake**: Continued offering the legacy GitHub integration through a recommended MCP/plugin entry after the repository had moved toward fewer explicit integrations.
 **Rule**: Retire the github catalogue item, its MCP configuration and install recipes, and its plugin replacement route for both targets. Keep unrelated GitHub source links, Git/gh workflows and review skills intact. Preserve existing external integrations and credentials unless their live removal is explicitly requested; ordinary updates do not reinstall the retired item through another channel.
+
+## 2026-09-17 - Publish the unified repository as the main line
+**Context**: The author approved promoting the unified configuration, renaming the repository to awesome-agent-config, retaining other branches, and publishing a changelog, tag and release.
+**Rule**: Promote the reviewed unified work to main, preserve the previous main at archive/legacy-main, and retain the other branches. Use Mizoreww/awesome-agent-config on main as the current edit-config source. Preserve historical names and source records, recognize the repository rename, and require an explicit choice before changing an installed branch, pin or local policy. The release request supersedes the earlier development-only and no-promotion restrictions; it does not authorize changing live agent installations.
+
+## 2026-09-17 - Name all retained branches consistently
+**Context**: Preparing the main-line release and branch preservation.
+**Mistake**: Proposed archive/legacy-main for the old Claude main and left the remaining branch names unchanged.
+**Rule**: Preserve the old main as archive/legacy-claude. Move every other retained branch to archive/legacy-<original-name>, replacing any slash in the original name with a hyphen. Keep the unified release on main and preserve each archived branch's commit history. This naming instruction supersedes the archive/legacy-main proposal and the earlier plan to keep old branch names.
