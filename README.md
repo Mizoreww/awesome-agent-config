@@ -45,9 +45,6 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | **Writing style rule** | [Repository](platforms/claude/README.md#configuration) | Complete English writing requirements and examples; replaces the previous common rules | Rule ★ | — |
 | **StatusLine** | [Repository](platforms/claude/README.md#configuration) | Claude gradient context/usage bar and fonts; Codex native footer | Template ★ | Template ★ |
 | **Lessons** | [Repository](platforms/codex/README.md#configuration) | Independent blank global logs and memory routing; preserve real corrections | Template ★ | Template ★ |
-| **explorer** | [Repository](platforms/codex/README.md#configuration) | Subagent for tracing code paths and locating implementations | — | Template ★ |
-| **reviewer** | [Repository](platforms/codex/README.md#configuration) | Subagent for defects, regressions and missing coverage | — | Template ★ |
-| **docs-researcher** | [Repository](platforms/codex/README.md#configuration) | Subagent for checking documentation and API usage | — | Template ★ |
 
 ### Language Rules
 
@@ -148,7 +145,7 @@ Complete bundle membership is listed in [catalog.md](catalog.md#members). Select
 ├── skills/                      # Author-owned and customized skill sources
 ├── platforms/
 │   ├── claude/                  # Claude instructions, lessons, rules, hooks, skills
-│   ├── codex/                   # Codex instructions, lessons, agents, skills
+│   ├── codex/                   # Codex instructions, lessons, settings, skills
 │   └── sources.md               # External revisions, members and adaptations
 ├── scripts/                     # Protected file operations and focused helpers
 ├── lessons.md                   # This repository's correction history
@@ -160,7 +157,7 @@ Complete bundle membership is listed in [catalog.md](catalog.md#members). Select
 
 - **Agent-guided choices** — complete numbered lists, explanations and a record of the user's selections. Plugins and MCP servers are managed through the target agent's native tools; custom files use protected copies and partial merges.
 - **Independent memory** — Claude uses its own global `lessons.md` plus project `memory/MEMORY.md`; Codex uses its own global `lessons.md` plus project-root `lessons.md`. Templates and real histories remain separate. Only missing global logs are seeded.
-- **Rules and status lines** — Claude has one writing rule and independent Python / TypeScript / Go rules; the gradient status line shows model, directory, venv, Git, context and usage. Codex has separate subagent templates and a native footer.
+- **Rules and status lines** — Claude has one writing rule and independent Python / TypeScript / Go rules; the gradient status line shows model, directory, venv, Git, context and usage. Codex uses its native footer and subagent capabilities; this repository no longer installs custom role presets.
 - **Branch-specific configuration management** — edit-config follows agent-config-for-agents and records the actual revision. Conflicting source policies require an explicit migration choice; user selections and customizations are preserved. Installation and maintenance need no legacy Claude/Codex branches.
 - **Scoped changes** — preserve user edits, credentials, hooks and memory databases. Backups and file ownership support safe updates and explicit removals. ResearchStudio Idea/Reel and PPT Master prepare complete source only; runtime dependencies are handled on first use.
 

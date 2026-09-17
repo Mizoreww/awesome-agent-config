@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.0.0-dev.6] - 2026-09-17
+
+### Features
+- Retire the Codex explorer, reviewer and docs-researcher presets: remove their three role templates, registration patches, Core entries and recommendations.
+- Align the catalogue, bilingual README and platform instructions. The catalogue now has 40 active IDs; recommendation drafts contain 20 Claude and 19 Codex items.
+
+### Design Rationale
+- Use native subagents and selected skills for task-specific work without installing legacy fixed-model roles or their concurrency and depth settings.
+
+### Notes & Caveats
+- Native multi-agent support remains enabled. Existing custom agents and shared settings are preserved until an explicit, ownership-checked uninstall; migration guidance covers registrations, files and prior setting values.
+- Historical provenance and changelog entries remain intact. Other installation choices and recommendation markers are unchanged.
+
 ## [4.0.0-dev.5] - 2026-09-17
 
 ### Features

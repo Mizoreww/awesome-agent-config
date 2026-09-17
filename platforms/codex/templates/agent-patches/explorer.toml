@@ -1,7 +1,0 @@
-[agents]
-max_threads = 4
-max_depth = 1
-
-[agents.explorer]
-description = "Scans code paths and summarizes findings"
-config_file = "agents/explorer.toml"

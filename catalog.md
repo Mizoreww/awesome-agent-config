@@ -18,9 +18,6 @@
 | rules-writing-style | 清晰、准确的写作规则；完整英文要求及示例 | [平台配置](platforms/claude/README.md#configuration) | — | 推荐 | — |
 | statusline | 终端状态栏；Claude 渐变脚本与字体 / Codex 原生 footer | [平台配置](platforms/claude/README.md#configuration) | [平台配置](platforms/codex/README.md#configuration) | 推荐 | 推荐 |
 | lessons | 空白全局纠错记录；保留现有真实记录 | [平台配置](platforms/claude/README.md#configuration) | [平台配置](platforms/codex/README.md#configuration) | 推荐 | 推荐 |
-| agent-explorer | explorer：代码路径探索 | — | [平台配置](platforms/codex/README.md#configuration) | — | 推荐 |
-| agent-reviewer | reviewer：缺陷与回归检查 | — | [平台配置](platforms/codex/README.md#configuration) | — | 推荐 |
-| agent-docs-researcher | docs-researcher：文档/API 核实 | — | [平台配置](platforms/codex/README.md#configuration) | — | 推荐 |
 
 ## Language Rules · 语言规则
 
@@ -143,11 +140,12 @@
 | Agent | 来源快照 | 当前推荐数 |
 | --- | --- | --- |
 | Claude | main · d65cbda0058be09e4771f4603ccf45b3a589583b | 20 |
-| Codex | codex · fdd3e50aca09d1b80ac416f320f42bc0ecef5faa | 22 |
+| Codex | codex · fdd3e50aca09d1b80ac416f320f42bc0ecef5faa | 19 |
 
 - 旧 settings/config 默认包含权限设置；拆分后的 `settings` 与 `permissions` 均列为候选推荐。高自主权限仍需用户明确选择可信环境，推荐标记不构成授权。
 - Claude 原 `rules-common` 默认项对应新的 `rules-writing-style` 候选；完整内容已按本轮要求替换，旧通用编码规则不恢复。
 - 两端的旧更新项对应 `edit-config`；Codex 独立 handoff 已并入原本推荐的 Matt 包，不另计一次。
+- 2026-09-17 按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 自定义预设，推荐草案由 22 项减为 19 项；原生子 agent 能力继续可用，旧安装按[迁移说明](docs/migration.md#codex-agent-presets)处理。
 - Claude 的 frontend-design 仍按原菜单标记推荐，已选 examples 整包时复用其中成员，避免重复安装。
 - AI Research 的六组在两端菜单中均默认关闭，合包后仍不标记推荐。main/settings.json 中启用插件的布尔值不替代交互菜单默认选择。
 - Lark / Feishu、Claude-Mem、PUA 已退役，不出现在推荐名单。其他原本关闭的选项继续可选，不因目录改动加入推荐。

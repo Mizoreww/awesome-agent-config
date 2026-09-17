@@ -47,7 +47,7 @@ root lessons.md 保留本仓库纠错历史，安装使用各自 platforms/claud
 
 ## 配置变化
 
-根目录 AGENTS.md/CLAUDE.md 仅指导本仓库工作；原全局模板移入 platforms。settings、权限、状态栏、记忆 hooks、子 agent 注册和 MCP 分开选择，防止装一项时顺带启用其他能力。
+根目录 AGENTS.md/CLAUDE.md 仅指导本仓库工作；原全局模板移入 platforms。settings、权限、状态栏、记忆 hooks 和 MCP 分开选择，防止装一项时顺带启用其他能力。Codex 自定义子 agent 预设现已退役，处理方式见下方。
 
 Claude 全局模板按可用 Python 环境和已选审查工作流执行；原指令中的强制 Conda 和固定 review 依赖改为条件规则。Claude 规则、字体与状态栏仍可选择，路径支持实际配置目录。
 
@@ -69,7 +69,16 @@ Codex 关闭 `desktop.external-agent-import-sync-enabled`。旧 `model_instructi
 
 ## 条目退役与改名
 
-活动目录现为 43 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+活动目录现为 40 个 ID。更新遇到目录中消失的已选 ID 时，保留其现状与记录并提示处理方式，用户明确要求后才迁移或卸载。以后每次改名、替换或退役在此追加映射。
+
+<a id="codex-agent-presets"></a>
+### Codex 自定义子 agent 预设退役
+
+2026-09-17 按作者要求移除 `agent-explorer`、`agent-reviewer`、`agent-docs-researcher` 的安装项、推荐、三份角色模板及三份注册 patch。这些是本仓库维护的自定义预设。Codex 原生子 agent 能力继续可用；新安装不设置这些角色的固定模型，也不再通过它们写入 `agents.max_threads = 4` 或 `agents.max_depth = 1`。
+
+已有选择标记为退役，保留实际安装状态、来源和文件记录；普通更新不重装或升级这些预设，也不自动安装替代 skill。历史 provenance 中的旧路径只描述首次合并。
+
+用户明确要求卸载已安装预设时，先核实归属、本地修改和备份：从 config.toml 局部移除属于这些预设的 `agents.explorer`、`agents.reviewer`、`agents.docs_researcher` 注册，确认没有其他注册引用后，再受控移除未修改的自管 `agents/explorer.toml`、`agents/reviewer.toml`、`agents/docs-researcher.toml`。外部或已修改的对象保留并说明处理状态。共享的 `max_threads` / `max_depth` 仅在记录能证明由这些预设写入、当前值未修改且没有其他依赖时恢复原值；没有可核实原值则保留。不能删除整个 `[agents]`、整个 agents 目录或关闭原生多 agent 功能。
 
 <a id="removed-integrations"></a>
 ### Lark、Claude-Mem 与 PUA 退役

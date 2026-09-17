@@ -8,6 +8,8 @@
 
 2026-09-17 交互纠正：安装时直接在当前对话展示目标 agent 的完整支持项、用途、作者推荐和安装状态，并优先使用实际可用的多选问答。单选/文本工具接收多个编号；没有问答工具时直接在聊天中提问。不以生成 Markdown、报告或文件链接替代选型；仅用户要求导出时生成文档。推荐名单及安装范围不因交互方式变化而改变。
 
+2026-09-17 预设精简：按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 三个自定义角色预设，包括模板、注册 patch、Core 安装项与推荐。保留原生子 agent 能力及已选审查/文档 skills，现有用户安装按迁移说明处理。活动目录为 40 个 ID，推荐草案为 Claude 20 项、Codex 19 项。
+
 ## 用户入口
 
 README 提供一段可以直接交给 agent 的请求：
@@ -16,7 +18,7 @@ README 提供一段可以直接交给 agent 的请求：
 
 已有 agent 就能开始，无需先安装一个用于安装其他内容的 skill。以后也可以说“给 Codex 增加论文工具”“更新我上次选择的内容”。
 
-README 保留原 main 的双语分类、使用说明、表格、展示示例、目录结构、关键机制、设置、自定义、致谢及许可，合并 Codex 能力并更新已过时的安装说明。分类顺序为 Core、Language Rules、Review、Workflow、Integrations、Design & Content、Slides、Memory & Lifestyle、Storage、Academic Research、MCP Servers；catalog 沿用同一顺序。Codex 子 agents 放在 Core，训练与推理条目留在 Academic Research。
+README 保留原 main 的双语分类、使用说明、表格、展示示例、目录结构、关键机制、设置、自定义、致谢及许可，合并 Codex 能力并更新已过时的安装说明。分类顺序为 Core、Language Rules、Review、Workflow、Integrations、Design & Content、Slides、Memory & Lifestyle、Storage、Academic Research、MCP Servers；catalog 沿用同一顺序。Codex Core 保留全局指令、基础设置、权限、状态栏与 lessons；训练与推理条目留在 Academic Research。
 
 入口让用户打开 checkout 或分享当前 README 页面 URL；安装沿用该页面的 ref，不写死开发/历史分支，也不丢掉 ref 后静默落回旧默认分支。
 
@@ -36,7 +38,7 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 先用 Markdown 维护目录即可。每项写清用途、适用场景、Claude/Codex 渠道、重要限制、来源和固定版本要求；Claude 与 Codex 的作者推荐标记分别维护。具体命令集中在平台说明里。特殊能力的安装细节按需链接，不让 agent 每次读取所有插件文档。
 
-作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 22 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
+作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射及之后明确的退役决定调整，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 19 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
 
 根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。配置查询与修改由 edit-config 区分目标和操作，普通代码工作不会触发安装；模板在缺少 skill 时提供同一分支工作流的读取入口。查询不写记录、不改配置，也不隐式安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
 
@@ -93,7 +95,8 @@ Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生�
 
 - 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
 - 当前仓库独立保存自有和保留的定制 skill payload；未退役的第三方原版与外部 skill 组均有上游安装说明，不从历史 Claude/Codex 分支安装或更新。
-- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 43 个 ID；退役集成、Common rules、旧更新入口及 24 项范围在迁移说明中有明确处理。
+- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 40 个 ID；退役集成、Common rules、旧更新入口、Codex 角色预设及 24 项范围在迁移说明中有明确处理。
+- Codex 不再提供三个自定义角色的模板或注册 patch；基础配置保留原生多 agent 功能，不安装替代角色或改动已有用户的 agents 目录。
 - Claude 写作 rule 包含八条完整英文要求、全部替换示例、统一中性状态标签、条目可独立陈述事实、未知原因及已验证结论的处理；CLAUDE 模板不重复保存缩略版。原 Common 文件全部移除，语言规则无悬空引用。
 - edit-config 在两端模板中可自动触发配置查询与增删改，安装到各自 skills/edit-config；本仓库仅保留一份源码。查询和修改、仓库和已安装内容分别处理，版本与来源校验遵循明确分支。
 - Codex 原生优先渠道通过当前 CLI、实际 skill 加载和完整资源核实；官方目录受账号/client 限制，失败、待授权和待首次使用准备分别记录。组合包部分失败时保留成功组件，只续装未完成项。

@@ -191,3 +191,9 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: A user asked an agent to install this repository, but received a generated Markdown document instead of usable choices in the conversation.
 **Mistake**: The installation instructions required a catalogue but did not make its delivery surface and question interaction explicit enough.
 **Rule**: Present the current target agent's complete supported catalogue directly in the conversation, grouped and numbered with useful descriptions, author recommendations and installed status. Prefer the host's real multi-select question UI when available; respect its actual limits, and otherwise accept multiple numbers/names in chat. Keep all eligible options visible, reuse explicit selections, and wait for an actual response where selection is still missing. Do not replace this interaction with a generated Markdown/report file or a link to one unless the user requests an export. Installation receipts are separate from the user-facing choices.
+
+
+## 2026-09-17 - Retire redundant Codex role presets
+**Context**: The author questioned the Core explorer, reviewer and docs-researcher entries and requested their removal after checking their origin.
+**Mistake**: Kept legacy custom role presets as recommended Core installation items, adding fixed model and concurrency settings to ordinary Codex setup.
+**Rule**: Retire agent-explorer, agent-reviewer and agent-docs-researcher from this branch's catalogue, recommendations, templates and registration patches. Keep Codex's native multi-agent capability and the selected review/documentation skills available. Historical provenance and existing user installations remain traceable; retiring repository presets does not authorize deleting live custom agents or disabling native subagents.

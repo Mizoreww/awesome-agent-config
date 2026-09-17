@@ -45,9 +45,6 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 | **Writing style rule** | [本仓库](platforms/claude/README.md#configuration) | 完整英文写作要求与示例，替代原 Common rules | 规则 ★ | — |
 | **StatusLine** | [本仓库](platforms/claude/README.md#configuration) | Claude 渐变上下文/用量栏与字体；Codex 原生状态栏 | 模板 ★ | 模板 ★ |
 | **Lessons** | [本仓库](platforms/codex/README.md#configuration) | 独立空白全局记录及记忆规则，保留真实纠错历史 | 模板 ★ | 模板 ★ |
-| **explorer** | [本仓库](platforms/codex/README.md#configuration) | 探索代码路径、定位实现的子 agent | — | 模板 ★ |
-| **reviewer** | [本仓库](platforms/codex/README.md#configuration) | 检查缺陷、回归和验证缺口的子 agent | — | 模板 ★ |
-| **docs-researcher** | [本仓库](platforms/codex/README.md#configuration) | 核实文档与 API 用法的子 agent | — | 模板 ★ |
 
 ### Language Rules · 语言规则
 
@@ -148,7 +145,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 ├── skills/                      # 自有及定制 skill 的完整源码
 ├── platforms/
 │   ├── claude/                  # Claude 指令、lessons、规则、hooks、skills
-│   ├── codex/                   # Codex 指令、lessons、子 agents、skills
+│   ├── codex/                   # Codex 指令、lessons、设置、skills
 │   └── sources.md               # 外部 revision、成员与适配
 ├── scripts/                     # 受控文件操作与专用小工具
 ├── lessons.md                   # 本仓库的项目纠错历史
@@ -160,7 +157,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 - **对话选型**：完整编号列表、用途解释与用户选择记录。插件、MCP 使用目标 agent 的原生工具管理；自管文件通过受控复制和局部合并部署。
 - **独立记忆**：Claude 使用自己的全局 `lessons.md` 与项目 `memory/MEMORY.md`；Codex 使用自己的全局 `lessons.md` 与项目根目录 `lessons.md`。模板和真实历史各自保留，仅在缺少全局记录时创建空白文件。
-- **规则与状态栏**：Claude 提供一份写作规则，以及独立的 Python / TypeScript / Go 规则；渐变状态栏展示模型、目录、venv、Git、上下文与用量。Codex 使用独立子 agent 模板和原生状态栏。
+- **规则与状态栏**：Claude 提供一份写作规则，以及独立的 Python / TypeScript / Go 规则；渐变状态栏展示模型、目录、venv、Git、上下文与用量。Codex 使用原生状态栏与子 agent 能力，本仓库不再安装自定义角色预设。
 - **分支配置管理**：edit-config 跟踪 agent-config-for-agents 并记录实际 revision；来源策略冲突时明确选择是否迁移，保留已有选择与定制。安装与维护不需要旧 Claude/Codex 分支。
 - **限定修改范围**：保留用户定制、凭据、hooks 和记忆数据库，通过备份与文件归属支持更新和明确移除。ResearchStudio Idea/Reel、PPT Master 只准备完整源码，运行依赖留到首次使用。
 

@@ -5,7 +5,7 @@
 使用本仓库管理 Codex 的前提是关闭外部 agent 自动导入，以免绕过用户的选择。在选型时说明这一点；开始安装所选内容前，局部合并 templates/import-sync.toml 并显式 `--replace /desktop/external-agent-import-sync-enabled`，验证值为 false。即使未选基础 settings 也执行这个前提操作；它不删除已导入内容，也不改变其他设置。
 
 <a id="configuration"></a>
-## 配置与子 agents
+## 配置
 
 使用 [受控文件工具](../../scripts/README.md)，只处理对应所选 patch：
 
@@ -16,11 +16,8 @@
 | permissions | 选择高自主权限后，合并 templates/permissions.toml；明确替换 /approval_policy 和 /sandbox_mode，不影响其它配置 |
 | lessons | seed-lessons --agent codex 从 templates/lessons.md 创建空白记录；将 templates/AGENTS.md 的 Memory System 段合并到全局 AGENTS（若未随 instructions 部署），显式读取 global/project lessons，保留其余用户指令 |
 | statusline | 合并 templates/statusline.toml；用户选择采用此 footer 时显式替换 /tui/status_line |
-| agent-explorer | templates/agents/explorer.toml → agents/explorer.toml；合并 templates/agent-patches/explorer.toml |
-| agent-reviewer | templates/agents/reviewer.toml → agents/reviewer.toml；合并 templates/agent-patches/reviewer.toml |
-| agent-docs-researcher | templates/agents/docs-researcher.toml → agents/docs-researcher.toml；合并 templates/agent-patches/docs_researcher.toml |
 
-子 agent 配置先复制验证，再注册其 config_file；失败不留下悬空配置。已有 AGENTS.md 引用的工作流应与用户所选内容对齐，缺少前提时解释，不暗中补装。
+本仓库使用 Codex 的原生子 agent 能力，按任务和已选 skills 分工；不再部署固定模型的角色预设或设置它们的并发/嵌套限制。旧预设的处理见[迁移说明](../../docs/migration.md#codex-agent-presets)。已有 AGENTS.md 引用的工作流应与用户所选内容对齐，缺少前提时解释，不暗中补装。
 
 Codex 的跨项目纠错写入本 home 的 lessons.md，项目纠错写入项目根目录 lessons.md。模板和真实记录均与 Claude 独立；已有 lessons 不替换为新的空白模板。
 

@@ -1,5 +1,18 @@
 # 变更记录
 
+## [4.0.0-dev.6] - 2026-09-17
+
+### Features
+- 退役 Codex 的 explorer、reviewer、docs-researcher 预设，移除三份角色模板、注册 patch、Core 条目与推荐。
+- 同步目录、双语 README 与平台说明。活动目录现为 40 个 ID，推荐草案为 Claude 20 项、Codex 19 项。
+
+### Design Rationale
+- 使用原生子 agent 和已选 skills 按任务分工，减少固定模型角色及其并发、嵌套设置的维护。
+
+### Notes & Caveats
+- 保留原生多 agent 功能。已有自定义角色与共享设置，仅在明确要求卸载并核实归属后处理；迁移说明覆盖注册、文件及原配置值。
+- 保留历史 provenance 和 changelog，其他安装选择与推荐标记保持不变。
+
 ## [4.0.0-dev.5] - 2026-09-17
 
 ### Features
