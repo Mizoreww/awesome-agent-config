@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.0.0-dev.5] - 2026-09-17
+
+### Features
+- Present the target agent's complete installation options, descriptions, recommendations and installed status directly in the conversation.
+- Prefer the host's actual multi-select question tool, with numbered chat selections when only single-choice/text questions or no question tool are available. Align README prompts, repository entry points and edit-config with this interaction.
+
+### Design Rationale
+- Users should be able to choose and install in the same conversation. A generated selection document does not complete that interaction; the catalogue remains the shared source for both agents.
+
+### Notes & Caveats
+- Tool capabilities and limits depend on the current client and mode. Reuse explicit choices; missing replies and preselected values do not authorize installation. Export selection documents or installation reports only when requested; installation receipts are still maintained.
+- Catalogue entries, recommendation drafts and installation recipes are unchanged.
+
 ## [4.0.0-dev.4] - 2026-09-13
 
 ### Features

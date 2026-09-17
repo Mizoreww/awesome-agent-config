@@ -14,7 +14,7 @@ This skill serves both Claude and Codex and tracks one repository branch:
 
 Distinguish inspection from modification, and repository edits from changes to an installed agent. Default to the current conversation's agent; target both only when requested. Resolve the actual `CLAUDE_CONFIG_DIR`, `CODEX_HOME`, or user-selected home. Read relevant configuration, `agent-config/selection.json`, and `agent-config/files.json` when present; use native lists to verify installed state. Redact credentials.
 
-For inspection, report current values, selected content, sources, differences, and pending items as relevant. Reading configuration does not authorize writing receipts, changing settings, installing dependencies, or disabling imports. Stop when the query is answered unless the user also requested a change.
+For inspection, report current values, selected content, sources, differences, and pending items directly in the conversation as relevant. Export a document only when requested. Reading configuration does not authorize writing receipts, changing settings, installing dependencies, or disabling imports. Stop when the query is answered unless the user also requested a change.
 
 Completion: the operation, target, existing state, and authorization are clear.
 
@@ -30,7 +30,7 @@ Completion: the source, revision, and any source migration are established.
 
 ## 3. Apply the requested operation
 
-- **Installed configuration:** read `INSTALL.md`, `catalog.md`, and the target platform's README from the resolved source. Follow their native plugin/MCP, protected file, and verification procedures. Default to recorded selections; when selecting additions, show the complete supported catalogue with continuous numbers, category grouping, author recommendations, and installed status. Recommendations do not authorize installation.
+- **Installed configuration:** read `INSTALL.md`, `catalog.md`, and the target platform's README from the resolved source. Follow their native plugin/MCP, protected file, and verification procedures. Default to recorded selections. For additions or changed selections, follow `INSTALL.md`'s `choose-options` procedure: show the target agent's complete supported catalogue directly in the conversation, with category grouping, continuous item numbers, useful descriptions, author recommendations and installed status. Prefer a real multi-select question tool when available; otherwise accept multiple numbers or names in chat. Export a selection document only when requested. Reuse explicit choices; wait for an actual response when choices are missing. Recommendations do not authorize installation.
 - **Repository configuration:** follow `MAINTAIN.md` for templates, skills, catalogue entries, recommendations, and documentation. Editing repository files does not modify an agent home.
 
 Handle retired or renamed IDs using `docs/migration.md`. Omitted selections remain installed. Removal requires an explicit request and ownership checks. Preserve upstream revision constraints, local customizations, credentials, hooks, memory databases, and each agent's real lessons. Continue within the user's existing authorization.

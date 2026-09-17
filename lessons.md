@@ -185,3 +185,9 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: Synchronizing bilingual README and configuration changes.
 **Mistake**: Repeatedly prepared text replacements from remembered wording, causing patch failures and one partially updated bilingual pair.
 **Rule**: Read the exact current lines before replacements; use verified anchors, check each file's resulting state after a failed batch, and complete bilingual synchronization before validation.
+
+
+## 2026-09-17 - Present installation choices in the conversation
+**Context**: A user asked an agent to install this repository, but received a generated Markdown document instead of usable choices in the conversation.
+**Mistake**: The installation instructions required a catalogue but did not make its delivery surface and question interaction explicit enough.
+**Rule**: Present the current target agent's complete supported catalogue directly in the conversation, grouped and numbered with useful descriptions, author recommendations and installed status. Prefer the host's real multi-select question UI when available; respect its actual limits, and otherwise accept multiple numbers/names in chat. Keep all eligible options visible, reuse explicit selections, and wait for an actual response where selection is still missing. Do not replace this interaction with a generated Markdown/report file or a link to one unless the user requests an export. Installation receipts are separate from the user-facing choices.
