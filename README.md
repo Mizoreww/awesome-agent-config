@@ -82,6 +82,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | --- | --- | --- | --- | --- |
 | **context7** | [Upstash](https://github.com/upstash/context7) | Up-to-date library documentation lookup | Native plugin ★ | Plugin / MCP ★ |
 | **playwright** | [Microsoft](https://github.com/microsoft/playwright-mcp) | Browser automation, E2E testing and screenshots; Codex MCP pinned to 0.0.78 | Native plugin ★ | MCP ★ |
+| **orcareplay** | [Continuum-AI-Corp](https://github.com/Continuum-AI-Corp/OrcaReplay) | Records an agent run at the model-provider boundary and replays it offline with no model called; `orca mcp` serves six stdio tools over the local trace store | MCP ★ | MCP |
 
 ### Design & Content
 
