@@ -205,6 +205,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 - [Anthropic Engineering](https://www.anthropic.com/engineering) / [OpenAI Engineering](https://openai.com/news/engineering/)
 - [Claude Code Best Practice](https://github.com/shanraisshan/claude-code-best-practice) by shanraisshan
 - [Claude How To](https://github.com/luongnv89/claude-howto) by luongnv89
+- [awesome-claude-code-hooks](https://github.com/loqimean/awesome-claude-code-hooks) by loqimean — Claude Code hooks 精选列表
 
 ## License
 
