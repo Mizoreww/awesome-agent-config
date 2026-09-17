@@ -46,6 +46,13 @@
   会被整块算进主盘占用。
 - `build_report.py` 的打开提示按平台输出 `open` / `start` / `xdg-open`。
 
+### 五、khazix-skills#50 之后的修复（未提交上游）
+
+- 报告模板里的文件管理器名改为按 `system.platform`（`scan.py` 写入的 `sys.platform`）判断：
+  macOS 为访达，Windows 为资源管理器，Linux 及其他平台为文件管理器。旧数据没有该字段时按
+  `system.os` 整词匹配，`Darwin` 不再被判为 Windows。
+- Linux 根盘在 `system.disks` 中的条目改用与 `disk_name` 相同的名称，报告的「其他磁盘」不再重复列出 `/`。
+
 ## 验证状态
 
 实测于 Ubuntu 24.04.4 / ext4 / GNOME：扫描、逐盘对账、XDG 废纸篓写入与还原闭环、

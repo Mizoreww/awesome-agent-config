@@ -155,7 +155,23 @@
 <script>
 const DATA = __REPORT_DATA__;
 const DELETE = __DELETE_CONFIG__; // null=静态只读报告；{token,endpoint}=server.py 提供一键删除
-const FM = (DATA.system && /win/i.test(DATA.system.os||'')) ? '资源管理器' : '访达'; // 文件管理器名，按系统
+
+// 按钮和说明文字里的文件管理器名。分支与 scan.py / server.py 一致：优先看 system.platform
+// （scan.py 写入的 sys.platform），旧数据没有该字段时再看 system.os。
+// system.os 不能做 /win/i 子串匹配，"Darwin" 里也含 "win"。
+function fileManagerName(s){
+  const platform = String((s && s.platform) || '').toLowerCase();
+  if(platform){
+    if(platform === 'darwin') return '访达';
+    if(platform.startsWith('win')) return '资源管理器';
+    return '文件管理器';
+  }
+  const os = String((s && s.os) || '');
+  if(/\bmac\s*os|\bos\s*x\b|\bdarwin\b/i.test(os)) return '访达';
+  if(/\bwindows\b/i.test(os)) return '资源管理器';
+  return '文件管理器';
+}
+const FM = fileManagerName(DATA.system);
 
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // "约" 已表示估算，去掉冗余的"（估算…）"括号让大小显示更干净专业
@@ -348,12 +364,12 @@ function postAction(wrap, paths, mode){
 function doDelete(btn, mode){
   const wrap = btn.closest('.del-actions');
   const paths = JSON.parse(decodeURIComponent(escape(atob(wrap.dataset.paths))));
-  const verb = mode==='rm' ? '直接删除（不可恢复）' : '移到废纸篓（访达可恢复）';
+  const verb = mode==='rm' ? '直接删除（不可恢复）' : `移到废纸篓（${FM}可恢复）`;
   if(!confirm(`确认${verb}以下 ${paths.length} 个路径？\n\n`+paths.join('\n'))) return;
   postAction(wrap, paths, mode).then(res=>{
     const status = wrap.querySelector('.del-status');
     if(res.ok){
-      status.textContent = mode==='rm' ? '✓ 已删除，空间已释放' : '✓ 已移到废纸篓（访达可恢复，清空后释放空间）';
+      status.textContent = mode==='rm' ? '✓ 已删除，空间已释放' : `✓ 已移到废纸篓（${FM}可恢复，清空后释放空间）`;
       status.className='del-status ok';
       wrap.querySelectorAll('.del-btn.trash,.del-btn.danger').forEach(b=>b.remove());
       // 折叠状态下也能看到：标题行打上徽标 + 整行变灰

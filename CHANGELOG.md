@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Bug Fixes
+- `storage-analyzer`: on Linux the HTML report used the macOS file-manager name 访达 in every button, note, confirmation and status message, and a `system.os` of `Darwin` would have produced the Windows name 资源管理器. The report template now picks the name from `system.platform`, which `scan.py` writes from `sys.platform`: 访达 on macOS, 资源管理器 on Windows, 文件管理器 on Linux and other platforms. Analysis JSON without `platform` falls back to whole-word matching on `system.os`.
+- `storage-analyzer`: on Linux the root filesystem appeared a second time under 其他磁盘, because `disk_name` used the device (`/dev/nvme0n1p2 (/)`) while the matching `system.disks` entry used the mount point (`/`). The root entry now has the same name as `disk_name`; macOS and Windows already matched.
+
+### Notes & Caveats
+- The disk fix changes the scanner output, so an analysis JSON produced before this change still lists `/` twice; scanning again resolves it.
+- Verified on Ubuntu 24.04.4 with a static report and a server-mode render. macOS and Windows were checked only by rendering representative `system` blocks; no real macOS or Windows machine was used.
+- These fixes are not part of khazix-skills#50; `skills/storage-analyzer/UPSTREAM.md` records them.
+
 ## [4.0.0] - 2026-09-17
 
 ### Features

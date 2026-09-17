@@ -11,8 +11,10 @@ deletes anything.
 Output shape (same on both OSes):
 {
   "generated_at", "scan_seconds",
-  "system": {os, build, arch, user, home, filesystem,
+  "system": {platform,                               # sys.platform
+             os, build, arch, user, home, filesystem,
              disk_total, disk_used, disk_free, purgeable,
+             disk_name,                              # == name of its disks entry
              disks: [{name, total, used, free}]},   # all volumes/drives
   "groups": { "<group>": [{name, path, size_kb, size_h}], ... },
   "accounting": {...}   # Linux only — 缺口对账，见 reconcile_linux()
@@ -671,7 +673,11 @@ def system_info_linux(mounts):
     info["filesystem"] = root["fstype"] if root else "unknown"
     info["purgeable"] = ""          # Linux 无"可清除空间"概念
     info["disk_name"] = (root["source"] + " (/)") if root else "/"
-    info["disks"] = [{k: m[k] for k in ("name", "total", "used", "free")}
+    # 报告模板靠 disks[].name == disk_name 认出主盘，并把它排除在「其他磁盘」之外
+    # （macOS 的 "Macintosh HD"、Windows 的 "C:\" 两处本来就同名）。
+    # 根盘条目若沿用挂载点名 "/"，会在「其他磁盘」里重复列出。
+    info["disks"] = [{"name": info["disk_name"] if m is root else m["name"],
+                      "total": m["total"], "used": m["used"], "free": m["free"]}
                      for m in mounts]
     return info
 
@@ -721,7 +727,9 @@ def main():
         return
     data = {
         "generated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "system": system,
+        # 报告模板按 platform 选文件管理器名（访达 / 资源管理器 / 文件管理器），
+        # 取值与上面的分支判断同源；os 是展示用的系统名，不用于判断平台。
+        "system": {"platform": sys.platform, **system},
         "groups": groups,
         "scan_seconds": round(time.time() - started, 1),
     }

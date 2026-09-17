@@ -10,8 +10,9 @@ Schema (all sections optional except system):
 {
   "generated_at": "2026-05-28 12:00:00",
   "scan_seconds": 42.1,
-  "system": {os, build, arch, user, home, filesystem,
-             disk_total, disk_used, disk_free, purgeable},
+  "system": {platform, os, build, arch, user, home, filesystem,
+             disk_total, disk_used, disk_free, purgeable,
+             disk_name, disks:[{name, total, used, free}]},
   "top5": [{rank, tier(green|yellow|red), size, type, name, path, note}],
   "green":  [{name, path, size_estimate, kill_processes:[], trash_paths:[...], commands:[{label,cmd}]}],
   "yellow": [{name, path, size, content_profile, why_manual, disposal, risk, trash_paths:[...]?, open_note?}],
@@ -19,6 +20,10 @@ Schema (all sections optional except system):
   "denied": ["/path/one", ...],
   "summary": {overview, tier_stats:{green,yellow,red}, priority:[...], long_term:[...]}
 }
+
+Copy `system` from scan.py output unchanged: `platform` (sys.platform) selects the
+file-manager name in button labels, and the main disk's entry in `disks` must keep
+`name == disk_name`, otherwise that disk is listed again under 其他磁盘.
 """
 import json
 import os

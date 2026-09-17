@@ -1,5 +1,16 @@
 # 变更记录
 
+## [Unreleased]
+
+### Bug Fixes
+- `storage-analyzer`：Linux 上 HTML 报告的按钮、说明、确认框和状态提示都使用 macOS 的文件管理器名「访达」；`system.os` 为 `Darwin` 时还会得到 Windows 的「资源管理器」。报告模板现在按 `system.platform`（`scan.py` 写入的 `sys.platform`）选择名称：macOS 为访达，Windows 为资源管理器，Linux 及其他平台为文件管理器。analysis JSON 缺少 `platform` 时按 `system.os` 整词匹配。
+- `storage-analyzer`：Linux 上根文件系统在「其他磁盘」中重复出现。原因是 `disk_name` 使用设备名（`/dev/nvme0n1p2 (/)`），而 `system.disks` 中对应条目使用挂载点（`/`）。根盘条目现在与 `disk_name` 同名；macOS 与 Windows 原本一致。
+
+### Notes & Caveats
+- 磁盘修复改的是扫描输出，本次修改之前生成的 analysis JSON 仍会重复列出 `/`，重新扫描即可。
+- 在 Ubuntu 24.04.4 上验证了静态报告与服务模式渲染。macOS 与 Windows 只用代表性的 `system` 数据块做了渲染检查，未在真机上运行。
+- 这两项修复不在 khazix-skills#50 中，已记录在 `skills/storage-analyzer/UPSTREAM.md`。
+
 ## [4.0.0] - 2026-09-17
 
 ### Features
