@@ -81,3 +81,5 @@ adversarial-review 是基于 poteto/noodle 的定制版，来源与修改见其 
 ## MCP
 
 Context7 和 Playwright 通过上述原生插件提供，选择它们时复用插件的 MCP，无需另行注册。其他未选服务不因配置合并而启用。
+
+旧 GitHub MCP 记录按[退役说明](../../docs/migration.md#github-mcp)处理，不再作为安装或更新项。

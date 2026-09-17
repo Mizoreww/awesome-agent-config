@@ -21,7 +21,6 @@ codex plugin marketplace list --json
 | --- | --- | --- |
 | documents | OpenAI 的 documents、pdf、presentations、spreadsheets | 核实四种能力在目标 client 可用后复用；本次可见的 runtime 来源为 openai-primary-runtime，它是客户端提供的目录，不是要用户复制的 cache 路径。缺少覆盖时用下表 Anthropic 四件套 |
 | superpowers | OpenAI curated 的 Superpowers（作者 Jesse Vincent / obra） | 从当前列表选择 superpowers@openai-curated 或 superpowers@openai-api-curated；核对[十四个成员](../../catalog.md#members)与版本约束，不重复装 obra 源码 |
-| github | OpenAI 发布的 GitHub 插件 | 当前目录存在 github@openai-curated 时优先选择；检查 connector 在目标 client 的可用性并完成原生授权。API key 目录未必提供它；已有可用 GitHub 集成先复用，否则走[官方 GitHub MCP](README.md#mcp) |
 
 官方目录由客户端/账号提供，使用列表返回的确切 selector：
 
@@ -32,7 +31,7 @@ codex plugin list --json
 
 App 可通过 Plugins 页面、CLI 可通过 `/plugins` 查看官方目录。CLI 0.153.4 会拒绝 `plugin marketplace add openai/plugins`，提示 `openai-curated` 是保留名称；不把这条命令作为官方目录安装步骤，也不重命名官方目录来绕过。没有匹配条目时说明可用范围，使用本仓库已有后备渠道。
 
-GitHub 官方插件使用 connector，和直接配置 GitHub MCP 的授权入口不同；选型时说明所用入口，不重复创建连接。`openai-docs` 继续使用官方文档 MCP；OpenAI Developers 插件额外包含 API key、Agents SDK、Apps 开发等能力，不用它自动替换只选文档的用户范围。
+`openai-docs` 继续使用官方文档 MCP；OpenAI Developers 插件额外包含 API key、Agents SDK、Apps 开发等能力，不用它自动替换只选文档的用户范围。
 
 ## 3. 第三方原生与兼容插件
 

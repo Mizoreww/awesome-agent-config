@@ -197,3 +197,9 @@ Example lessons (invisible to `cat`, visible in editors):
 **Context**: The author questioned the Core explorer, reviewer and docs-researcher entries and requested their removal after checking their origin.
 **Mistake**: Kept legacy custom role presets as recommended Core installation items, adding fixed model and concurrency settings to ordinary Codex setup.
 **Rule**: Retire agent-explorer, agent-reviewer and agent-docs-researcher from this branch's catalogue, recommendations, templates and registration patches. Keep Codex's native multi-agent capability and the selected review/documentation skills available. Historical provenance and existing user installations remain traceable; retiring repository presets does not authorize deleting live custom agents or disabling native subagents.
+
+
+## 2026-09-17 - Retire GitHub MCP installation options
+**Context**: The author requested removal of GitHub MCP from both Claude and Codex offerings.
+**Mistake**: Continued offering the legacy GitHub integration through a recommended MCP/plugin entry after the repository had moved toward fewer explicit integrations.
+**Rule**: Retire the github catalogue item, its MCP configuration and install recipes, and its plugin replacement route for both targets. Keep unrelated GitHub source links, Git/gh workflows and review skills intact. Preserve existing external integrations and credentials unless their live removal is explicitly requested; ordinary updates do not reinstall the retired item through another channel.

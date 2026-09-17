@@ -127,7 +127,6 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 
 | 项目 | 来源 | 功能 | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **GitHub** | [OpenAI 插件 / GitHub MCP](platforms/codex/plugins.md) | 仓库与 issue 工具，需要授权；官方插件可用时优先采用 | — | 官方插件 / MCP ★ |
 | **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | OpenAI 官方开发文档 | — | MCP ★ |
 
 

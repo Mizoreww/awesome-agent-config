@@ -100,7 +100,6 @@
 
 | ID | 安装项与用途 | Claude | Codex | Claude 推荐 | Codex 推荐 |
 | --- | --- | --- | --- | --- | --- |
-| github | GitHub 仓库与 issue 工具；需用户授权 | — | 可用时优先 [OpenAI 官方插件](platforms/codex/plugins.md)；[GitHub MCP](platforms/codex/README.md#mcp) | — | 推荐 |
 | openai-docs | OpenAI 官方文档 MCP | — | [MCP](platforms/codex/README.md#mcp) | — | 推荐 |
 
 <a id="members"></a>
@@ -140,12 +139,13 @@
 | Agent | 来源快照 | 当前推荐数 |
 | --- | --- | --- |
 | Claude | main · d65cbda0058be09e4771f4603ccf45b3a589583b | 20 |
-| Codex | codex · fdd3e50aca09d1b80ac416f320f42bc0ecef5faa | 19 |
+| Codex | codex · fdd3e50aca09d1b80ac416f320f42bc0ecef5faa | 18 |
 
 - 旧 settings/config 默认包含权限设置；拆分后的 `settings` 与 `permissions` 均列为候选推荐。高自主权限仍需用户明确选择可信环境，推荐标记不构成授权。
 - Claude 原 `rules-common` 默认项对应新的 `rules-writing-style` 候选；完整内容已按本轮要求替换，旧通用编码规则不恢复。
 - 两端的旧更新项对应 `edit-config`；Codex 独立 handoff 已并入原本推荐的 Matt 包，不另计一次。
 - 2026-09-17 按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 自定义预设，推荐草案由 22 项减为 19 项；原生子 agent 能力继续可用，旧安装按[迁移说明](docs/migration.md#codex-agent-presets)处理。
+- 2026-09-17 按作者要求从两端移除 GitHub MCP 安装入口及该条目的插件替代渠道，Codex 推荐草案由 19 项减为 18 项；Claude 原本未推荐此项。旧 `github` 记录按[迁移说明](docs/migration.md#github-mcp)处理。
 - Claude 的 frontend-design 仍按原菜单标记推荐，已选 examples 整包时复用其中成员，避免重复安装。
 - AI Research 的六组在两端菜单中均默认关闭，合包后仍不标记推荐。main/settings.json 中启用插件的布尔值不替代交互菜单默认选择。
 - Lark / Feishu、Claude-Mem、PUA 已退役，不出现在推荐名单。其他原本关闭的选项继续可选，不因目录改动加入推荐。

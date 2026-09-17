@@ -8,7 +8,9 @@
 
 2026-09-17 交互纠正：安装时直接在当前对话展示目标 agent 的完整支持项、用途、作者推荐和安装状态，并优先使用实际可用的多选问答。单选/文本工具接收多个编号；没有问答工具时直接在聊天中提问。不以生成 Markdown、报告或文件链接替代选型；仅用户要求导出时生成文档。推荐名单及安装范围不因交互方式变化而改变。
 
-2026-09-17 预设精简：按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 三个自定义角色预设，包括模板、注册 patch、Core 安装项与推荐。保留原生子 agent 能力及已选审查/文档 skills，现有用户安装按迁移说明处理。活动目录为 40 个 ID，推荐草案为 Claude 20 项、Codex 19 项。
+2026-09-17 预设精简：按作者要求移除 Codex 的 explorer、reviewer、docs-researcher 三个自定义角色预设，包括模板、注册 patch、Core 安装项与推荐。保留原生子 agent 能力及已选审查/文档 skills，现有用户安装按迁移说明处理。
+
+2026-09-17 集成精简：按作者要求从 Claude / Codex 移除 GitHub MCP 安装入口，退役 `github` 条目及其插件替代渠道。保留普通 Git/gh 工作流、审查 skills 和上游源码地址，不改动用户现有凭据或外部连接。活动目录为 39 个 ID，推荐草案为 Claude 20 项、Codex 18 项。
 
 ## 用户入口
 
@@ -38,7 +40,7 @@ scripts/                   确有需要的备份、受控复制、配置合并�
 
 先用 Markdown 维护目录即可。每项写清用途、适用场景、Claude/Codex 渠道、重要限制、来源和固定版本要求；Claude 与 Codex 的作者推荐标记分别维护。具体命令集中在平台说明里。特殊能力的安装细节按需链接，不让 agent 每次读取所有插件文档。
 
-作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射及之后明确的退役决定调整，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 19 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
+作者未提供推荐依据的新条目标记留空。当前作者明确要求按远端 main/codex 的安装默认项整理推荐：核对两个分支的 Bash / PowerShell 交互菜单，按现有目录映射及之后明确的退役决定调整，写入双语 README 后供作者最终确认。草案为 Claude 20 项、Codex 18 项，具体来源 SHA 与映射在 catalog 中；不能用 settings 中的启用值代替菜单默认。查询和安装读取当前目录，无需获取旧分支。
 
 根目录 AGENTS.md/CLAUDE.md 管本仓库的开发与安装工作；要部署到用户 home 的全局指令放在 platforms 下。配置查询与修改由 edit-config 区分目标和操作，普通代码工作不会触发安装；模板在缺少 skill 时提供同一分支工作流的读取入口。查询不写记录、不改配置，也不隐式安装。内容共用的 skills 保留一份源码，平台差异只在确有需要处适配。
 
@@ -75,7 +77,7 @@ Agent 维护 skills 时同步当前源码、catalog、双语 README 及对应平
 - `npx` 只在选定能力的上游安装方式或运行方式需要时使用；用户不必先学习不同渠道，再决定自己该运行哪条命令。
 - 上游支持或命令变化时，agent 查询官方说明并核对本地 CLI。固定版本、精选成员和本仓库的必要适配保持有效，不能顺手升级到 latest。
 
-Codex 尽量采用官方目录与可用插件：明确区分 OpenAI 发布、OpenAI curated 中的第三方作者、上游 Codex 专用包、Claude 格式兼容插件。从实际目录读取 selector，兼容性结论包括实际加载和完整资源，不能只凭 installed/enabled。可复用 OpenAI 文档能力或 GitHub 插件时优先复用；其余文档四件套、frontend-slides、AI Research 使用已验证的上游兼容包。
+Codex 尽量采用官方目录与可用插件：明确区分 OpenAI 发布、OpenAI curated 中的第三方作者、上游 Codex 专用包、Claude 格式兼容插件。从实际目录读取 selector，兼容性结论包括实际加载和完整资源，不能只凭 installed/enabled。可复用 OpenAI 文档能力时优先复用；其余文档四件套、frontend-slides、AI Research 使用已验证的上游兼容包。
 
 无法满足范围、版本或入口约束的条目保留明确后备路径：Matt 固定精选、Codex examples、Humanizer、PPT Master 及没有插件入口的研究/写作 skills 使用上游源码，Playwright 保持固定 MCP，OpenAI 文档 MCP 不被更大的 Developers 插件替换。维护理由与具体配方集中在 platforms/codex/plugins.md，账号不可见的官方插件不宣称已验证可用。
 
@@ -95,7 +97,7 @@ Codex 的 Matt 包继续固定现有 commit，包含其上游 handoff，原生�
 
 - 初始合并已从 main 建立 agent-config-for-agents 并纳入 Codex 的完整技能；本次继续只推送此分支，不操作归档或远端默认分支。
 - 当前仓库独立保存自有和保留的定制 skill payload；未退役的第三方原版与外部 skill 组均有上游安装说明，不从历史 Claude/Codex 分支安装或更新。
-- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 40 个 ID；退役集成、Common rules、旧更新入口、Codex 角色预设及 24 项范围在迁移说明中有明确处理。
+- handoff 仅在 Matt 包中；AI Research 六组归为一个 31 项安装选择，活动目录共 39 个 ID；退役集成（含两端 GitHub MCP）、Common rules、旧更新入口、Codex 角色预设及 24 项范围在迁移说明中有明确处理。
 - Codex 不再提供三个自定义角色的模板或注册 patch；基础配置保留原生多 agent 功能，不安装替代角色或改动已有用户的 agents 目录。
 - Claude 写作 rule 包含八条完整英文要求、全部替换示例、统一中性状态标签、条目可独立陈述事实、未知原因及已验证结论的处理；CLAUDE 模板不重复保存缩略版。原 Common 文件全部移除，语言规则无悬空引用。
 - edit-config 在两端模板中可自动触发配置查询与增删改，安装到各自 skills/edit-config；本仓库仅保留一份源码。查询和修改、仓库和已安装内容分别处理，版本与来源校验遵循明确分支。

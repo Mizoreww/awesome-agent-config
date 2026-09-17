@@ -71,6 +71,6 @@ codex mcp add playwright -- npx -y --loglevel=error --package=node@24 --package=
 
 Windows 若可执行入口是 npx.cmd，按本机 shell 核实调用方式；必要时通过原生 cmd 入口启动相同参数。没有可用 Node/npm 时说明并准备所选服务的前提，不影响不依赖它的 skills 安装。一次 initialize 成功只证明 MCP 启动；业务浏览器就绪按所需工作流另外验证。
 
-GitHub：先按[插件选择](plugins.md)检查可用的 OpenAI 官方 GitHub 插件或已有集成。需要 MCP 渠道时核实 [GitHub 官方 MCP server](https://github.com/github/github-mcp-server)，通过 `codex mcp add github --url https://api.githubcopilot.com/mcp --bearer-token-env-var GITHUB_PERSONAL_ACCESS_TOKEN` 注册，或复用既有受支持配置。用户在环境中设置 token；不要把值传入聊天或记录。旧版 @modelcontextprotocol/server-github 仅作为已有安装的来源识别，不自动删掉。
+旧 GitHub MCP / 对应插件选择按[退役说明](../../docs/migration.md#github-mcp)处理，不再作为安装或更新项。
 
 templates/mcp 保存既有无凭据服务的参考配置，供核对来源；不整份复制来启用全部 MCP。

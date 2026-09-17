@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.0.0-dev.7] - 2026-09-17
+
+### Features
+- Retire GitHub MCP from both agents' installation scope. Remove the remaining catalogue/README entry, recommendation, MCP setup recipe and its GitHub plugin alternative.
+- The catalogue now has 39 active IDs; recommendation drafts contain 20 Claude and 18 Codex items. Both platform guides route old GitHub selections to migration instructions.
+
+### Design Rationale
+- Removing the integration includes its alternative installation route so ordinary updates cannot restore the retired item through a plugin.
+
+### Notes & Caveats
+- Existing services, plugins, shared connections and credentials are preserved. Live removal requires an explicit target and ownership checks; ordinary Git/gh workflows and review skills remain available.
+- Both agents' templates already contain no GitHub service configuration. Other MCP recipes, source revisions and historical records are unchanged.
+
 ## [4.0.0-dev.6] - 2026-09-17
 
 ### Features

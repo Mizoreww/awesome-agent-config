@@ -127,7 +127,6 @@ The tables retain the original categories and merge the Claude and Codex capabil
 
 | Item | Source | What It Does | Claude | Codex |
 | --- | --- | --- | --- | --- |
-| **GitHub** | [OpenAI plugin / GitHub MCP](platforms/codex/plugins.md) | Repository and issue tools; requires authorization; prefer the official plugin when available | — | Official plugin / MCP ★ |
 | **OpenAI docs** | [OpenAI](https://developers.openai.com/mcp) | Official OpenAI developer documentation | — | MCP ★ |
 
 
