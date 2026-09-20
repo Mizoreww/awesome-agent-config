@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Features
+- Workflow: add the third-party `yylo-skills` bundle — seven skills for Kanban task lifecycle, requirement planning, project understanding, wiki knowledge, workflow records, artifact evidence and merge orchestration, driving the separate YYLO CLI. Installed from the upstream repository via the Skills CLI (`npx skills add yylo-dev/yylo-skills`) or the pinned source revision in [sources.md](platforms/sources.md#yylo); the YYLO CLI itself is installed separately (`npm install --global @yylo/cli`) and is not copied by this repository.
+
 ### Bug Fixes
 - `storage-analyzer`: on Linux the HTML report used the macOS file-manager name 访达 in every button, note, confirmation and status message, and a `system.os` of `Darwin` would have produced the Windows name 资源管理器. The report template now picks the name from `system.platform`, which `scan.py` writes from `sys.platform`: 访达 on macOS, 资源管理器 on Windows, 文件管理器 on Linux and other platforms. Analysis JSON without `platform` falls back to whole-word matching on `system.os`.
 - `storage-analyzer`: on Linux the root filesystem appeared a second time under 其他磁盘, because `disk_name` used the device (`/dev/nvme0n1p2 (/)`) while the matching `system.disks` entry used the mount point (`/`). The root entry now has the same name as `disk_name`; macOS and Windows already matched.

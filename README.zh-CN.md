@@ -75,6 +75,7 @@ Codex 会先检查可用的 OpenAI 官方/curated 目录，再核实上游 Codex
 | **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | 对齐项目文档、agent 规则、获准维护的记忆及工作区残留 | 上游安装 ★ | 上游安装 ★ |
 | **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | 代码简化与重构 agent | 原生插件 ★ | — |
 | **edit-config** | [本仓库](skills/edit-config/SKILL.md) | 查询和管理 main 的配置，两端共用 | 内置 skill ★ | 内置 skill ★ |
+| **yylo-skills** | [YYLO](https://github.com/yylo-dev/yylo-skills) | 看板任务生命周期、需求规划、项目理解、wiki 知识与合并编排；驱动 YYLO CLI 的 7 项整包 | 上游安装 | 上游安装 |
 
 ### Integrations · 开发集成
 

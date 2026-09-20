@@ -75,6 +75,7 @@ The tables retain the original categories and merge the Claude and Codex capabil
 | **neat-freak** | [khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/2b4a645cfdc894156ae347d897723562f719ce95/neat-freak) | Reconcile project docs, agent rules, authorized memory and workspace residue | Upstream install ★ | Upstream install ★ |
 | **code-simplifier** | [Anthropic](https://github.com/anthropics/claude-plugins-official) | Code simplification and refactoring agent | Native plugin ★ | — |
 | **edit-config** | [Repository](skills/edit-config/SKILL.md) | Inspect and manage configuration on main; shared by both agents | Bundled skill ★ | Bundled skill ★ |
+| **yylo-skills** | [YYLO](https://github.com/yylo-dev/yylo-skills) | Kanban task lifecycle, requirement planning, project understanding, wiki knowledge and merge orchestration; 7-skill bundle driving the YYLO CLI | Upstream install | Upstream install |
 
 ### Integrations
 

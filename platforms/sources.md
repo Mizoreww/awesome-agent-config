@@ -21,6 +21,7 @@
 | Humanizer | https://github.com/blader/humanizer | 9862685f575c65a8247f90369951df1b3416e3d6 |
 | Humanizer-zh | https://github.com/op7418/Humanizer-zh | 91f3d394db8419c20d67ebe22a96cf8fee0a404b |
 | neat-freak | https://github.com/KKKKhazix/khazix-skills | 2b4a645cfdc894156ae347d897723562f719ce95 |
+| YYLO | https://github.com/yylo-dev/yylo-skills | b0df002ee1e86fb6acdefd2c31560045edf273b4 |
 
 在新的临时目录获取源码。例如下面是 Bash 参数形式；PowerShell 使用同样参数及其变量语法。`source_url`、`revision`、`checkout` 由当前所选项确定；不要修改用户现有 checkout。
 
@@ -169,3 +170,10 @@ python3 scripts/managed_files.py --root "$target_dir" install "$stage" skills/li
 ```
 
 stage 只含根文件及四个目录，保留 LICENSE；排除 `.git` 和 `docs/` 预览媒体。预览索引中的缩略图/文档链接可能缺失，图表和报告的文本选择资源完整。旧 marker 只作为识别线索，不据此覆盖用户已修改的目录。
+
+<a id="yylo"></a>
+## YYLO Skills
+
+`yylo-skills` 整包包含七个独立 skill，目标名保持目录名：`skills/ledger-tasks-yylo`（YYLO Ledger 看板任务管理与工作流模式）、`skills/plan-ledger-tasks-yylo`（把需求拆成产品开发要求与实现粒度任务）、`skills/understand-project-yylo`（动手前检查产品架构、依赖与验证回路）、`skills/ralph-loop-yylo`（把一个指派任务执行到验证过的提交）、`skills/wiki-yylo`（把项目知识写入 Ledger wiki 记录）、`skills/workflow-yylo`（维护存储/执行/证据分离的 workflow 记录）、`skills/artifact-yylo`（捕获与检索不可变工件证据）。
+
+上游提供 Skills CLI 入口 `npx skills add yylo-dev/yylo-skills`，支持 `-a claude-code -a codex -a pi` 按端选择；执行前核实其本机帮助、目标目录与所选 revision。这组 skill 驱动独立的 YYLO CLI，运行前提是单独安装 `npm install --global @yylo/cli`；安装 skill 不安装也不执行该 CLI。需要固定源码时按上表 revision 获取，sparse 范围为 `skills`（cone 模式同时保留根 LICENSE），只复制完整 skill，不执行上游安装器。

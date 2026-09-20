@@ -46,6 +46,7 @@
 | neat-freak | 知识、文档与工作区收尾 | [上游安装](platforms/sources.md#writing) | [上游安装](platforms/sources.md#writing) | 推荐 | 推荐 |
 | code-simplifier | 代码简化与重构 agent | [原生插件](platforms/claude/README.md#plugins) | — | 推荐 | — |
 | edit-config | 查询、增删改、修复与更新配置；两端共用，跟踪 main | [共享 skill](platforms/claude/README.md#local-skills) | [共享 skill](platforms/codex/README.md#local-skills) | 推荐 | 推荐 |
+| yylo-skills | 看板任务生命周期、需求规划、项目理解、wiki 记录与合并编排的 7 项 skill 整包；驱动 YYLO CLI | [上游安装](platforms/sources.md#yylo) | [上游安装](platforms/sources.md#yylo) | — | — |
 
 ## Integrations · 开发集成
 

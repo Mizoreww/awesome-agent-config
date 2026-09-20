@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Features
+- 工作流：新增第三方 `yylo-skills` 整包 —— 覆盖看板任务生命周期、需求规划、项目理解、wiki 知识、workflow 记录、工件证据与合并编排的 7 项 skill，驱动独立的 YYLO CLI。经上游 Skills CLI（`npx skills add yylo-dev/yylo-skills`）或 [sources.md](platforms/sources.md#yylo) 中固定 revision 的源码安装；YYLO CLI 本体需单独安装（`npm install --global @yylo/cli`），本仓库不复制。
+
 ### Bug Fixes
 - `storage-analyzer`：Linux 上 HTML 报告的按钮、说明、确认框和状态提示都使用 macOS 的文件管理器名「访达」；`system.os` 为 `Darwin` 时还会得到 Windows 的「资源管理器」。报告模板现在按 `system.platform`（`scan.py` 写入的 `sys.platform`）选择名称：macOS 为访达，Windows 为资源管理器，Linux 及其他平台为文件管理器。analysis JSON 缺少 `platform` 时按 `system.os` 整词匹配。
 - `storage-analyzer`：Linux 上根文件系统在「其他磁盘」中重复出现。原因是 `disk_name` 使用设备名（`/dev/nvme0n1p2 (/)`），而 `system.disks` 中对应条目使用挂载点（`/`）。根盘条目现在与 `disk_name` 同名；macOS 与 Windows 原本一致。
